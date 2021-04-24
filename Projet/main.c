@@ -52,7 +52,7 @@ int main(void)
 	motors_init();
 
 	//stars the threads for the pi regulator and the processing of the image
-    pi_regulator_start();
+	pi_regulator_start();
 	process_image_start();
 
     /* Infinite loop. */

@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
   55              		.loc 1 68 0
   56 000c 0020     		movs	r0, #0
   57              		.loc 1 65 0
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 2
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 2
 
 
   58 000e 0191     		str	r1, [sp, #4]
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  112              		.cfi_def_cfa_offset 12
  113              		.cfi_offset 4, -12
  114              		.cfi_offset 5, -8
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 3
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 3
 
 
  115              		.cfi_offset 14, -4
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  169              	.LVL7:
  170 0042 03B0     		add	sp, sp, #12
  171              		.cfi_remember_state
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 4
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 4
 
 
  172              		.cfi_def_cfa_offset 12
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  226              		.cfi_def_cfa_offset 24
  227              		.loc 1 275 0
  228 0006 2B68     		ldr	r3, [r5]
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 5
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 5
 
 
  229 0008 0193     		str	r3, [sp, #4]
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  283              		.loc 5 136 0
  284 0030 FFF7FEFF 		bl	chDbgCheckClassI
  285              	.LVL19:
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 6
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 6
 
 
  286              		.loc 5 138 0
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  340              	.LBE159:
  341              		.loc 1 307 0
  342 0060 019A     		ldr	r2, [sp, #4]
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 7
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 7
 
 
  343 0062 2B68     		ldr	r3, [r5]
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  397              		.cfi_offset 6, -12
  398              		.cfi_offset 7, -8
  399              		.cfi_offset 14, -4
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 8
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 8
 
 
  400 0002 194E     		ldr	r6, .L43
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  454 0036 A069     		ldr	r0, [r4, #24]
  455 0038 FFF7FEFF 		bl	_stats_ctxswc
  456              	.LVL35:
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 9
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 9
 
 
  457              	.LBB171:
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  511              	.L43:
  512 0068 00000000 		.word	__stack_chk_guard
  513 006c 00000000 		.word	.LANCHOR0
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 10
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 10
 
 
  514 0070 00000000 		.word	.LC0
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  568              	.LVL43:
  569              	.LBB176:
  570              	.LBB177:
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 11
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 11
 
 
  571              		.file 6 "../lib/e-puck2_main-processor/ChibiOS//os/rt/include/chvt.h"
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  625              		.global	chSchWakeupS
  626              		.syntax unified
  627              		.thumb
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 12
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 12
 
 
  628              		.thumb_func
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  682 002e FFF7FEFF 		bl	_dbg_trace
  683              	.LVL53:
  684 0032 3946     		mov	r1, r7
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 13
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 13
 
 
  685 0034 2046     		mov	r0, r4
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  739 005c 019A     		ldr	r2, [sp, #4]
  740 005e 2B68     		ldr	r3, [r5]
  741 0060 9A42     		cmp	r2, r3
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 14
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 14
 
 
  742 0062 09D1     		bne	.L64
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  796              		.loc 1 424 0 is_stmt 1
  797              		.cfi_startproc
  798              		@ args = 0, pretend = 0, frame = 8
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 15
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 15
 
 
  799              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  853 0030 94BF     		ite	ls
  854 0032 0020     		movls	r0, #0
  855              	.LVL67:
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 16
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 16
 
 
  856 0034 0120     		movhi	r0, #1
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  910              		.loc 2 675 0
  911 000e 5460     		str	r4, [r2, #4]
  912              	.LVL71:
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 17
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 17
 
 
  913              	.LBE188:
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  967              		.loc 1 467 0 discriminator 3
  968 004a 019A     		ldr	r2, [sp, #4]
  969 004c 3368     		ldr	r3, [r6]
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 18
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 18
 
 
  970 004e 9A42     		cmp	r2, r3
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1024              		.cfi_offset 6, -8
  1025              		.cfi_offset 14, -4
  1026              		.loc 1 482 0
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 19
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 19
 
 
  1027 0002 1C4D     		ldr	r5, .L95
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1081 002e FBD8     		bhi	.L93
  1082              		.loc 1 498 0
  1083 0030 2360     		str	r3, [r4]
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 20
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 20
 
 
  1084              		.loc 1 499 0
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1138              		.cfi_restore 6
  1139              		.cfi_restore 5
  1140              		.cfi_restore 4
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 21
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 21
 
 
  1141              		.cfi_def_cfa_offset 0
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1195 0012 0C4B     		ldr	r3, .L104+4
  1196 0014 1A68     		ldr	r2, [r3]
  1197 0016 9B69     		ldr	r3, [r3, #24]
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 22
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 22
 
 
  1198              	.LBE205:
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1252              		.thumb
  1253              		.thumb_func
  1254              		.fpu fpv4-sp-d16
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 23
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 23
 
 
  1255              		.type	chSchDoReschedule, %function
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1309              		@ sp needed
  1310 0030 5DF804EB 		ldr	lr, [sp], #4
  1311              		.cfi_restore 14
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 24
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 24
 
 
  1312              		.cfi_def_cfa_offset 0
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1357              		.file 14 "../lib/e-puck2_main-processor/ChibiOS//os/rt/ports/ARMCMx/chcore.h"
  1358              		.file 15 "../lib/e-puck2_main-processor/ChibiOS//os/rt/ports/ARMCMx/chcore_v7m.h"
  1359              		.file 16 "../lib/e-puck2_main-processor/ChibiOS//os/rt/include/chdebug.h"
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 25
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 25
 
 
  1360              		.file 17 "../lib/e-puck2_main-processor/ChibiOS//os/rt/include/chtm.h"
@@ -1452,10 +1452,10 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1368 0006 00000000 		.4byte	.Ldebug_abbrev0
  1369 000a 04       		.byte	0x4
  1370 000b 01       		.uleb128 0x1
- 1371 000c ED020000 		.4byte	.LASF200
+ 1371 000c DA020000 		.4byte	.LASF200
  1372 0010 0C       		.byte	0xc
- 1373 0011 99050000 		.4byte	.LASF201
- 1374 0015 03070000 		.4byte	.LASF202
+ 1373 0011 86050000 		.4byte	.LASF201
+ 1374 0015 DF050000 		.4byte	.LASF202
  1375 0019 00010000 		.4byte	.Ldebug_ranges0+0x100
  1376 001d 00000000 		.4byte	0
  1377 0021 00000000 		.4byte	.Ldebug_line0
@@ -1471,7 +1471,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1387 0037 04       		.uleb128 0x4
  1388 0038 04       		.byte	0x4
  1389 0039 07       		.byte	0x7
- 1390 003a D9020000 		.4byte	.LASF0
+ 1390 003a C6020000 		.4byte	.LASF0
  1391 003e 04       		.uleb128 0x4
  1392 003f 08       		.byte	0x8
  1393 0040 05       		.byte	0x5
@@ -1479,7 +1479,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1395 0045 04       		.uleb128 0x4
  1396 0046 08       		.byte	0x8
  1397 0047 04       		.byte	0x4
- 1398 0048 F2050000 		.4byte	.LASF2
+ 1398 0048 1C060000 		.4byte	.LASF2
  1399 004c 04       		.uleb128 0x4
  1400 004d 01       		.byte	0x1
  1401 004e 06       		.byte	0x6
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1414 0067 05       		.byte	0x5
  1415 0068 6E070000 		.4byte	.LASF7
  1416 006c 03       		.uleb128 0x3
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 26
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 26
 
 
  1417 006d C2080000 		.4byte	.LASF8
@@ -1508,7 +1508,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1421 0077 04       		.uleb128 0x4
  1422 0078 02       		.byte	0x2
  1423 0079 07       		.byte	0x7
- 1424 007a 9C040000 		.4byte	.LASF9
+ 1424 007a 89040000 		.4byte	.LASF9
  1425 007e 03       		.uleb128 0x3
  1426 007f 18010000 		.4byte	.LASF10
  1427 0083 08       		.byte	0x8
@@ -1528,7 +1528,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1441 009d 07       		.byte	0x7
  1442 009e A4080000 		.4byte	.LASF13
  1443 00a2 03       		.uleb128 0x3
- 1444 00a3 A4060000 		.4byte	.LASF14
+ 1444 00a3 CE060000 		.4byte	.LASF14
  1445 00a7 08       		.byte	0x8
  1446 00a8 69       		.byte	0x69
  1447 00a9 AD000000 		.4byte	0xad
@@ -1542,7 +1542,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1455 00ba 18       		.byte	0x18
  1456 00bb 53000000 		.4byte	0x53
  1457 00bf 03       		.uleb128 0x3
- 1458 00c0 31040000 		.4byte	.LASF17
+ 1458 00c0 1E040000 		.4byte	.LASF17
  1459 00c4 09       		.byte	0x9
  1460 00c5 24       		.byte	0x24
  1461 00c6 6C000000 		.4byte	0x6c
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1471 00df 09       		.byte	0x9
  1472 00e0 30       		.byte	0x30
  1473 00e1 90000000 		.4byte	0x90
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 27
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 27
 
 
  1474 00e5 03       		.uleb128 0x3
@@ -1567,7 +1567,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1477 00eb 3C       		.byte	0x3c
  1478 00ec A2000000 		.4byte	0xa2
  1479 00f0 03       		.uleb128 0x3
- 1480 00f1 D3050000 		.4byte	.LASF21
+ 1480 00f1 C0050000 		.4byte	.LASF21
  1481 00f5 0A       		.byte	0xa
  1482 00f6 45       		.byte	0x45
  1483 00f7 DA000000 		.4byte	0xda
@@ -1587,7 +1587,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1497 0117 49       		.byte	0x49
  1498 0118 B4000000 		.4byte	0xb4
  1499 011c 03       		.uleb128 0x3
- 1500 011d C7060000 		.4byte	.LASF25
+ 1500 011d F1060000 		.4byte	.LASF25
  1501 0121 0A       		.byte	0xa
  1502 0122 4A       		.byte	0x4a
  1503 0123 B4000000 		.4byte	0xb4
@@ -1597,12 +1597,12 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1507 012d 4B       		.byte	0x4b
  1508 012e B4000000 		.4byte	0xb4
  1509 0132 03       		.uleb128 0x3
- 1510 0133 FB060000 		.4byte	.LASF27
+ 1510 0133 25070000 		.4byte	.LASF27
  1511 0137 0A       		.byte	0xa
  1512 0138 4C       		.byte	0x4c
  1513 0139 DA000000 		.4byte	0xda
  1514 013d 03       		.uleb128 0x3
- 1515 013e D5040000 		.4byte	.LASF28
+ 1515 013e C2040000 		.4byte	.LASF28
  1516 0142 0A       		.byte	0xa
  1517 0143 4D       		.byte	0x4d
  1518 0144 CA000000 		.4byte	0xca
@@ -1612,13 +1612,13 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1522 014e 4F       		.byte	0x4f
  1523 014f DA000000 		.4byte	0xda
  1524 0153 03       		.uleb128 0x3
- 1525 0154 CB020000 		.4byte	.LASF30
+ 1525 0154 B8020000 		.4byte	.LASF30
  1526 0158 0A       		.byte	0xa
  1527 0159 51       		.byte	0x51
  1528 015a CA000000 		.4byte	0xca
  1529 015e 03       		.uleb128 0x3
- 1530 015f E0040000 		.4byte	.LASF31
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 28
+ 1530 015f CD040000 		.4byte	.LASF31
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 28
 
 
  1531 0163 0A       		.byte	0xa
@@ -1637,7 +1637,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1544 017f 3F       		.byte	0x3f
  1545 0180 84010000 		.4byte	0x184
  1546 0184 06       		.uleb128 0x6
- 1547 0185 BE040000 		.4byte	.LASF57
+ 1547 0185 AB040000 		.4byte	.LASF57
  1548 0189 68       		.byte	0x68
  1549 018a 02       		.byte	0x2
  1550 018b C2       		.byte	0xc2
@@ -1649,7 +1649,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1556 0197 AD020000 		.4byte	0x2ad
  1557 019b 00       		.byte	0
  1558 019c 07       		.uleb128 0x7
- 1559 019d F4060000 		.4byte	.LASF35
+ 1559 019d 1E070000 		.4byte	.LASF35
  1560 01a1 02       		.byte	0x2
  1561 01a2 C5       		.byte	0xc5
  1562 01a3 AD020000 		.4byte	0x2ad
@@ -1661,7 +1661,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1568 01af 32010000 		.4byte	0x132
  1569 01b3 08       		.byte	0x8
  1570 01b4 07       		.uleb128 0x7
- 1571 01b5 52060000 		.4byte	.LASF37
+ 1571 01b5 7C060000 		.4byte	.LASF37
  1572 01b9 02       		.byte	0x2
  1573 01ba C8       		.byte	0xc8
  1574 01bb 26050000 		.4byte	0x526
@@ -1673,12 +1673,12 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1580 01c7 AD020000 		.4byte	0x2ad
  1581 01cb 10       		.byte	0x10
  1582 01cc 07       		.uleb128 0x7
- 1583 01cd 44060000 		.4byte	.LASF39
+ 1583 01cd 6E060000 		.4byte	.LASF39
  1584 01d1 02       		.byte	0x2
  1585 01d2 CB       		.byte	0xcb
  1586 01d3 AD020000 		.4byte	0x2ad
  1587 01d7 14       		.byte	0x14
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 29
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 29
 
 
  1588 01d8 07       		.uleb128 0x7
@@ -1688,7 +1688,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1592 01df 9C080000 		.4byte	0x89c
  1593 01e3 18       		.byte	0x18
  1594 01e4 07       		.uleb128 0x7
- 1595 01e5 69060000 		.4byte	.LASF41
+ 1595 01e5 93060000 		.4byte	.LASF41
  1596 01e9 02       		.byte	0x2
  1597 01ea D8       		.byte	0xd8
  1598 01eb B3080000 		.4byte	0x8b3
@@ -1718,7 +1718,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1622 021b 27010000 		.4byte	0x127
  1623 021f 23       		.byte	0x23
  1624 0220 07       		.uleb128 0x7
- 1625 0221 4A040000 		.4byte	.LASF46
+ 1625 0221 37040000 		.4byte	.LASF46
  1626 0225 02       		.byte	0x2
  1627 0226 F3       		.byte	0xf3
  1628 0227 74010000 		.4byte	0x174
@@ -1730,15 +1730,15 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1634 0234 CB070000 		.4byte	0x7cb
  1635 0238 28       		.byte	0x28
  1636 0239 09       		.uleb128 0x9
- 1637 023a 8F050000 		.4byte	.LASF47
+ 1637 023a 7C050000 		.4byte	.LASF47
  1638 023e 02       		.byte	0x2
  1639 023f 3601     		.2byte	0x136
  1640 0241 B3020000 		.4byte	0x2b3
  1641 0245 2C       		.byte	0x2c
  1642 0246 09       		.uleb128 0x9
- 1643 0247 6E040000 		.4byte	.LASF48
+ 1643 0247 5B040000 		.4byte	.LASF48
  1644 024b 02       		.byte	0x2
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 30
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 30
 
 
  1645 024c 3C01     		.2byte	0x13c
@@ -1757,7 +1757,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1658 0268 48010000 		.4byte	0x148
  1659 026c 3C       		.byte	0x3c
  1660 026d 09       		.uleb128 0x9
- 1661 026e 27050000 		.4byte	.LASF51
+ 1661 026e 14050000 		.4byte	.LASF51
  1662 0272 02       		.byte	0x2
  1663 0273 4D01     		.2byte	0x14d
  1664 0275 96080000 		.4byte	0x896
@@ -1790,7 +1790,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1691 02ae 04       		.byte	0x4
  1692 02af 79010000 		.4byte	0x179
  1693 02b3 03       		.uleb128 0x3
- 1694 02b4 65050000 		.4byte	.LASF56
+ 1694 02b4 52050000 		.4byte	.LASF56
  1695 02b8 0B       		.byte	0xb
  1696 02b9 49       		.byte	0x49
  1697 02ba BE020000 		.4byte	0x2be
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1699 02bf 8C080000 		.4byte	.LASF58
  1700 02c3 04       		.byte	0x4
  1701 02c4 02       		.byte	0x2
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 31
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 31
 
 
  1702 02c5 B0       		.byte	0xb0
@@ -1828,7 +1828,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1726 02f5 AD020000 		.4byte	0x2ad
  1727 02f9 00       		.byte	0
  1728 02fa 07       		.uleb128 0x7
- 1729 02fb F4060000 		.4byte	.LASF35
+ 1729 02fb 1E070000 		.4byte	.LASF35
  1730 02ff 02       		.byte	0x2
  1731 0300 B9       		.byte	0xb9
  1732 0301 AD020000 		.4byte	0x2ad
@@ -1840,7 +1840,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1738 030d 57       		.byte	0x57
  1739 030e 12030000 		.4byte	0x312
  1740 0312 0B       		.uleb128 0xb
- 1741 0313 82040000 		.4byte	.LASF62
+ 1741 0313 6F040000 		.4byte	.LASF62
  1742 0317 1C       		.byte	0x1c
  1743 0318 02       		.byte	0x2
  1744 0319 9001     		.2byte	0x190
@@ -1852,34 +1852,34 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1750 0327 D7020000 		.4byte	0x2d7
  1751 032b 00       		.byte	0
  1752 032c 09       		.uleb128 0x9
- 1753 032d 88050000 		.4byte	.LASF64
+ 1753 032d 75050000 		.4byte	.LASF64
  1754 0331 02       		.byte	0x2
  1755 0332 9201     		.2byte	0x192
  1756 0334 32010000 		.4byte	0x132
  1757 0338 08       		.byte	0x8
  1758 0339 09       		.uleb128 0x9
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 32
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 32
 
 
- 1759 033a 4C060000 		.4byte	.LASF65
+ 1759 033a 76060000 		.4byte	.LASF65
  1760 033e 02       		.byte	0x2
  1761 033f 9401     		.2byte	0x194
  1762 0341 26050000 		.4byte	0x526
  1763 0345 0C       		.byte	0xc
  1764 0346 09       		.uleb128 0x9
- 1765 0347 62020000 		.4byte	.LASF66
+ 1765 0347 4F020000 		.4byte	.LASF66
  1766 034b 02       		.byte	0x2
  1767 034c 9701     		.2byte	0x197
  1768 034e AD020000 		.4byte	0x2ad
  1769 0352 10       		.byte	0x10
  1770 0353 09       		.uleb128 0x9
- 1771 0354 83060000 		.4byte	.LASF67
+ 1771 0354 AD060000 		.4byte	.LASF67
  1772 0358 02       		.byte	0x2
  1773 0359 9801     		.2byte	0x198
  1774 035b AD020000 		.4byte	0x2ad
  1775 035f 14       		.byte	0x14
  1776 0360 09       		.uleb128 0x9
- 1777 0361 79060000 		.4byte	.LASF68
+ 1777 0361 A3060000 		.4byte	.LASF68
  1778 0365 02       		.byte	0x2
  1779 0366 9B01     		.2byte	0x19b
  1780 0368 AD020000 		.4byte	0x2ad
@@ -1901,7 +1901,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1796 038a 0E       		.uleb128 0xe
  1797 038b 04       		.byte	0x4
  1798 038c 03       		.uleb128 0x3
- 1799 038d E4060000 		.4byte	.LASF70
+ 1799 038d 0E070000 		.4byte	.LASF70
  1800 0391 0B       		.byte	0xb
  1801 0392 61       		.byte	0x61
  1802 0393 97030000 		.4byte	0x397
@@ -1912,22 +1912,22 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1807 039e 6B01     		.2byte	0x16b
  1808 03a0 E6030000 		.4byte	0x3e6
  1809 03a4 09       		.uleb128 0x9
- 1810 03a5 A5020000 		.4byte	.LASF72
+ 1810 03a5 92020000 		.4byte	.LASF72
  1811 03a9 02       		.byte	0x2
  1812 03aa 6C01     		.2byte	0x16c
  1813 03ac B9080000 		.4byte	0x8b9
  1814 03b0 00       		.byte	0
  1815 03b1 09       		.uleb128 0x9
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 33
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 33
 
 
- 1816 03b2 D1020000 		.4byte	.LASF73
+ 1816 03b2 BE020000 		.4byte	.LASF73
  1817 03b6 02       		.byte	0x2
  1818 03b7 6D01     		.2byte	0x16d
  1819 03b9 B9080000 		.4byte	0x8b9
  1820 03bd 04       		.byte	0x4
  1821 03be 09       		.uleb128 0x9
- 1822 03bf 65040000 		.4byte	.LASF74
+ 1822 03bf 52040000 		.4byte	.LASF74
  1823 03c3 02       		.byte	0x2
  1824 03c4 6E01     		.2byte	0x16e
  1825 03c6 69010000 		.4byte	0x169
@@ -1951,25 +1951,25 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1843 03ec 66       		.byte	0x66
  1844 03ed F1030000 		.4byte	0x3f1
  1845 03f1 0B       		.uleb128 0xb
- 1846 03f2 DB050000 		.4byte	.LASF78
+ 1846 03f2 C8050000 		.4byte	.LASF78
  1847 03f6 10       		.byte	0x10
  1848 03f7 02       		.byte	0x2
  1849 03f8 7B01     		.2byte	0x17b
  1850 03fa 33040000 		.4byte	0x433
  1851 03fe 09       		.uleb128 0x9
- 1852 03ff A5020000 		.4byte	.LASF72
+ 1852 03ff 92020000 		.4byte	.LASF72
  1853 0403 02       		.byte	0x2
  1854 0404 7C01     		.2byte	0x17c
  1855 0406 B9080000 		.4byte	0x8b9
  1856 040a 00       		.byte	0
  1857 040b 09       		.uleb128 0x9
- 1858 040c D1020000 		.4byte	.LASF73
+ 1858 040c BE020000 		.4byte	.LASF73
  1859 0410 02       		.byte	0x2
  1860 0411 7E01     		.2byte	0x17e
  1861 0413 B9080000 		.4byte	0x8b9
  1862 0417 04       		.byte	0x4
  1863 0418 09       		.uleb128 0x9
- 1864 0419 65040000 		.4byte	.LASF74
+ 1864 0419 52040000 		.4byte	.LASF74
  1865 041d 02       		.byte	0x2
  1866 041e 8001     		.2byte	0x180
  1867 0420 69010000 		.4byte	0x169
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1870 0426 310A0000 		.4byte	.LASF79
  1871 042a 02       		.byte	0x2
  1872 042b 8201     		.2byte	0x182
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 34
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 34
 
 
  1873 042d 74010000 		.4byte	0x174
@@ -1990,7 +1990,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1879 0439 6B       		.byte	0x6b
  1880 043a 3E040000 		.4byte	0x43e
  1881 043e 0F       		.uleb128 0xf
- 1882 043f 8F020000 		.4byte	.LASF81
+ 1882 043f 7C020000 		.4byte	.LASF81
  1883 0443 1404     		.2byte	0x414
  1884 0445 02       		.byte	0x2
  1885 0446 A201     		.2byte	0x1a2
@@ -2008,7 +2008,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1897 0461 53010000 		.4byte	0x153
  1898 0465 04       		.byte	0x4
  1899 0466 09       		.uleb128 0x9
- 1900 0467 B3020000 		.4byte	.LASF84
+ 1900 0467 A0020000 		.4byte	.LASF84
  1901 046b 02       		.byte	0x2
  1902 046c B301     		.2byte	0x1b3
  1903 046e 53010000 		.4byte	0x153
@@ -2021,7 +2021,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1910 047f 0C       		.byte	0xc
  1911 0480 00       		.byte	0
  1912 0481 03       		.uleb128 0x3
- 1913 0482 F8040000 		.4byte	.LASF86
+ 1913 0482 E5040000 		.4byte	.LASF86
  1914 0486 0B       		.byte	0xb
  1915 0487 70       		.byte	0x70
  1916 0488 8C040000 		.4byte	0x48c
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1927 04a2 07030000 		.4byte	0x307
  1928 04a6 00       		.byte	0
  1929 04a7 09       		.uleb128 0x9
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 35
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 35
 
 
  1930 04a8 B9010000 		.4byte	.LASF89
@@ -2065,13 +2065,13 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1951 04d6 2E070000 		.4byte	0x72e
  1952 04da A804     		.2byte	0x4a8
  1953 04dc 10       		.uleb128 0x10
- 1954 04dd BA060000 		.4byte	.LASF91
+ 1954 04dd E4060000 		.4byte	.LASF91
  1955 04e1 02       		.byte	0x2
  1956 04e2 DD01     		.2byte	0x1dd
  1957 04e4 C0070000 		.4byte	0x7c0
  1958 04e8 B004     		.2byte	0x4b0
  1959 04ea 10       		.uleb128 0x10
- 1960 04eb BC020000 		.4byte	.LASF92
+ 1960 04eb A9020000 		.4byte	.LASF92
  1961 04ef 02       		.byte	0x2
  1962 04f0 E301     		.2byte	0x1e3
  1963 04f2 BF080000 		.4byte	0x8bf
@@ -2083,22 +2083,22 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  1969 04ff A706     		.2byte	0x6a7
  1970 0501 D5000000 		.4byte	0xd5
  1971 0505 13       		.uleb128 0x13
- 1972 0506 3A040000 		.4byte	.LASF94
+ 1972 0506 27040000 		.4byte	.LASF94
  1973 050a 0D       		.byte	0xd
  1974 050b 4C       		.byte	0x4c
  1975 050c DA000000 		.4byte	0xda
  1976 0510 03       		.uleb128 0x3
- 1977 0511 6A020000 		.4byte	.LASF95
+ 1977 0511 57020000 		.4byte	.LASF95
  1978 0515 0E       		.byte	0xe
  1979 0516 65       		.byte	0x65
  1980 0517 8A030000 		.4byte	0x38a
  1981 051b 03       		.uleb128 0x3
- 1982 051c 5A050000 		.4byte	.LASF96
+ 1982 051c 47050000 		.4byte	.LASF96
  1983 0520 0E       		.byte	0xe
  1984 0521 6D       		.byte	0x6d
  1985 0522 E5000000 		.4byte	0xe5
  1986 0526 06       		.uleb128 0x6
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 36
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 36
 
 
  1987 0527 4A090000 		.4byte	.LASF97
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2041 0593 14       		.uleb128 0x14
  2042 0594 73323200 		.ascii	"s22\000"
  2043 0598 0F       		.byte	0xf
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 37
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 37
 
 
  2044 0599 FC       		.byte	0xfc
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2098 060a 0501     		.2byte	0x105
  2099 060c 10050000 		.4byte	0x510
  2100 0610 3C       		.byte	0x3c
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 38
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 38
 
 
  2101 0611 08       		.uleb128 0x8
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2155 067f 00       		.byte	0
  2156 0680 0A       		.uleb128 0xa
  2157 0681 04       		.byte	0x4
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 39
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 39
 
 
  2158 0682 3F050000 		.4byte	0x53f
@@ -2313,7 +2313,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2187 06bd 0C       		.byte	0xc
  2188 06be 00       		.byte	0
  2189 06bf 03       		.uleb128 0x3
- 2190 06c0 29060000 		.4byte	.LASF103
+ 2190 06c0 53060000 		.4byte	.LASF103
  2191 06c4 10       		.byte	0x10
  2192 06c5 62       		.byte	0x62
  2193 06c6 86060000 		.4byte	0x686
@@ -2323,22 +2323,22 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2197 06ce 67       		.byte	0x67
  2198 06cf F8060000 		.4byte	0x6f8
  2199 06d3 07       		.uleb128 0x7
- 2200 06d4 5A020000 		.4byte	.LASF104
+ 2200 06d4 47020000 		.4byte	.LASF104
  2201 06d8 10       		.byte	0x10
  2202 06d9 6B       		.byte	0x6b
  2203 06da 37000000 		.4byte	0x37
  2204 06de 00       		.byte	0
  2205 06df 07       		.uleb128 0x7
- 2206 06e0 0A060000 		.4byte	.LASF105
+ 2206 06e0 34060000 		.4byte	.LASF105
  2207 06e4 10       		.byte	0x10
  2208 06e5 6F       		.byte	0x6f
  2209 06e6 F8060000 		.4byte	0x6f8
  2210 06ea 04       		.byte	0x4
  2211 06eb 07       		.uleb128 0x7
- 2212 06ec CF060000 		.4byte	.LASF106
+ 2212 06ec F9060000 		.4byte	.LASF106
  2213 06f0 10       		.byte	0x10
  2214 06f1 73       		.byte	0x73
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 40
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 40
 
 
  2215 06f2 FE060000 		.4byte	0x6fe
@@ -2372,7 +2372,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2243 072c 00       		.byte	0
  2244 072d 00       		.byte	0
  2245 072e 03       		.uleb128 0x3
- 2246 072f 58060000 		.4byte	.LASF109
+ 2246 072f 82060000 		.4byte	.LASF109
  2247 0733 11       		.byte	0x11
  2248 0734 3D       		.byte	0x3d
  2249 0735 19070000 		.4byte	0x719
@@ -2394,11 +2394,11 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2265 0754 F0000000 		.4byte	0xf0
  2266 0758 04       		.byte	0x4
  2267 0759 07       		.uleb128 0x7
- 2268 075a DB040000 		.4byte	.LASF112
+ 2268 075a C8040000 		.4byte	.LASF112
  2269 075e 11       		.byte	0x11
  2270 075f 4B       		.byte	0x4b
  2271 0760 F0000000 		.4byte	0xf0
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 41
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 41
 
 
  2272 0764 08       		.byte	0x8
@@ -2409,7 +2409,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2277 076a 5E010000 		.4byte	0x15e
  2278 076e 0C       		.byte	0xc
  2279 076f 07       		.uleb128 0x7
- 2280 0770 AF060000 		.4byte	.LASF113
+ 2280 0770 D9060000 		.4byte	.LASF113
  2281 0774 11       		.byte	0x11
  2282 0775 4D       		.byte	0x4d
  2283 0776 FB000000 		.4byte	0xfb
@@ -2426,7 +2426,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2294 078a 38       		.byte	0x38
  2295 078b C0070000 		.4byte	0x7c0
  2296 078f 07       		.uleb128 0x7
- 2297 0790 90040000 		.4byte	.LASF115
+ 2297 0790 7D040000 		.4byte	.LASF115
  2298 0794 12       		.byte	0x12
  2299 0795 39       		.byte	0x39
  2300 0796 5E010000 		.4byte	0x15e
@@ -2444,21 +2444,21 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2312 07ae 7C070000 		.4byte	0x77c
  2313 07b2 08       		.byte	0x8
  2314 07b3 07       		.uleb128 0x7
- 2315 07b4 1C050000 		.4byte	.LASF118
+ 2315 07b4 09050000 		.4byte	.LASF118
  2316 07b8 12       		.byte	0x12
  2317 07b9 3D       		.byte	0x3d
  2318 07ba 7C070000 		.4byte	0x77c
  2319 07be 20       		.byte	0x20
  2320 07bf 00       		.byte	0
  2321 07c0 03       		.uleb128 0x3
- 2322 07c1 AF040000 		.4byte	.LASF119
+ 2322 07c1 9C040000 		.4byte	.LASF119
  2323 07c5 12       		.byte	0x12
  2324 07c6 3F       		.byte	0x3f
  2325 07c7 87070000 		.4byte	0x787
  2326 07cb 19       		.uleb128 0x19
  2327 07cc 04       		.byte	0x4
  2328 07cd 02       		.byte	0x2
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 42
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 42
 
 
  2329 07ce FA       		.byte	0xfa
@@ -2474,7 +2474,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2339 07e5 0801     		.2byte	0x108
  2340 07e7 3D010000 		.4byte	0x13d
  2341 07eb 1A       		.uleb128 0x1a
- 2342 07ec 04050000 		.4byte	.LASF122
+ 2342 07ec F1040000 		.4byte	.LASF122
  2343 07f0 02       		.byte	0x2
  2344 07f1 0F01     		.2byte	0x10f
  2345 07f3 8A030000 		.4byte	0x38a
@@ -2484,7 +2484,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2349 07fd 1601     		.2byte	0x116
  2350 07ff 28080000 		.4byte	0x828
  2351 0803 1A       		.uleb128 0x1a
- 2352 0804 51040000 		.4byte	.LASF124
+ 2352 0804 3E040000 		.4byte	.LASF124
  2353 0808 02       		.byte	0x2
  2354 0809 1E01     		.2byte	0x11e
  2355 080b 53080000 		.4byte	0x853
@@ -2515,10 +2515,10 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2380 0841 D7020000 		.4byte	0x2d7
  2381 0845 00       		.byte	0
  2382 0846 07       		.uleb128 0x7
- 2383 0847 96040000 		.4byte	.LASF129
+ 2383 0847 83040000 		.4byte	.LASF129
  2384 084b 05       		.byte	0x5
  2385 084c 37       		.byte	0x37
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 43
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 43
 
 
  2386 084d 53010000 		.4byte	0x153
@@ -2552,7 +2552,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2414 0884 FC090000 		.4byte	0x9fc
  2415 0888 0C       		.byte	0xc
  2416 0889 07       		.uleb128 0x7
- 2417 088a 9F020000 		.4byte	.LASF134
+ 2417 088a 8C020000 		.4byte	.LASF134
  2418 088e 13       		.byte	0x13
  2419 088f 41       		.byte	0x41
  2420 0890 53010000 		.4byte	0x153
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2440 08b9 0A       		.uleb128 0xa
  2441 08ba 04       		.byte	0x4
  2442 08bb 8C030000 		.4byte	0x38c
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 44
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 44
 
 
  2443 08bf 17       		.uleb128 0x17
@@ -2605,7 +2605,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2464 08e9 BB090000 		.4byte	0x9bb
  2465 08ed 00       		.byte	0
  2466 08ee 07       		.uleb128 0x7
- 2467 08ef 74050000 		.4byte	.LASF137
+ 2467 08ef 61050000 		.4byte	.LASF137
  2468 08f3 14       		.byte	0x14
  2469 08f4 36       		.byte	0x36
  2470 08f5 B4000000 		.4byte	0xb4
@@ -2623,13 +2623,13 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2482 090d BF000000 		.4byte	0xbf
  2483 0911 06       		.byte	0x6
  2484 0912 07       		.uleb128 0x7
- 2485 0913 D9060000 		.4byte	.LASF140
+ 2485 0913 03070000 		.4byte	.LASF140
  2486 0917 14       		.byte	0x14
  2487 0918 39       		.byte	0x39
  2488 0919 B4000000 		.4byte	0xb4
  2489 091d 08       		.byte	0x8
  2490 091e 07       		.uleb128 0x7
- 2491 091f FE050000 		.4byte	.LASF141
+ 2491 091f 28060000 		.4byte	.LASF141
  2492 0923 14       		.byte	0x14
  2493 0924 3A       		.byte	0x3a
  2494 0925 B4000000 		.4byte	0xb4
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2497 092b E9000000 		.4byte	.LASF142
  2498 092f 14       		.byte	0x14
  2499 0930 3B       		.byte	0x3b
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 45
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 45
 
 
  2500 0931 B4000000 		.4byte	0xb4
@@ -2668,7 +2668,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2524 0961 B4000000 		.4byte	0xb4
  2525 0965 0E       		.byte	0xe
  2526 0966 07       		.uleb128 0x7
- 2527 0967 38060000 		.4byte	.LASF147
+ 2527 0967 62060000 		.4byte	.LASF147
  2528 096b 14       		.byte	0x14
  2529 096c 40       		.byte	0x40
  2530 096d B4000000 		.4byte	0xb4
@@ -2692,13 +2692,13 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2548 0991 B4000000 		.4byte	0xb4
  2549 0995 12       		.byte	0x12
  2550 0996 07       		.uleb128 0x7
- 2551 0997 7C050000 		.4byte	.LASF151
+ 2551 0997 69050000 		.4byte	.LASF151
  2552 099b 14       		.byte	0x14
  2553 099c 45       		.byte	0x45
  2554 099d B4000000 		.4byte	0xb4
  2555 09a1 13       		.byte	0x13
  2556 09a2 07       		.uleb128 0x7
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 46
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 46
 
 
  2557 09a3 BD070000 		.4byte	.LASF152
@@ -2728,7 +2728,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2581 09d6 1B       		.uleb128 0x1b
  2582 09d7 CB090000 		.4byte	0x9cb
  2583 09db 13       		.uleb128 0x13
- 2584 09dc 79040000 		.4byte	.LASF155
+ 2584 09dc 66040000 		.4byte	.LASF155
  2585 09e0 14       		.byte	0x14
  2586 09e1 6E       		.byte	0x6e
  2587 09e2 D6090000 		.4byte	0x9d6
@@ -2753,12 +2753,12 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2606 0a0a 03       		.byte	0x3
  2607 0a0b 00000000 		.4byte	ch
  2608 0a0f 1E       		.uleb128 0x1e
- 2609 0a10 73020000 		.4byte	.LASF158
+ 2609 0a10 60020000 		.4byte	.LASF158
  2610 0a14 01       		.byte	0x1
  2611 0a15 0402     		.2byte	0x204
  2612 0a17 00000000 		.4byte	.LFB229
  2613 0a1b 44000000 		.4byte	.LFE229-.LFB229
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 47
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 47
 
 
  2614 0a1f 01       		.uleb128 0x1
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2668 0aad 00       		.byte	0
  2669 0aae 00       		.byte	0
  2670 0aaf 27       		.uleb128 0x27
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 48
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 48
 
 
  2671 0ab0 5A000000 		.4byte	.LVL85
@@ -2878,10 +2878,10 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2725 0b29 00       		.byte	0
  2726 0b2a 00       		.byte	0
  2727 0b2b 1E       		.uleb128 0x1e
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 49
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 49
 
 
- 2728 0b2c 11060000 		.4byte	.LASF160
+ 2728 0b2c 3B060000 		.4byte	.LASF160
  2729 0b30 01       		.byte	0x1
  2730 0b31 C301     		.2byte	0x1c3
  2731 0b33 00000000 		.4byte	.LFB227
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2782 0bb4 29       		.uleb128 0x29
  2783 0bb5 0C110000 		.4byte	0x110c
  2784 0bb9 06000000 		.4byte	.LBB186
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 50
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 50
 
 
  2785 0bbd 98000000 		.4byte	.Ldebug_ranges0+0x98
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2839 0c2e 01       		.uleb128 0x1
  2840 0c2f 9C       		.byte	0x9c
  2841 0c30 5C0C0000 		.4byte	0xc5c
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 51
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 51
 
 
  2842 0c34 21       		.uleb128 0x21
@@ -3022,7 +3022,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2860 0c5e 02       		.byte	0x2
  2861 0c5f 49070000 		.4byte	.LASF161
  2862 0c63 1E       		.uleb128 0x1e
- 2863 0c64 49020000 		.4byte	.LASF162
+ 2863 0c64 36020000 		.4byte	.LASF162
  2864 0c68 01       		.byte	0x1
  2865 0c69 9201     		.2byte	0x192
  2866 0c6b 00000000 		.4byte	.LFB225
@@ -3052,13 +3052,13 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2890 0cae 1B130000 		.4byte	0x131b
  2891 0cb2 00       		.byte	0
  2892 0cb3 1E       		.uleb128 0x1e
- 2893 0cb4 C8040000 		.4byte	.LASF163
+ 2893 0cb4 B5040000 		.4byte	.LASF163
  2894 0cb8 01       		.byte	0x1
  2895 0cb9 6F01     		.2byte	0x16f
  2896 0cbb 00000000 		.4byte	.LFB224
  2897 0cbf 88000000 		.4byte	.LFE224-.LFB224
  2898 0cc3 01       		.uleb128 0x1
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 52
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 52
 
 
  2899 0cc4 9C       		.byte	0x9c
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  2953 0d4d 01       		.uleb128 0x1
  2954 0d4e 50       		.byte	0x50
  2955 0d4f 00       		.byte	0
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 53
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 53
 
 
  2956 0d50 27       		.uleb128 0x27
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3010 0db9 50       		.byte	0x50
  3011 0dba 03       		.uleb128 0x3
  3012 0dbb F3       		.byte	0xf3
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 54
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 54
 
 
  3013 0dbc 01       		.uleb128 0x1
@@ -3202,7 +3202,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3031 0de2 11010000 		.4byte	0x111
  3032 0de6 2F020000 		.4byte	.LLST13
  3033 0dea 32       		.uleb128 0x32
- 3034 0deb 74060000 		.4byte	.LASF167
+ 3034 0deb 9E060000 		.4byte	.LASF167
  3035 0def 01       		.byte	0x1
  3036 0df0 4A01     		.2byte	0x14a
  3037 0df2 69010000 		.4byte	0x169
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3067 0e41 68130000 		.4byte	0x1368
  3068 0e45 5F0E0000 		.4byte	0xe5f
  3069 0e49 28       		.uleb128 0x28
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 55
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 55
 
 
  3070 0e4a 01       		.uleb128 0x1
@@ -3298,12 +3298,12 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3124 0ea1 20       		.uleb128 0x20
  3125 0ea2 56000000 		.4byte	.LVL48
  3126 0ea6 1B130000 		.4byte	0x131b
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 56
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 56
 
 
  3127 0eaa 00       		.byte	0
  3128 0eab 35       		.uleb128 0x35
- 3129 0eac E6020000 		.4byte	.LASF172
+ 3129 0eac D3020000 		.4byte	.LASF172
  3130 0eb0 01       		.byte	0x1
  3131 0eb1 1301     		.2byte	0x113
  3132 0eb3 01       		.byte	0x1
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3181 0f2a 25       		.uleb128 0x25
  3182 0f2b 3C000000 		.4byte	.LBB173
  3183 0f2f 04000000 		.4byte	.LBE173-.LBB173
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 57
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 57
 
 
  3184 0f33 26       		.uleb128 0x26
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3238 0faf 3C000000 		.4byte	.LVL35
  3239 0fb3 47130000 		.4byte	0x1347
  3240 0fb7 28       		.uleb128 0x28
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 58
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 58
 
 
  3241 0fb8 01       		.uleb128 0x1
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3295 1031 01       		.uleb128 0x1
  3296 1032 50       		.byte	0x50
  3297 1033 05       		.uleb128 0x5
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 59
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 59
 
 
  3298 1034 03       		.byte	0x3
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3352 10ae E6090000 		.4byte	0x9e6
  3353 10b2 40       		.uleb128 0x40
  3354 10b3 E5070000 		.4byte	.LASF176
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 60
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 60
 
 
  3355 10b7 06       		.byte	0x6
@@ -3553,7 +3553,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3364 10cb B9080000 		.4byte	0x8b9
  3365 10cf 00       		.byte	0
  3366 10d0 41       		.uleb128 0x41
- 3367 10d1 36020000 		.4byte	.LASF174
+ 3367 10d1 2D070000 		.4byte	.LASF174
  3368 10d5 04       		.byte	0x4
  3369 10d6 9601     		.2byte	0x196
  3370 10d8 03       		.byte	0x3
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3409 112d 02       		.byte	0x2
  3410 112e A002     		.2byte	0x2a0
  3411 1130 AD020000 		.4byte	0x2ad
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 61
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 61
 
 
  3412 1134 00       		.byte	0
@@ -3644,7 +3644,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3452 1181 03       		.byte	0x3
  3453 1182 93110000 		.4byte	0x1193
  3454 1186 43       		.uleb128 0x43
- 3455 1187 AD020000 		.4byte	.LASF185
+ 3455 1187 9A020000 		.4byte	.LASF185
  3456 118b 03       		.byte	0x3
  3457 118c 2002     		.2byte	0x220
  3458 118e DA000000 		.4byte	0xda
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3466 11a0 B1110000 		.4byte	0x11b1
  3467 11a4 44       		.uleb128 0x44
  3468 11a5 A10A0000 		.4byte	.LASF187
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 62
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 62
 
 
  3469 11a9 03       		.byte	0x3
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3523 1238 89130000 		.4byte	0x1389
  3524 123c 00       		.byte	0
  3525 123d 24       		.uleb128 0x24
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 63
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 63
 
 
  3526 123e 95100000 		.4byte	0x1095
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3580 12d4 00       		.byte	0
  3581 12d5 00       		.byte	0
  3582 12d6 20       		.uleb128 0x20
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 64
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 64
 
 
  3583 12d7 56000000 		.4byte	.LVL23
@@ -3817,13 +3817,13 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3616 131c 2C080000 		.4byte	.LASF204
  3617 1320 2C080000 		.4byte	.LASF204
  3618 1324 48       		.uleb128 0x48
- 3619 1325 85020000 		.4byte	.LASF188
- 3620 1329 85020000 		.4byte	.LASF188
+ 3619 1325 72020000 		.4byte	.LASF188
+ 3620 1329 72020000 		.4byte	.LASF188
  3621 132d 04       		.byte	0x4
  3622 132e 1601     		.2byte	0x116
  3623 1330 48       		.uleb128 0x48
- 3624 1331 58040000 		.4byte	.LASF189
- 3625 1335 58040000 		.4byte	.LASF189
+ 3624 1331 45040000 		.4byte	.LASF189
+ 3625 1335 45040000 		.4byte	.LASF189
  3626 1339 0F       		.byte	0xf
  3627 133a 6701     		.2byte	0x167
  3628 133c 49       		.uleb128 0x49
@@ -3837,21 +3837,21 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3636 1350 12       		.byte	0x12
  3637 1351 4E       		.byte	0x4e
  3638 1352 49       		.uleb128 0x49
- 3639 1353 E7040000 		.4byte	.LASF192
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 65
+ 3639 1353 D4040000 		.4byte	.LASF192
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 65
 
 
- 3640 1357 E7040000 		.4byte	.LASF192
+ 3640 1357 D4040000 		.4byte	.LASF192
  3641 135b 10       		.byte	0x10
  3642 135c DE       		.byte	0xde
  3643 135d 49       		.uleb128 0x49
- 3644 135e 0B050000 		.4byte	.LASF193
- 3645 1362 0B050000 		.4byte	.LASF193
+ 3644 135e F8040000 		.4byte	.LASF193
+ 3645 1362 F8040000 		.4byte	.LASF193
  3646 1366 10       		.byte	0x10
  3647 1367 DF       		.byte	0xdf
  3648 1368 49       		.uleb128 0x49
- 3649 1369 31050000 		.4byte	.LASF194
- 3650 136d 31050000 		.4byte	.LASF194
+ 3649 1369 1E050000 		.4byte	.LASF194
+ 3650 136d 1E050000 		.4byte	.LASF194
  3651 1371 06       		.byte	0x6
  3652 1372 BC       		.byte	0xbc
  3653 1373 49       		.uleb128 0x49
@@ -3860,13 +3860,13 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3656 137c 06       		.byte	0x6
  3657 137d BE       		.byte	0xbe
  3658 137e 49       		.uleb128 0x49
- 3659 137f 3C050000 		.4byte	.LASF196
- 3660 1383 3C050000 		.4byte	.LASF196
+ 3659 137f 29050000 		.4byte	.LASF196
+ 3660 1383 29050000 		.4byte	.LASF196
  3661 1387 12       		.byte	0x12
  3662 1388 51       		.byte	0x51
  3663 1389 49       		.uleb128 0x49
- 3664 138a 8B060000 		.4byte	.LASF197
- 3665 138e 8B060000 		.4byte	.LASF197
+ 3664 138a B5060000 		.4byte	.LASF197
+ 3665 138e B5060000 		.4byte	.LASF197
  3666 1392 10       		.byte	0x10
  3667 1393 DA       		.byte	0xda
  3668 1394 49       		.uleb128 0x49
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3694 000d 11       		.uleb128 0x11
  3695 000e 01       		.uleb128 0x1
  3696 000f 10       		.uleb128 0x10
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 66
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 66
 
 
  3697 0010 17       		.uleb128 0x17
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3751 0046 3B       		.uleb128 0x3b
  3752 0047 0B       		.uleb128 0xb
  3753 0048 01       		.uleb128 0x1
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 67
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 67
 
 
  3754 0049 13       		.uleb128 0x13
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3808 007f 13       		.uleb128 0x13
  3809 0080 00       		.byte	0
  3810 0081 00       		.byte	0
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 68
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 68
 
 
  3811 0082 0B       		.uleb128 0xb
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3865 00b8 0D       		.uleb128 0xd
  3866 00b9 00       		.byte	0
  3867 00ba 03       		.uleb128 0x3
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 69
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 69
 
 
  3868 00bb 0E       		.uleb128 0xe
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3922 00f1 3F       		.uleb128 0x3f
  3923 00f2 19       		.uleb128 0x19
  3924 00f3 3C       		.uleb128 0x3c
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 70
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 70
 
 
  3925 00f4 19       		.uleb128 0x19
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  3979 012a 21       		.uleb128 0x21
  3980 012b 00       		.byte	0
  3981 012c 49       		.uleb128 0x49
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 71
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 71
 
 
  3982 012d 13       		.uleb128 0x13
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  4036 0163 00       		.byte	0
  4037 0164 1D       		.uleb128 0x1d
  4038 0165 34       		.uleb128 0x34
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 72
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 72
 
 
  4039 0166 00       		.byte	0
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  4093 01a2 00       		.byte	0
  4094 01a3 00       		.byte	0
  4095 01a4 21       		.uleb128 0x21
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 73
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 73
 
 
  4096 01a5 34       		.uleb128 0x34
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  4150 01db 0B       		.uleb128 0xb
  4151 01dc 01       		.byte	0x1
  4152 01dd 11       		.uleb128 0x11
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 74
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 74
 
 
  4153 01de 01       		.uleb128 0x1
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  4207 0219 02       		.uleb128 0x2
  4208 021a 17       		.uleb128 0x17
  4209 021b 00       		.byte	0
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 75
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 75
 
 
  4210 021c 00       		.byte	0
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  4264 0255 05       		.uleb128 0x5
  4265 0256 00       		.byte	0
  4266 0257 03       		.uleb128 0x3
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 76
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 76
 
 
  4267 0258 08       		.uleb128 0x8
@@ -4558,7 +4558,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  4321 0294 01       		.uleb128 0x1
  4322 0295 12       		.uleb128 0x12
  4323 0296 06       		.uleb128 0x6
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 77
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 77
 
 
  4324 0297 01       		.uleb128 0x1
@@ -4618,7 +4618,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  4378 02cd 03       		.uleb128 0x3
  4379 02ce 0E       		.uleb128 0xe
  4380 02cf 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 78
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 78
 
 
  4381 02d0 0B       		.uleb128 0xb
@@ -4678,7 +4678,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  4435 0307 3A       		.uleb128 0x3a
  4436 0308 0B       		.uleb128 0xb
  4437 0309 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 79
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 79
 
 
  4438 030a 0B       		.uleb128 0xb
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  4492 0341 58       		.uleb128 0x58
  4493 0342 0B       		.uleb128 0xb
  4494 0343 59       		.uleb128 0x59
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 80
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 80
 
 
  4495 0344 0B       		.uleb128 0xb
@@ -4798,7 +4798,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  4549 037a 41       		.uleb128 0x41
  4550 037b 2E       		.uleb128 0x2e
  4551 037c 00       		.byte	0
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 81
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 81
 
 
  4552 037d 03       		.uleb128 0x3
@@ -4858,7 +4858,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  4606 03b3 00       		.byte	0
  4607 03b4 45       		.uleb128 0x45
  4608 03b5 2E       		.uleb128 0x2e
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 82
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 82
 
 
  4609 03b6 01       		.byte	0x1
@@ -4918,7 +4918,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  4663 03ed 3A       		.uleb128 0x3a
  4664 03ee 0B       		.uleb128 0xb
  4665 03ef 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 83
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 83
 
 
  4666 03f0 05       		.uleb128 0x5
@@ -4978,7 +4978,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  4720 0051 00000000 		.4byte	0
  4721 0055 00000000 		.4byte	0
  4722              	.LLST27:
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 84
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 84
 
 
  4723 0059 0A000000 		.4byte	.LVL79
@@ -5038,7 +5038,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  4777 00e8 34000000 		.4byte	.LVL67
  4778 00ec 3B000000 		.4byte	.LVL69-1
  4779 00f0 0800     		.2byte	0x8
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 85
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 85
 
 
  4780 00f2 03       		.byte	0x3
@@ -5098,7 +5098,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  4834 0173 5C000000 		.4byte	.LVL56
  4835 0177 6C000000 		.4byte	.LVL57
  4836 017b 0100     		.2byte	0x1
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 86
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 86
 
 
  4837 017d 54       		.byte	0x54
@@ -5158,7 +5158,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  4891 01ff 31000000 		.4byte	.LVL53-1
  4892 0203 0100     		.2byte	0x1
  4893 0205 50       		.byte	0x50
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 87
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 87
 
 
  4894 0206 31000000 		.4byte	.LVL53-1
@@ -5218,7 +5218,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  4948 0296 F3       		.byte	0xf3
  4949 0297 01       		.uleb128 0x1
  4950 0298 50       		.byte	0x50
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 88
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 88
 
 
  4951 0299 9F       		.byte	0x9f
@@ -5278,7 +5278,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  5005 032c 50       		.byte	0x50
  5006 032d 59000000 		.4byte	.LVL12-1
  5007 0331 68000000 		.4byte	.LFE220
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 89
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 89
 
 
  5008 0335 0100     		.2byte	0x1
@@ -5338,7 +5338,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  5062 03c3 00000000 		.4byte	0
  5063              	.LLST6:
  5064 03c7 30000000 		.4byte	.LVL18
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 90
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 90
 
 
  5065 03cb 3A000000 		.4byte	.LVL20
@@ -5398,7 +5398,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  5119 0000 04000000 		.4byte	.LBB103
  5120 0004 06000000 		.4byte	.LBE103
  5121 0008 08000000 		.4byte	.LBB107
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 91
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 91
 
 
  5122 000c 0A000000 		.4byte	.LBE107
@@ -5458,7 +5458,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  5176 00e4 00000000 		.4byte	0
  5177 00e8 48000000 		.4byte	.LBB200
  5178 00ec 66000000 		.4byte	.LBE200
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 92
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 92
 
 
  5179 00f0 6C000000 		.4byte	.LBB203
@@ -5518,7 +5518,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  5220              	.LASF20:
  5221 0030 75696E74 		.ascii	"uint64_t\000"
  5221      36345F74 
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 93
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 93
 
 
  5221      00
@@ -5578,7 +5578,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  5245 00d7 63685F74 		.ascii	"ch_trace_buffer_t\000"
  5245      72616365 
  5245      5F627566 
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 94
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 94
 
 
  5245      6665725F 
@@ -5638,7 +5638,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  5269      206C6F6E 
  5269      6720696E 
  5269      7400
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 95
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 95
 
 
  5270              	.LASF3:
@@ -5698,7 +5698,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  5298              	.LASF164:
  5299 020c 63685363 		.ascii	"chSchIsPreemptionRequired\000"
  5299      68497350 
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 96
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 96
 
 
  5299      7265656D 
@@ -5710,384 +5710,384 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  5302              	.LASF128:
  5303 022e 735F7175 		.ascii	"s_queue\000"
  5303      65756500 
- 5304              	.LASF174:
- 5305 0236 63685379 		.ascii	"chSysUnlockFromISR\000"
- 5305      73556E6C 
- 5305      6F636B46 
- 5305      726F6D49 
- 5305      535200
- 5306              	.LASF162:
- 5307 0249 63685363 		.ascii	"chSchRescheduleS\000"
- 5307      68526573 
- 5307      63686564 
- 5307      756C6553 
- 5307      00
- 5308              	.LASF104:
- 5309 025a 74625F73 		.ascii	"tb_size\000"
- 5309      697A6500 
- 5310              	.LASF66:
- 5311 0262 725F6E65 		.ascii	"r_newer\000"
- 5311      77657200 
- 5312              	.LASF95:
- 5313 026a 72656761 		.ascii	"regarm_t\000"
- 5313      726D5F74 
- 5313      00
- 5314              	.LASF158:
- 5315 0273 63685363 		.ascii	"chSchDoReschedule\000"
- 5315      68446F52 
- 5315      65736368 
- 5315      6564756C 
- 5315      6500
- 5316              	.LASF188:
- 5317 0285 63685379 		.ascii	"chSysHalt\000"
- 5317      7348616C 
- 5317      7400
- 5318              	.LASF81:
- 5319 028f 63685F73 		.ascii	"ch_system_debug\000"
- 5319      79737465 
- 5319      6D5F6465 
- 5319      62756700 
- 5320              	.LASF134:
- 5321 029f 6D5F636E 		.ascii	"m_cnt\000"
- 5321      7400
- 5322              	.LASF72:
- 5323 02a5 76745F6E 		.ascii	"vt_next\000"
- 5323      65787400 
- 5324              	.LASF185:
- 5325 02ad 76616C75 		.ascii	"value\000"
- 5325      6500
- 5326              	.LASF84:
- 5327 02b3 6C6F636B 		.ascii	"lock_cnt\000"
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 97
+ 5304              	.LASF162:
+ 5305 0236 63685363 		.ascii	"chSchRescheduleS\000"
+ 5305      68526573 
+ 5305      63686564 
+ 5305      756C6553 
+ 5305      00
+ 5306              	.LASF104:
+ 5307 0247 74625F73 		.ascii	"tb_size\000"
+ 5307      697A6500 
+ 5308              	.LASF66:
+ 5309 024f 725F6E65 		.ascii	"r_newer\000"
+ 5309      77657200 
+ 5310              	.LASF95:
+ 5311 0257 72656761 		.ascii	"regarm_t\000"
+ 5311      726D5F74 
+ 5311      00
+ 5312              	.LASF158:
+ 5313 0260 63685363 		.ascii	"chSchDoReschedule\000"
+ 5313      68446F52 
+ 5313      65736368 
+ 5313      6564756C 
+ 5313      6500
+ 5314              	.LASF188:
+ 5315 0272 63685379 		.ascii	"chSysHalt\000"
+ 5315      7348616C 
+ 5315      7400
+ 5316              	.LASF81:
+ 5317 027c 63685F73 		.ascii	"ch_system_debug\000"
+ 5317      79737465 
+ 5317      6D5F6465 
+ 5317      62756700 
+ 5318              	.LASF134:
+ 5319 028c 6D5F636E 		.ascii	"m_cnt\000"
+ 5319      7400
+ 5320              	.LASF72:
+ 5321 0292 76745F6E 		.ascii	"vt_next\000"
+ 5321      65787400 
+ 5322              	.LASF185:
+ 5323 029a 76616C75 		.ascii	"value\000"
+ 5323      6500
+ 5324              	.LASF84:
+ 5325 02a0 6C6F636B 		.ascii	"lock_cnt\000"
+ 5325      5F636E74 
+ 5325      00
+ 5326              	.LASF92:
+ 5327 02a9 69646C65 		.ascii	"idle_thread_wa\000"
+ 5327      5F746872 
+ 5327      6561645F 
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 97
 
 
- 5327      5F636E74 
- 5327      00
- 5328              	.LASF92:
- 5329 02bc 69646C65 		.ascii	"idle_thread_wa\000"
- 5329      5F746872 
- 5329      6561645F 
- 5329      776100
- 5330              	.LASF30:
- 5331 02cb 636E745F 		.ascii	"cnt_t\000"
- 5331      7400
- 5332              	.LASF73:
- 5333 02d1 76745F70 		.ascii	"vt_prev\000"
- 5333      72657600 
- 5334              	.LASF0:
- 5335 02d9 756E7369 		.ascii	"unsigned int\000"
- 5335      676E6564 
- 5335      20696E74 
- 5335      00
- 5336              	.LASF172:
- 5337 02e6 77616B65 		.ascii	"wakeup\000"
- 5337      757000
- 5338              	.LASF200:
- 5339 02ed 474E5520 		.ascii	"GNU C11 7.2.1 20170904 (release) [ARM/embedded-7-br"
- 5339      43313120 
- 5339      372E322E 
- 5339      31203230 
- 5339      31373039 
- 5340 0320 616E6368 		.ascii	"anch revision 255204] -mcpu=cortex-m4 -mfloat-abi=h"
- 5340      20726576 
- 5340      6973696F 
- 5340      6E203235 
- 5340      35323034 
- 5341 0353 61726420 		.ascii	"ard -mfpu=fpv4-sp-d16 -mno-thumb-interwork -mthumb "
- 5341      2D6D6670 
- 5341      753D6670 
- 5341      76342D73 
- 5341      702D6431 
- 5342 0386 2D676764 		.ascii	"-ggdb -O2 -fomit-frame-pointer -falign-functions=16"
- 5342      62202D4F 
- 5342      32202D66 
- 5342      6F6D6974 
- 5342      2D667261 
- 5343 03b9 202D666E 		.ascii	" -fno-strict-aliasing -fstack-protector-all -ffunct"
- 5343      6F2D7374 
- 5343      72696374 
- 5343      2D616C69 
- 5343      6173696E 
- 5344 03ec 696F6E2D 		.ascii	"ion-sections -fdata-sections -fno-common -fsingle-p"
- 5344      73656374 
- 5344      696F6E73 
- 5344      202D6664 
- 5344      6174612D 
- 5345 041f 72656369 		.ascii	"recision-constant\000"
- 5345      73696F6E 
- 5345      2D636F6E 
- 5345      7374616E 
- 5345      7400
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 98
+ 5327      776100
+ 5328              	.LASF30:
+ 5329 02b8 636E745F 		.ascii	"cnt_t\000"
+ 5329      7400
+ 5330              	.LASF73:
+ 5331 02be 76745F70 		.ascii	"vt_prev\000"
+ 5331      72657600 
+ 5332              	.LASF0:
+ 5333 02c6 756E7369 		.ascii	"unsigned int\000"
+ 5333      676E6564 
+ 5333      20696E74 
+ 5333      00
+ 5334              	.LASF172:
+ 5335 02d3 77616B65 		.ascii	"wakeup\000"
+ 5335      757000
+ 5336              	.LASF200:
+ 5337 02da 474E5520 		.ascii	"GNU C11 7.2.1 20170904 (release) [ARM/embedded-7-br"
+ 5337      43313120 
+ 5337      372E322E 
+ 5337      31203230 
+ 5337      31373039 
+ 5338 030d 616E6368 		.ascii	"anch revision 255204] -mcpu=cortex-m4 -mfloat-abi=h"
+ 5338      20726576 
+ 5338      6973696F 
+ 5338      6E203235 
+ 5338      35323034 
+ 5339 0340 61726420 		.ascii	"ard -mfpu=fpv4-sp-d16 -mno-thumb-interwork -mthumb "
+ 5339      2D6D6670 
+ 5339      753D6670 
+ 5339      76342D73 
+ 5339      702D6431 
+ 5340 0373 2D676764 		.ascii	"-ggdb -O2 -fomit-frame-pointer -falign-functions=16"
+ 5340      62202D4F 
+ 5340      32202D66 
+ 5340      6F6D6974 
+ 5340      2D667261 
+ 5341 03a6 202D666E 		.ascii	" -fno-strict-aliasing -fstack-protector-all -ffunct"
+ 5341      6F2D7374 
+ 5341      72696374 
+ 5341      2D616C69 
+ 5341      6173696E 
+ 5342 03d9 696F6E2D 		.ascii	"ion-sections -fdata-sections -fno-common -fsingle-p"
+ 5342      73656374 
+ 5342      696F6E73 
+ 5342      202D6664 
+ 5342      6174612D 
+ 5343 040c 72656369 		.ascii	"recision-constant\000"
+ 5343      73696F6E 
+ 5343      2D636F6E 
+ 5343      7374616E 
+ 5343      7400
+ 5344              	.LASF17:
+ 5345 041e 75696E74 		.ascii	"uint16_t\000"
+ 5345      31365F74 
+ 5345      00
+ 5346              	.LASF94:
+ 5347 0427 53797374 		.ascii	"SystemCoreClock\000"
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 98
 
 
- 5346              	.LASF17:
- 5347 0431 75696E74 		.ascii	"uint16_t\000"
- 5347      31365F74 
- 5347      00
- 5348              	.LASF94:
- 5349 043a 53797374 		.ascii	"SystemCoreClock\000"
- 5349      656D436F 
- 5349      7265436C 
- 5349      6F636B00 
- 5350              	.LASF46:
- 5351 044a 705F7469 		.ascii	"p_time\000"
- 5351      6D6500
- 5352              	.LASF124:
- 5353 0451 77747365 		.ascii	"wtsemp\000"
- 5353      6D7000
- 5354              	.LASF189:
- 5355 0458 5F706F72 		.ascii	"_port_switch\000"
- 5355      745F7377 
- 5355      69746368 
+ 5347      656D436F 
+ 5347      7265436C 
+ 5347      6F636B00 
+ 5348              	.LASF46:
+ 5349 0437 705F7469 		.ascii	"p_time\000"
+ 5349      6D6500
+ 5350              	.LASF124:
+ 5351 043e 77747365 		.ascii	"wtsemp\000"
+ 5351      6D7000
+ 5352              	.LASF189:
+ 5353 0445 5F706F72 		.ascii	"_port_switch\000"
+ 5353      745F7377 
+ 5353      69746368 
+ 5353      00
+ 5354              	.LASF74:
+ 5355 0452 76745F64 		.ascii	"vt_delta\000"
+ 5355      656C7461 
  5355      00
- 5356              	.LASF74:
- 5357 0465 76745F64 		.ascii	"vt_delta\000"
- 5357      656C7461 
- 5357      00
- 5358              	.LASF48:
- 5359 046e 705F6D73 		.ascii	"p_msgqueue\000"
- 5359      67717565 
- 5359      756500
- 5360              	.LASF155:
- 5361 0479 63685F64 		.ascii	"ch_debug\000"
- 5361      65627567 
- 5361      00
- 5362              	.LASF62:
- 5363 0482 63685F72 		.ascii	"ch_ready_list\000"
- 5363      65616479 
- 5363      5F6C6973 
- 5363      7400
- 5364              	.LASF115:
- 5365 0490 6E5F6972 		.ascii	"n_irq\000"
- 5365      7100
- 5366              	.LASF129:
- 5367 0496 735F636E 		.ascii	"s_cnt\000"
- 5367      7400
- 5368              	.LASF9:
- 5369 049c 73686F72 		.ascii	"short unsigned int\000"
- 5369      7420756E 
- 5369      7369676E 
- 5369      65642069 
- 5369      6E7400
- 5370              	.LASF119:
- 5371 04af 6B65726E 		.ascii	"kernel_stats_t\000"
- 5371      656C5F73 
- 5371      74617473 
- 5371      5F7400
- 5372              	.LASF57:
- 5373 04be 63685F74 		.ascii	"ch_thread\000"
- 5373      68726561 
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 99
+ 5356              	.LASF48:
+ 5357 045b 705F6D73 		.ascii	"p_msgqueue\000"
+ 5357      67717565 
+ 5357      756500
+ 5358              	.LASF155:
+ 5359 0466 63685F64 		.ascii	"ch_debug\000"
+ 5359      65627567 
+ 5359      00
+ 5360              	.LASF62:
+ 5361 046f 63685F72 		.ascii	"ch_ready_list\000"
+ 5361      65616479 
+ 5361      5F6C6973 
+ 5361      7400
+ 5362              	.LASF115:
+ 5363 047d 6E5F6972 		.ascii	"n_irq\000"
+ 5363      7100
+ 5364              	.LASF129:
+ 5365 0483 735F636E 		.ascii	"s_cnt\000"
+ 5365      7400
+ 5366              	.LASF9:
+ 5367 0489 73686F72 		.ascii	"short unsigned int\000"
+ 5367      7420756E 
+ 5367      7369676E 
+ 5367      65642069 
+ 5367      6E7400
+ 5368              	.LASF119:
+ 5369 049c 6B65726E 		.ascii	"kernel_stats_t\000"
+ 5369      656C5F73 
+ 5369      74617473 
+ 5369      5F7400
+ 5370              	.LASF57:
+ 5371 04ab 63685F74 		.ascii	"ch_thread\000"
+ 5371      68726561 
+ 5371      6400
+ 5372              	.LASF163:
+ 5373 04b5 63685363 		.ascii	"chSchWakeupS\000"
+ 5373      6857616B 
+ 5373      65757053 
+ 5373      00
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 99
 
 
- 5373      6400
- 5374              	.LASF163:
- 5375 04c8 63685363 		.ascii	"chSchWakeupS\000"
- 5375      6857616B 
- 5375      65757053 
- 5375      00
- 5376              	.LASF28:
- 5377 04d5 6D73675F 		.ascii	"msg_t\000"
- 5377      7400
- 5378              	.LASF112:
- 5379 04db 6C617374 		.ascii	"last\000"
- 5379      00
- 5380              	.LASF31:
- 5381 04e0 75636E74 		.ascii	"ucnt_t\000"
- 5381      5F7400
- 5382              	.LASF192:
- 5383 04e7 63684462 		.ascii	"chDbgCheckClassI\000"
- 5383      67436865 
- 5383      636B436C 
- 5383      61737349 
- 5383      00
- 5384              	.LASF86:
- 5385 04f8 63685F73 		.ascii	"ch_system_t\000"
- 5385      79737465 
- 5385      6D5F7400 
- 5386              	.LASF122:
- 5387 0504 77746F62 		.ascii	"wtobjp\000"
- 5387      6A7000
- 5388              	.LASF193:
- 5389 050b 63684462 		.ascii	"chDbgCheckClassS\000"
- 5389      67436865 
- 5389      636B436C 
- 5389      61737353 
- 5389      00
- 5390              	.LASF118:
- 5391 051c 6D5F6372 		.ascii	"m_crit_isr\000"
- 5391      69745F69 
- 5391      737200
- 5392              	.LASF51:
- 5393 0527 705F6D74 		.ascii	"p_mtxlist\000"
- 5393      786C6973 
- 5393      7400
- 5394              	.LASF194:
- 5395 0531 63685654 		.ascii	"chVTDoSetI\000"
- 5395      446F5365 
- 5395      744900
- 5396              	.LASF196:
- 5397 053c 5F737461 		.ascii	"_stats_start_measure_crit_isr\000"
- 5397      74735F73 
- 5397      74617274 
- 5397      5F6D6561 
- 5397      73757265 
- 5398              	.LASF96:
- 5399 055a 73746B61 		.ascii	"stkalign_t\000"
- 5399      6C69676E 
+ 5374              	.LASF28:
+ 5375 04c2 6D73675F 		.ascii	"msg_t\000"
+ 5375      7400
+ 5376              	.LASF112:
+ 5377 04c8 6C617374 		.ascii	"last\000"
+ 5377      00
+ 5378              	.LASF31:
+ 5379 04cd 75636E74 		.ascii	"ucnt_t\000"
+ 5379      5F7400
+ 5380              	.LASF192:
+ 5381 04d4 63684462 		.ascii	"chDbgCheckClassI\000"
+ 5381      67436865 
+ 5381      636B436C 
+ 5381      61737349 
+ 5381      00
+ 5382              	.LASF86:
+ 5383 04e5 63685F73 		.ascii	"ch_system_t\000"
+ 5383      79737465 
+ 5383      6D5F7400 
+ 5384              	.LASF122:
+ 5385 04f1 77746F62 		.ascii	"wtobjp\000"
+ 5385      6A7000
+ 5386              	.LASF193:
+ 5387 04f8 63684462 		.ascii	"chDbgCheckClassS\000"
+ 5387      67436865 
+ 5387      636B436C 
+ 5387      61737353 
+ 5387      00
+ 5388              	.LASF118:
+ 5389 0509 6D5F6372 		.ascii	"m_crit_isr\000"
+ 5389      69745F69 
+ 5389      737200
+ 5390              	.LASF51:
+ 5391 0514 705F6D74 		.ascii	"p_mtxlist\000"
+ 5391      786C6973 
+ 5391      7400
+ 5392              	.LASF194:
+ 5393 051e 63685654 		.ascii	"chVTDoSetI\000"
+ 5393      446F5365 
+ 5393      744900
+ 5394              	.LASF196:
+ 5395 0529 5F737461 		.ascii	"_stats_start_measure_crit_isr\000"
+ 5395      74735F73 
+ 5395      74617274 
+ 5395      5F6D6561 
+ 5395      73757265 
+ 5396              	.LASF96:
+ 5397 0547 73746B61 		.ascii	"stkalign_t\000"
+ 5397      6C69676E 
+ 5397      5F7400
+ 5398              	.LASF56:
+ 5399 0552 74687265 		.ascii	"threads_list_t\000"
+ 5399      6164735F 
+ 5399      6C697374 
  5399      5F7400
- 5400              	.LASF56:
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 100
+ 5400              	.LASF137:
+ 5401 0561 63685F7A 		.ascii	"ch_zero\000"
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 100
 
 
- 5401 0565 74687265 		.ascii	"threads_list_t\000"
- 5401      6164735F 
- 5401      6C697374 
- 5401      5F7400
- 5402              	.LASF137:
- 5403 0574 63685F7A 		.ascii	"ch_zero\000"
- 5403      65726F00 
- 5404              	.LASF151:
- 5405 057c 63665F6F 		.ascii	"cf_off_refs\000"
- 5405      66665F72 
- 5405      65667300 
- 5406              	.LASF64:
- 5407 0588 725F7072 		.ascii	"r_prio\000"
- 5407      696F00
- 5408              	.LASF47:
- 5409 058f 705F7761 		.ascii	"p_waiting\000"
- 5409      6974696E 
- 5409      6700
- 5410              	.LASF201:
- 5411 0599 2E2E2F6C 		.ascii	"../lib/e-puck2_main-processor/ChibiOS//os/rt/src/ch"
- 5411      69622F65 
- 5411      2D707563 
- 5411      6B325F6D 
- 5411      61696E2D 
- 5412 05cc 73636864 		.ascii	"schd.c\000"
- 5412      2E6300
- 5413              	.LASF21:
- 5414 05d3 7274636E 		.ascii	"rtcnt_t\000"
- 5414      745F7400 
- 5415              	.LASF78:
- 5416 05db 63685F76 		.ascii	"ch_virtual_timers_list\000"
- 5416      69727475 
- 5416      616C5F74 
- 5416      696D6572 
- 5416      735F6C69 
- 5417              	.LASF2:
- 5418 05f2 6C6F6E67 		.ascii	"long double\000"
- 5418      20646F75 
- 5418      626C6500 
- 5419              	.LASF141:
- 5420 05fe 63685F74 		.ascii	"ch_timesize\000"
- 5420      696D6573 
- 5420      697A6500 
- 5421              	.LASF105:
- 5422 060a 74625F70 		.ascii	"tb_ptr\000"
- 5422      747200
- 5423              	.LASF160:
- 5424 0611 63685363 		.ascii	"chSchDoRescheduleBehind\000"
- 5424      68446F52 
- 5424      65736368 
- 5424      6564756C 
- 5424      65426568 
- 5425              	.LASF103:
- 5426 0629 63685F73 		.ascii	"ch_swc_event_t\000"
- 5426      77635F65 
- 5426      76656E74 
- 5426      5F7400
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 101
+ 5401      65726F00 
+ 5402              	.LASF151:
+ 5403 0569 63665F6F 		.ascii	"cf_off_refs\000"
+ 5403      66665F72 
+ 5403      65667300 
+ 5404              	.LASF64:
+ 5405 0575 725F7072 		.ascii	"r_prio\000"
+ 5405      696F00
+ 5406              	.LASF47:
+ 5407 057c 705F7761 		.ascii	"p_waiting\000"
+ 5407      6974696E 
+ 5407      6700
+ 5408              	.LASF201:
+ 5409 0586 2E2E2F6C 		.ascii	"../lib/e-puck2_main-processor/ChibiOS//os/rt/src/ch"
+ 5409      69622F65 
+ 5409      2D707563 
+ 5409      6B325F6D 
+ 5409      61696E2D 
+ 5410 05b9 73636864 		.ascii	"schd.c\000"
+ 5410      2E6300
+ 5411              	.LASF21:
+ 5412 05c0 7274636E 		.ascii	"rtcnt_t\000"
+ 5412      745F7400 
+ 5413              	.LASF78:
+ 5414 05c8 63685F76 		.ascii	"ch_virtual_timers_list\000"
+ 5414      69727475 
+ 5414      616C5F74 
+ 5414      696D6572 
+ 5414      735F6C69 
+ 5415              	.LASF202:
+ 5416 05df 433A5C55 		.ascii	"C:\\Users\\Ben\\Desktop\\Eclipse_e-puck2\\Projet_Ro"
+ 5416      73657273 
+ 5416      5C42656E 
+ 5416      5C446573 
+ 5416      6B746F70 
+ 5417 060d 626F7469 		.ascii	"botique\\Projet\000"
+ 5417      7175655C 
+ 5417      50726F6A 
+ 5417      657400
+ 5418              	.LASF2:
+ 5419 061c 6C6F6E67 		.ascii	"long double\000"
+ 5419      20646F75 
+ 5419      626C6500 
+ 5420              	.LASF141:
+ 5421 0628 63685F74 		.ascii	"ch_timesize\000"
+ 5421      696D6573 
+ 5421      697A6500 
+ 5422              	.LASF105:
+ 5423 0634 74625F70 		.ascii	"tb_ptr\000"
+ 5423      747200
+ 5424              	.LASF160:
+ 5425 063b 63685363 		.ascii	"chSchDoRescheduleBehind\000"
+ 5425      68446F52 
+ 5425      65736368 
+ 5425      6564756C 
+ 5425      65426568 
+ 5426              	.LASF103:
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 101
 
 
- 5427              	.LASF147:
- 5428 0638 63665F6F 		.ascii	"cf_off_name\000"
- 5428      66665F6E 
- 5428      616D6500 
- 5429              	.LASF39:
- 5430 0644 705F6F6C 		.ascii	"p_older\000"
- 5430      64657200 
- 5431              	.LASF65:
- 5432 064c 725F6374 		.ascii	"r_ctx\000"
- 5432      7800
- 5433              	.LASF37:
- 5434 0652 705F6374 		.ascii	"p_ctx\000"
- 5434      7800
- 5435              	.LASF109:
- 5436 0658 746D5F63 		.ascii	"tm_calibration_t\000"
- 5436      616C6962 
- 5436      72617469 
- 5436      6F6E5F74 
- 5436      00
- 5437              	.LASF41:
- 5438 0669 705F7374 		.ascii	"p_stklimit\000"
- 5438      6B6C696D 
- 5438      697400
- 5439              	.LASF167:
- 5440 0674 74696D65 		.ascii	"time\000"
- 5440      00
- 5441              	.LASF68:
- 5442 0679 725F6375 		.ascii	"r_current\000"
- 5442      7272656E 
- 5442      7400
- 5443              	.LASF67:
- 5444 0683 725F6F6C 		.ascii	"r_older\000"
- 5444      64657200 
- 5445              	.LASF197:
- 5446 068b 5F646267 		.ascii	"_dbg_check_lock_from_isr\000"
- 5446      5F636865 
- 5446      636B5F6C 
- 5446      6F636B5F 
- 5446      66726F6D 
- 5447              	.LASF14:
- 5448 06a4 5F5F7569 		.ascii	"__uint64_t\000"
- 5448      6E743634 
- 5448      5F7400
- 5449              	.LASF113:
- 5450 06af 63756D75 		.ascii	"cumulative\000"
- 5450      6C617469 
- 5450      766500
- 5451              	.LASF91:
- 5452 06ba 6B65726E 		.ascii	"kernel_stats\000"
- 5452      656C5F73 
- 5452      74617473 
- 5452      00
- 5453              	.LASF25:
- 5454 06c7 74726566 		.ascii	"trefs_t\000"
- 5454      735F7400 
- 5455              	.LASF106:
- 5456 06cf 74625F62 		.ascii	"tb_buffer\000"
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 102
+ 5427 0653 63685F73 		.ascii	"ch_swc_event_t\000"
+ 5427      77635F65 
+ 5427      76656E74 
+ 5427      5F7400
+ 5428              	.LASF147:
+ 5429 0662 63665F6F 		.ascii	"cf_off_name\000"
+ 5429      66665F6E 
+ 5429      616D6500 
+ 5430              	.LASF39:
+ 5431 066e 705F6F6C 		.ascii	"p_older\000"
+ 5431      64657200 
+ 5432              	.LASF65:
+ 5433 0676 725F6374 		.ascii	"r_ctx\000"
+ 5433      7800
+ 5434              	.LASF37:
+ 5435 067c 705F6374 		.ascii	"p_ctx\000"
+ 5435      7800
+ 5436              	.LASF109:
+ 5437 0682 746D5F63 		.ascii	"tm_calibration_t\000"
+ 5437      616C6962 
+ 5437      72617469 
+ 5437      6F6E5F74 
+ 5437      00
+ 5438              	.LASF41:
+ 5439 0693 705F7374 		.ascii	"p_stklimit\000"
+ 5439      6B6C696D 
+ 5439      697400
+ 5440              	.LASF167:
+ 5441 069e 74696D65 		.ascii	"time\000"
+ 5441      00
+ 5442              	.LASF68:
+ 5443 06a3 725F6375 		.ascii	"r_current\000"
+ 5443      7272656E 
+ 5443      7400
+ 5444              	.LASF67:
+ 5445 06ad 725F6F6C 		.ascii	"r_older\000"
+ 5445      64657200 
+ 5446              	.LASF197:
+ 5447 06b5 5F646267 		.ascii	"_dbg_check_lock_from_isr\000"
+ 5447      5F636865 
+ 5447      636B5F6C 
+ 5447      6F636B5F 
+ 5447      66726F6D 
+ 5448              	.LASF14:
+ 5449 06ce 5F5F7569 		.ascii	"__uint64_t\000"
+ 5449      6E743634 
+ 5449      5F7400
+ 5450              	.LASF113:
+ 5451 06d9 63756D75 		.ascii	"cumulative\000"
+ 5451      6C617469 
+ 5451      766500
+ 5452              	.LASF91:
+ 5453 06e4 6B65726E 		.ascii	"kernel_stats\000"
+ 5453      656C5F73 
+ 5453      74617473 
+ 5453      00
+ 5454              	.LASF25:
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 102
 
 
- 5456      75666665 
- 5456      7200
- 5457              	.LASF140:
- 5458 06d9 63685F70 		.ascii	"ch_ptrsize\000"
- 5458      74727369 
- 5458      7A6500
- 5459              	.LASF70:
- 5460 06e4 76697274 		.ascii	"virtual_timer_t\000"
- 5460      75616C5F 
- 5460      74696D65 
- 5460      725F7400 
- 5461              	.LASF35:
- 5462 06f4 705F7072 		.ascii	"p_prev\000"
- 5462      657600
- 5463              	.LASF27:
- 5464 06fb 74707269 		.ascii	"tprio_t\000"
- 5464      6F5F7400 
- 5465              	.LASF202:
- 5466 0703 433A5C55 		.ascii	"C:\\Users\\Ben\\Desktop\\Eclipse_e-puck2\\Projet Ro"
- 5466      73657273 
- 5466      5C42656E 
- 5466      5C446573 
- 5466      6B746F70 
- 5467 0731 626F7469 		.ascii	"botique\\Projet\000"
- 5467      7175655C 
- 5467      50726F6A 
- 5467      657400
+ 5455 06f1 74726566 		.ascii	"trefs_t\000"
+ 5455      735F7400 
+ 5456              	.LASF106:
+ 5457 06f9 74625F62 		.ascii	"tb_buffer\000"
+ 5457      75666665 
+ 5457      7200
+ 5458              	.LASF140:
+ 5459 0703 63685F70 		.ascii	"ch_ptrsize\000"
+ 5459      74727369 
+ 5459      7A6500
+ 5460              	.LASF70:
+ 5461 070e 76697274 		.ascii	"virtual_timer_t\000"
+ 5461      75616C5F 
+ 5461      74696D65 
+ 5461      725F7400 
+ 5462              	.LASF35:
+ 5463 071e 705F7072 		.ascii	"p_prev\000"
+ 5463      657600
+ 5464              	.LASF27:
+ 5465 0725 74707269 		.ascii	"tprio_t\000"
+ 5465      6F5F7400 
+ 5466              	.LASF174:
+ 5467 072d 63685379 		.ascii	"chSysUnlockFromISR\000"
+ 5467      73556E6C 
+ 5467      6F636B46 
+ 5467      726F6D49 
+ 5467      535200
  5468              	.LASF116:
  5469 0740 6E5F6374 		.ascii	"n_ctxswc\000"
  5469      78737763 
@@ -6118,7 +6118,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  5483 0780 705F7072 		.ascii	"p_preempt\000"
  5483      65656D70 
  5483      7400
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 103
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 103
 
 
  5484              	.LASF153:
@@ -6178,7 +6178,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  5510              	.LASF145:
  5511 081f 63665F6F 		.ascii	"cf_off_newer\000"
  5511      66665F6E 
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 104
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 104
 
 
  5511      65776572 
@@ -6238,7 +6238,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  5536              	.LASF125:
  5537 08bb 77746D74 		.ascii	"wtmtxp\000"
  5537      787000
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 105
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 105
 
 
  5538              	.LASF8:
@@ -6298,7 +6298,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  5564              	.LASF190:
  5565 0952 5F646267 		.ascii	"_dbg_trace\000"
  5565      5F747261 
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 106
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 106
 
 
  5565      636500
@@ -6358,7 +6358,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  5593      54696D65 
  5593      6F757453 
  5594              	.LASF191:
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 107
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 107
 
 
  5595 09f8 5F737461 		.ascii	"_stats_ctxswc\000"
@@ -6418,7 +6418,7 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  5618              	.LASF187:
  5619 0aa1 72657375 		.ascii	"result\000"
  5619      6C7400
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 108
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 108
 
 
  5620              	.LASF154:
@@ -6438,51 +6438,51 @@ ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 1
  5627 0aca 76745F66 		.ascii	"vt_func\000"
  5627      756E6300 
  5628              		.ident	"GCC: (GNU Tools for Arm Embedded Processors 7-2017-q4-major) 7.2.1 20170904 (release) [ARM
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 109
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 109
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 chschd.c
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:18     .text._scheduler_init:00000000 $t
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:26     .text._scheduler_init:00000000 _scheduler_init
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:90     .text._scheduler_init:0000002c $d
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:96     .text.chSchReadyI:00000000 $t
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:104    .text.chSchReadyI:00000000 chSchReadyI
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:197    .text.chSchReadyI:0000005c $d
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:204    .text.wakeup:00000000 $t
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:211    .text.wakeup:00000000 wakeup
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:267    .text.wakeup:00000026 $d
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:275    .text.wakeup:0000002e $t
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:373    .text.wakeup:00000084 $d
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:378    .text.chSchGoSleepS:00000000 $t
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:386    .text.chSchGoSleepS:00000000 chSchGoSleepS
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:512    .text.chSchGoSleepS:00000068 $d
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:520    .text.chSchGoSleepTimeoutS:00000000 $t
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:528    .text.chSchGoSleepTimeoutS:00000000 chSchGoSleepTimeoutS
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:616    .text.chSchGoSleepTimeoutS:00000058 $d
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:623    .text.chSchWakeupS:00000000 $t
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:631    .text.chSchWakeupS:00000000 chSchWakeupS
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:777    .text.chSchWakeupS:0000007c $d
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:786    .text.chSchIsPreemptionRequired:00000000 $t
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:794    .text.chSchIsPreemptionRequired:00000000 chSchIsPreemptionRequired
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:866    .text.chSchIsPreemptionRequired:0000003c $d
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:872    .text.chSchDoRescheduleBehind:00000000 $t
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:880    .text.chSchDoRescheduleBehind:00000000 chSchDoRescheduleBehind
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:998    .text.chSchDoRescheduleBehind:00000064 $d
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:1006   .text.chSchDoRescheduleAhead:00000000 $t
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:1014   .text.chSchDoRescheduleAhead:00000000 chSchDoRescheduleAhead
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:1154   .text.chSchDoRescheduleAhead:00000074 $d
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:1162   .text.chSchRescheduleS:00000000 $t
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:1170   .text.chSchRescheduleS:00000000 chSchRescheduleS
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:1242   .text.chSchRescheduleS:00000040 $d
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:1248   .text.chSchDoReschedule:00000000 $t
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:1256   .text.chSchDoReschedule:00000000 chSchDoReschedule
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:1324   .text.chSchDoReschedule:0000003c $d
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:1335   .bss.ch:00000000 ch
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:1331   .bss.ch:00000000 $d
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:1338   .rodata.__func__.7854:00000000 $d
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:1342   .rodata.__func__.7854:00000000 __func__.7854
-C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s:1345   .rodata.chSchGoSleepS.str1.4:00000000 $d
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:18     .text._scheduler_init:00000000 $t
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:26     .text._scheduler_init:00000000 _scheduler_init
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:90     .text._scheduler_init:0000002c $d
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:96     .text.chSchReadyI:00000000 $t
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:104    .text.chSchReadyI:00000000 chSchReadyI
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:197    .text.chSchReadyI:0000005c $d
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:204    .text.wakeup:00000000 $t
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:211    .text.wakeup:00000000 wakeup
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:267    .text.wakeup:00000026 $d
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:275    .text.wakeup:0000002e $t
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:373    .text.wakeup:00000084 $d
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:378    .text.chSchGoSleepS:00000000 $t
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:386    .text.chSchGoSleepS:00000000 chSchGoSleepS
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:512    .text.chSchGoSleepS:00000068 $d
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:520    .text.chSchGoSleepTimeoutS:00000000 $t
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:528    .text.chSchGoSleepTimeoutS:00000000 chSchGoSleepTimeoutS
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:616    .text.chSchGoSleepTimeoutS:00000058 $d
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:623    .text.chSchWakeupS:00000000 $t
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:631    .text.chSchWakeupS:00000000 chSchWakeupS
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:777    .text.chSchWakeupS:0000007c $d
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:786    .text.chSchIsPreemptionRequired:00000000 $t
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:794    .text.chSchIsPreemptionRequired:00000000 chSchIsPreemptionRequired
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:866    .text.chSchIsPreemptionRequired:0000003c $d
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:872    .text.chSchDoRescheduleBehind:00000000 $t
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:880    .text.chSchDoRescheduleBehind:00000000 chSchDoRescheduleBehind
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:998    .text.chSchDoRescheduleBehind:00000064 $d
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:1006   .text.chSchDoRescheduleAhead:00000000 $t
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:1014   .text.chSchDoRescheduleAhead:00000000 chSchDoRescheduleAhead
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:1154   .text.chSchDoRescheduleAhead:00000074 $d
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:1162   .text.chSchRescheduleS:00000000 $t
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:1170   .text.chSchRescheduleS:00000000 chSchRescheduleS
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:1242   .text.chSchRescheduleS:00000040 $d
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:1248   .text.chSchDoReschedule:00000000 $t
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:1256   .text.chSchDoReschedule:00000000 chSchDoReschedule
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:1324   .text.chSchDoReschedule:0000003c $d
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:1335   .bss.ch:00000000 ch
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:1331   .bss.ch:00000000 $d
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:1338   .rodata.__func__.7854:00000000 $d
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:1342   .rodata.__func__.7854:00000000 __func__.7854
+C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s:1345   .rodata.chSchGoSleepS.str1.4:00000000 $d
 
 UNDEFINED SYMBOLS
 __stack_chk_fail
@@ -6498,7 +6498,7 @@ _dbg_trace
 _stats_ctxswc
 _port_switch
 chVTDoSetI
-ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccFcWV0c.s 			page 110
+ARM GAS  C:\Users\Ben\AppData\Local\Temp\ccaedvGH.s 			page 110
 
 
 chVTDoResetI
