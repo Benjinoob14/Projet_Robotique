@@ -22,7 +22,7 @@ int16_t pi_regulator(float distance, float goal){
 	error = distance - goal;
 
 	//disables the PI regulator if the error is to small
-	//this avoids to always move as we cannot exactly be where we want and 
+	//this avoids to always move as we cannot exactly be where we want and
 	//the camera is a bit noisy
 	if(fabs(error) < ERROR_THRESHOLD){
 		return 0;
@@ -56,7 +56,7 @@ static THD_FUNCTION(PiRegulator, arg) {
 
     while(1){
         time = chVTGetSystemTime();
-        
+
         //computes the speed to give to the motors
         //black_line is modified by the image processing thread
         speed = pi_regulator(get_line_position(), IMAGE_BUFFER_SIZE/2);
@@ -74,8 +74,8 @@ static THD_FUNCTION(PiRegulator, arg) {
         	speed=0;
         }
 
-        if (speed>300){
-        	speed=300;
+        if (speed>100){
+        	speed=100;
         }
 
         black_line=get_black_line();
@@ -92,8 +92,8 @@ static THD_FUNCTION(PiRegulator, arg) {
 
         else{
 			//applies the speed from the PI regulator and the correction for the rotation
-			right_motor_set_speed(speed+400 - ROTATION_COEFF * speed_correction);
-			left_motor_set_speed(speed+400 + ROTATION_COEFF * speed_correction);
+			right_motor_set_speed(speed+100 - ROTATION_COEFF * speed_correction);
+			left_motor_set_speed(speed+100 + ROTATION_COEFF * speed_correction);
         }
 
         //100Hz
