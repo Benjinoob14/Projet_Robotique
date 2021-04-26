@@ -14,6 +14,7 @@
 
 #include <pi_regulator.h>
 #include <process_image.h>
+#include <sensors/proximity.h>
 
 void SendUint8ToComputer(uint8_t* data, uint16_t size) 
 {
@@ -43,6 +44,7 @@ int main(void)
     chSysInit();
     mpu_init();
 
+//    proximity_start();
     //starts the serial communication
     serial_start();
     //start the USB communication
@@ -58,10 +60,8 @@ int main(void)
 	process_image_start();
 
 
-	left_motor_set_pos(123);
-	position = left_motor_get_pos();
 
-
+	calibrate_ir();
 
 
 

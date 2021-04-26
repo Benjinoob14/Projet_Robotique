@@ -5,12 +5,13 @@
 
 #include <main.h>
 #include <camera/po8030.h>
-
+#include <sensors/proximity.h>
 #include <process_image.h>
 
 
 static float black_line = 0;
 static uint16_t line_position = 0;	//middle
+static uint8_t proxi=7;
 
 //semaphore
 static BSEMAPHORE_DECL(image_ready_sem, TRUE);
@@ -164,6 +165,21 @@ static THD_FUNCTION(ProcessImage, arg) {
     }
 }
 
+static THD_WORKING_AREA(waProximity, 256);
+static THD_FUNCTION(Proximity, arg) {
+
+    chRegSetThreadName(__FUNCTION__);
+    (void)arg;
+
+    uint8_t cali_proxi=7;
+
+    while(1){
+		proxi=get_prox(6);
+		cali_proxi=get_calibrated_prox(6);
+
+    }
+}
+
 float get_black_line(void){
 	return black_line;
 }
@@ -172,7 +188,12 @@ uint16_t get_line_position(void){
 	return line_position;
 }
 
+uint8_t get_proxi(void){
+	return proxi;
+}
+
 void process_image_start(void){
-	chThdCreateStatic(waProcessImage, sizeof(waProcessImage), NORMALPRIO, ProcessImage, NULL);
-	chThdCreateStatic(waCaptureImage, sizeof(waCaptureImage), NORMALPRIO, CaptureImage, NULL);
+//	chThdCreateStatic(waProcessImage, sizeof(waProcessImage), NORMALPRIO, ProcessImage, NULL);
+//	chThdCreateStatic(waCaptureImage, sizeof(waCaptureImage), NORMALPRIO, CaptureImage, NULL);
+	chThdCreateStatic(waProximity, sizeof(waProximity), NORMALPRIO, Proximity, NULL);
 }
