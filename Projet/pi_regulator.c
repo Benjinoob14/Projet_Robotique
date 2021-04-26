@@ -19,7 +19,7 @@
 #define PERIMETER_EPUCK     (PI * WHEEL_DISTANCE)
 
 static bool turn = 0;
-static uint32_t position=0;
+
 
 //simple PI regulator implementation
 int16_t pi_regulator(float distance, float goal){
@@ -60,8 +60,9 @@ static THD_FUNCTION(PiRegulator, arg) {
 
     systime_t time;
 
-    int16_t speed = 0, compteur=0, swag=0;
+    int16_t speed = 0, compteur=0;
     int16_t speed_correction = 0;
+    static uint32_t position=0;
 
     bool black_line=1;
 
@@ -107,17 +108,9 @@ static THD_FUNCTION(PiRegulator, arg) {
 //        	left_motor_set_speed(speed+100 + ROTATION_COEFF * speed_correction);
 //        }
 
+        left_motor_set_pos(123);
+        position = left_motor_get_pos();
 
-        swag = get_proxi();
-
-//        if (turn==1){
-//        	left_motor_set_speed(200);
-//        }
-//
-//
-//        if (turn==0){
-//        	left_motor_set_speed(100);
-//        }
 
 
 
@@ -150,7 +143,8 @@ static THD_FUNCTION(PiRegulator, arg) {
 ////}
 
 //
+
 void pi_regulator_start(void){
-//	chThdCreateStatic(waPiRegulator, sizeof(waPiRegulator), HIGHPRIO, PiRegulator, NULL);
+	chThdCreateStatic(waPiRegulator, sizeof(waPiRegulator), HIGHPRIO, PiRegulator, NULL);
 //	chThdCreateStatic(CheckStep, sizeof(waCheckStep), NORMALPRIO, CheckStep, NULL);
 }

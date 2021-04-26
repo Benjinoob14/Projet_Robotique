@@ -44,7 +44,7 @@ int main(void)
     chSysInit();
     mpu_init();
 
-//    proximity_start();
+
     //starts the serial communication
     serial_start();
     //start the USB communication
@@ -61,7 +61,7 @@ int main(void)
 
 
 
-	calibrate_ir();
+//	calibrate_ir();
 
 
 
