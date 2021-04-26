@@ -37,6 +37,8 @@ static void serial_start(void)
 int main(void)
 {
 
+	int32_t position=0;
+
     halInit();
     chSysInit();
     mpu_init();
@@ -54,6 +56,14 @@ int main(void)
 	//stars the threads for the pi regulator and the processing of the image
 	pi_regulator_start();
 	process_image_start();
+
+
+	left_motor_set_pos(123);
+	position = left_motor_get_pos();
+
+
+
+
 
     /* Infinite loop. */
     while (1) {
