@@ -11,7 +11,7 @@
 
 static float black_line = 0;
 static uint16_t line_position = 0;	//middle
-//static uint8_t proxi=7;
+static uint16_t turn=0;
 
 //semaphore
 static BSEMAPHORE_DECL(image_ready_sem, TRUE);
@@ -111,6 +111,10 @@ static THD_FUNCTION(CaptureImage, arg) {
     chRegSetThreadName(__FUNCTION__);
     (void)arg;
 
+    systime_t time;
+    time = chVTGetSystemTime();
+
+
 	//Takes pixels 0 to IMAGE_BUFFER_SIZE of the line 10 + 11 (minimum 2 lines because reasons)
 	po8030_advanced_config(FORMAT_RGB565, 0, 10, IMAGE_BUFFER_SIZE, 2, SUBSAMPLING_X1, SUBSAMPLING_X1);
 	dcmi_enable_double_buffering();
@@ -125,6 +129,8 @@ static THD_FUNCTION(CaptureImage, arg) {
 		//signals an image has been captured
 		chBSemSignal(&image_ready_sem);
     }
+    //-> Functions to measure <-//
+        chprintf((BaseSequentialStream *)&SDU1, "capture time= %d\n", chVTGetSystemTime()-time);
 }
 
 
@@ -165,20 +171,30 @@ static THD_FUNCTION(ProcessImage, arg) {
     }
 }
 
-//static THD_WORKING_AREA(waProximity, 256);
-//static THD_FUNCTION(Proximity, arg) {
-//
-//    chRegSetThreadName(__FUNCTION__);
-//    (void)arg;
-//
-//    uint8_t cali_proxi=7;
-//
-//    while(1){
-//		proxi=get_prox(6);
-//		cali_proxi=get_calibrated_prox(6);
-//
-//    }
-//}
+static THD_WORKING_AREA(waProximity, 256);
+static THD_FUNCTION(Proximity, arg) {
+
+    chRegSetThreadName(__FUNCTION__);
+    (void)arg;
+    uint8_t proxi=0;
+
+
+    systime_t time;
+
+    while(1){
+    	time = chVTGetSystemTime();
+
+		proxi=get_prox(5);
+
+		turn=proxi;
+
+//		chprintf((BaseSequentialStream *) &SDU1, "proxi = %d \n",proxi);
+
+
+		chThdSleepUntilWindowed(time, time + MS2ST(10));
+
+    }
+}
 
 float get_black_line(void){
 	return black_line;
@@ -188,12 +204,12 @@ uint16_t get_line_position(void){
 	return line_position;
 }
 
-//uint8_t get_proxi(void){
-//	return proxi;
-//}
+uint8_t get_turn(void){
+	return turn;
+}
 
 void process_image_start(void){
 	chThdCreateStatic(waProcessImage, sizeof(waProcessImage), NORMALPRIO, ProcessImage, NULL);
 	chThdCreateStatic(waCaptureImage, sizeof(waCaptureImage), NORMALPRIO, CaptureImage, NULL);
-//	chThdCreateStatic(waProximity, sizeof(waProximity), NORMALPRIO, Proximity, NULL);
+	chThdCreateStatic(waProximity, sizeof(waProximity), NORMALPRIO, Proximity, NULL);
 }

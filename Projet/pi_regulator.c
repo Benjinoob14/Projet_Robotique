@@ -18,8 +18,7 @@
 #define WHEEL_DISTANCE      5.35f    //cm
 #define PERIMETER_EPUCK     (PI * WHEEL_DISTANCE)
 
-static bool turn = 0;
-
+static bool evitement=0;
 
 //simple PI regulator implementation
 int16_t pi_regulator(float distance, float goal){
@@ -52,7 +51,7 @@ int16_t pi_regulator(float distance, float goal){
     return (int16_t)speed;
 }
 
-static THD_WORKING_AREA(waPiRegulator, 256);
+static THD_WORKING_AREA(waPiRegulator, 1024);
 static THD_FUNCTION(PiRegulator, arg) {
 
     chRegSetThreadName(__FUNCTION__);
@@ -62,89 +61,125 @@ static THD_FUNCTION(PiRegulator, arg) {
 
     int16_t speed = 0, compteur=0;
     int16_t speed_correction = 0;
-    static uint32_t position=0;
+
 
     bool black_line=1;
 
     while(1){
         time = chVTGetSystemTime();
 
-        //computes the speed to give to the motors
-        //black_line is modified by the image processing thread
-        speed = pi_regulator(get_line_position(), IMAGE_BUFFER_SIZE/2);
-        //computes a correction factor to let the robot rotate to be in front of the line
-        speed_correction = (get_line_position() - (IMAGE_BUFFER_SIZE/2));
+        if (evitement==0){
+        	//computes the speed to give to the motors
+			//black_line is modified by the image processing thread
+			speed = pi_regulator(get_line_position(), IMAGE_BUFFER_SIZE/2);
+			//computes a correction factor to let the robot rotate to be in front of the line
+			speed_correction = (get_line_position() - (IMAGE_BUFFER_SIZE/2));
 
 
-        //if the line is nearly in front of the camera, don't rotate
-        if(abs(speed_correction) < ROTATION_THRESHOLD){
-        	speed_correction = 0;
+			//if the line is nearly in front of the camera, don't rotate
+			if(abs(speed_correction) < ROTATION_THRESHOLD){
+				speed_correction = 0;
+			}
+
+
+			if (speed<0 ){
+				speed=0;
+			}
+
+			if (speed>100){
+				speed=100;
+			}
+
+			black_line=get_black_line();
+	        compteur++;
+
+	        if (black_line==1){
+	        	compteur=0;
+	        	evitement=0;
+	        }
+	        if (black_line==0 && compteur>5){
+	        	evitement=1;
+	        }
+	        else{
+	        	//applies the speed from the PI regulator and the correction for the rotation
+	        	right_motor_set_speed(speed+100 - ROTATION_COEFF * speed_correction);
+	        	left_motor_set_speed(speed+100 + ROTATION_COEFF * speed_correction);
+	        }
+
         }
-
-
-        if (speed<0 ){
-        	speed=0;
-        }
-
-        if (speed>100){
-        	speed=100;
-        }
-
-        black_line=get_black_line();
-        compteur++;
-
-//        if (black_line==1){
-//        	compteur=0;
-//        }
-//
-//        if (black_line==0 && compteur>5){
-//        	right_motor_set_speed(0);
-//        	left_motor_set_speed(0);
-//        }
-//
-//        else{
-//        	//applies the speed from the PI regulator and the correction for the rotation
-//        	right_motor_set_speed(speed+100 - ROTATION_COEFF * speed_correction);
-//        	left_motor_set_speed(speed+100 + ROTATION_COEFF * speed_correction);
-//        }
-
-        left_motor_set_pos(123);
-        position = left_motor_get_pos();
-
-
-
 
         //100Hz
         chThdSleepUntilWindowed(time, time + MS2ST(10));
+    }
+}
+static THD_WORKING_AREA(waContournement, 1024);
+static THD_FUNCTION(Contournement, arg) {
+
+    chRegSetThreadName(__FUNCTION__);
+    (void)arg;
+
+    systime_t time;
+    int16_t speed = 0;
+    int16_t speed_correction = 0;
+    uint8_t turn=0, compteur=0;
+    bool black_line=1;
+
+    while(1){
+    	time = chVTGetSystemTime();
+
+    	turn=get_turn();
+    	chprintf((BaseSequentialStream *) &SDU1, "turn = %d \n",turn);
+
+		if (turn>100){
+			evitement=1;
+		}
+
+		if (evitement==1){
+			//computes the speed to give to the motors
+			//black_line is modified by the image processing thread
+			speed = pi_regulator(turn, 100);
+			//computes a correction factor to let the robot rotate to be in front of the line
+			speed_correction = (turn - (100));
 
 
+			//if the line is nearly in front of the camera, don't rotate
+			if(abs(speed_correction) < ROTATION_THRESHOLD){
+				speed_correction = 0;
+			}
+			if (speed<0 ){
+				speed=0;
+			}
+			if (speed>100){
+				speed=100;
+			}
 
+			right_motor_set_speed(speed+100 - ROTATION_COEFF * speed_correction);
+			left_motor_set_speed(speed+100 + ROTATION_COEFF * speed_correction);
+
+			black_line=get_black_line();
+
+
+			if (black_line==1){
+				compteur++;
+			}
+			else{
+				compteur=0;
+			}
+			if (black_line==1 && compteur>5){
+				evitement=0;
+			}
+
+		}
+
+    	//100Hz
+    	chThdSleepUntilWindowed(time, time + MS2ST(10));
 
     }
 }
-//
-//static THD_WORKING_AREA(waCheckStep, 124);
-//static THD_FUNCTION(CheckStep, arg) {
-//
-//	uint32_t position=0;
-//
-//	while(1){
-////		chThdSleepMilliseconds(10);
-////		position= left_motor_get_pos();
-//		if(turn==1 && position>200){
-//			turn=0;
-//		}
-//
-//	}
-//}
-//
-////bool get_turn(){
-////	return turn;
-////}
 
-//
+
 
 void pi_regulator_start(void){
-	chThdCreateStatic(waPiRegulator, sizeof(waPiRegulator), HIGHPRIO, PiRegulator, NULL);
-//	chThdCreateStatic(CheckStep, sizeof(waCheckStep), NORMALPRIO, CheckStep, NULL);
+	chThdCreateStatic(waPiRegulator, sizeof(waPiRegulator), NORMALPRIO, PiRegulator, NULL);
+	chThdCreateStatic(waContournement, sizeof(waContournement), NORMALPRIO, Contournement, NULL);
 }
