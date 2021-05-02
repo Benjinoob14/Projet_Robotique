@@ -10,14 +10,8 @@
 #include <pi_regulator.h>
 #include <process_image.h>
 
-#define POSITION_NOT_REACHED	0
-#define POSITION_REACHED       	1
-
-#define PI                  3.1415926536f
-//TO ADJUST IF NECESSARY. NOT ALL THE E-PUCK2 HAVE EXACTLY THE SAME WHEEL DISTANCE
-#define WHEEL_DISTANCE      5.35f    //cm
-#define PERIMETER_EPUCK     (PI * WHEEL_DISTANCE)
-
+#define VITESSE_STABLE 200
+#define SENSIBLE_PROX 240
 static bool evitement=0;
 
 //simple PI regulator implementation
@@ -68,6 +62,8 @@ static THD_FUNCTION(PiRegulator, arg) {
     while(1){
         time = chVTGetSystemTime();
 
+//        chprintf((BaseSequentialStream *) &SDU1, "evitement = %d \n",evitement);
+
         if (evitement==0){
         	//computes the speed to give to the motors
 			//black_line is modified by the image processing thread
@@ -86,25 +82,32 @@ static THD_FUNCTION(PiRegulator, arg) {
 				speed=0;
 			}
 
-			if (speed>100){
-				speed=100;
+			if (speed>VITESSE_STABLE){
+				speed=VITESSE_STABLE;
 			}
+
 
 			black_line=get_black_line();
 	        compteur++;
 
 	        if (black_line==1){
 	        	compteur=0;
-	        	evitement=0;
+	        	right_motor_set_speed(speed+VITESSE_STABLE/2 - ROTATION_COEFF * speed_correction);
+				left_motor_set_speed(speed+VITESSE_STABLE/2 + ROTATION_COEFF * speed_correction);
 	        }
 	        if (black_line==0 && compteur>5){
-	        	evitement=1;
+	        	right_motor_set_speed(0);
+	        	left_motor_set_speed(0);
 	        }
+
+
 	        else{
 	        	//applies the speed from the PI regulator and the correction for the rotation
-	        	right_motor_set_speed(speed+100 - ROTATION_COEFF * speed_correction);
-	        	left_motor_set_speed(speed+100 + ROTATION_COEFF * speed_correction);
+//	        	right_motor_set_speed(speed+100 - ROTATION_COEFF * speed_correction);
+//	        	left_motor_set_speed(speed+100 + ROTATION_COEFF * speed_correction);
+//	        	chThdSleepMilliseconds(100);
 	        }
+
 
         }
 
@@ -119,57 +122,57 @@ static THD_FUNCTION(Contournement, arg) {
     (void)arg;
 
     systime_t time;
-    int16_t speed = 0;
-    int16_t speed_correction = 0;
-    uint8_t turn=0, compteur=0;
-    bool black_line=1;
+    uint8_t proxii=0;
+    uint8_t ligne=0;
+    bool tour=0;
 
     while(1){
     	time = chVTGetSystemTime();
 
-    	turn=get_turn();
-    	chprintf((BaseSequentialStream *) &SDU1, "turn = %d \n",turn);
+    	proxii=get_proxii();
+    	chprintf((BaseSequentialStream *) &SDU1, "proxii = %d \n",proxii);
 
-		if (turn>100){
+
+		if (proxii>SENSIBLE_PROX){
 			evitement=1;
 		}
 
 		if (evitement==1){
-			//computes the speed to give to the motors
-			//black_line is modified by the image processing thread
-			speed = pi_regulator(turn, 100);
-			//computes a correction factor to let the robot rotate to be in front of the line
-			speed_correction = (turn - (100));
 
-
-			//if the line is nearly in front of the camera, don't rotate
-			if(abs(speed_correction) < ROTATION_THRESHOLD){
-				speed_correction = 0;
-			}
-			if (speed<0 ){
-				speed=0;
-			}
-			if (speed>100){
-				speed=100;
-			}
-
-			right_motor_set_speed(speed+100 - ROTATION_COEFF * speed_correction);
-			left_motor_set_speed(speed+100 + ROTATION_COEFF * speed_correction);
-
-			black_line=get_black_line();
-
-
-			if (black_line==1){
-				compteur++;
+			if (tour==0){
+				right_motor_set_speed(-300);
+				left_motor_set_speed(300);
+				chThdSleepMilliseconds(1000);
+				right_motor_set_speed(300);
+				left_motor_set_speed(170);
+				chThdSleepMilliseconds(2000);
+				tour=1;
 			}
 			else{
-				compteur=0;
+				right_motor_set_speed(300);
+				left_motor_set_speed(170);
 			}
-			if (black_line==1 && compteur>5){
-				evitement=0;
-			}
+			ligne=get_liigne();
 
+//			chprintf((BaseSequentialStream *) &SDU1, "ligne = %d \n",ligne);
+
+
+			if(ligne>2){
+				chThdSleepMilliseconds(1200);
+				right_motor_set_speed(-300);
+				left_motor_set_speed(300);
+				chThdSleepMilliseconds(1000);
+				right_motor_set_speed(0);
+				left_motor_set_speed(0);
+				evitement=0;
+				tour=0;
+				ligne=0;
+			}
 		}
+
+
+
+//		chprintf((BaseSequentialStream *) &SDU1, "valeur = %d \n",ligne);
 
     	//100Hz
     	chThdSleepUntilWindowed(time, time + MS2ST(10));

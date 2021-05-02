@@ -9,9 +9,13 @@
 #include <process_image.h>
 
 
+#define VALEUR_SENSIBLE  50
+
+
 static float black_line = 0;
-static uint16_t line_position = 0;	//middle
-static uint16_t turn=0;
+static uint16_t line_position = IMAGE_BUFFER_SIZE/2;	//middle
+static uint16_t proxii=0;
+static uint8_t liigne=0;
 
 //semaphore
 static BSEMAPHORE_DECL(image_ready_sem, TRUE);
@@ -34,6 +38,15 @@ uint16_t extract_line_width(uint8_t *buffer){
 		mean += buffer[i];
 	}
 	mean /= IMAGE_BUFFER_SIZE;
+
+	if(buffer[IMAGE_BUFFER_SIZE/2]< VALEUR_SENSIBLE){
+		liigne++;
+	}
+	if(buffer[IMAGE_BUFFER_SIZE/2]> VALEUR_SENSIBLE || liigne>100){
+		liigne=0;
+	}
+
+//	chprintf((BaseSequentialStream *) &SDU1, "ligne = %d \n",liigne);
 
 	do{
 		wrong_line = 0;
@@ -97,6 +110,8 @@ uint16_t extract_line_width(uint8_t *buffer){
 
 	black_line=width;
 
+
+
 	if (width<170 || width>400){
 		black_line=0;
 	}
@@ -110,10 +125,6 @@ static THD_FUNCTION(CaptureImage, arg) {
 
     chRegSetThreadName(__FUNCTION__);
     (void)arg;
-
-    systime_t time;
-    time = chVTGetSystemTime();
-
 
 	//Takes pixels 0 to IMAGE_BUFFER_SIZE of the line 10 + 11 (minimum 2 lines because reasons)
 	po8030_advanced_config(FORMAT_RGB565, 0, 10, IMAGE_BUFFER_SIZE, 2, SUBSAMPLING_X1, SUBSAMPLING_X1);
@@ -129,8 +140,7 @@ static THD_FUNCTION(CaptureImage, arg) {
 		//signals an image has been captured
 		chBSemSignal(&image_ready_sem);
     }
-    //-> Functions to measure <-//
-        chprintf((BaseSequentialStream *)&SDU1, "capture time= %d\n", chVTGetSystemTime()-time);
+
 }
 
 
@@ -184,10 +194,11 @@ static THD_FUNCTION(Proximity, arg) {
     while(1){
     	time = chVTGetSystemTime();
 
-		proxi=get_prox(5);
+		proxii=get_prox(7);
 
-		turn=proxi;
+		proxi=get_ambient_light(7);
 
+//		chprintf((BaseSequentialStream *) &SDU1, "proxiiiiiiiii = %d \n",proxii);
 //		chprintf((BaseSequentialStream *) &SDU1, "proxi = %d \n",proxi);
 
 
@@ -204,8 +215,12 @@ uint16_t get_line_position(void){
 	return line_position;
 }
 
-uint8_t get_turn(void){
-	return turn;
+uint8_t get_liigne(void){
+	return liigne;
+}
+
+uint8_t get_proxii(void){
+	return proxii;
 }
 
 void process_image_start(void){
