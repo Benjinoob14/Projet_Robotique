@@ -9,10 +9,11 @@
 #include <motors.h>
 #include <pi_regulator.h>
 #include <process_image.h>
+#include <leds.h>
 
-#define VITESSE_STABLE 200
-#define SENSIBLE_PROX 240
-static bool evitement=0;
+
+static int8_t mode=0;
+
 
 //simple PI regulator implementation
 int16_t pi_regulator(float distance, float goal){
@@ -52,31 +53,39 @@ static THD_FUNCTION(PiRegulator, arg) {
     (void)arg;
 
     systime_t time;
+    bool inclined=0;
 
     int16_t speed = 0, compteur=0;
     int16_t speed_correction = 0;
 
-
     bool black_line=1;
+
+    get_inclined();
+
+    mode=0;
 
     while(1){
         time = chVTGetSystemTime();
 
-//        chprintf((BaseSequentialStream *) &SDU1, "evitement = %d \n",evitement);
 
-        if (evitement==0){
+//        if(inclined==1){
+//        	mode=SUIVIT_LIGNE_BACK;
+//        }
+
+        if (mode==SUIVIT_LIGNE ){
+
+        	set_body_led(0);
+
         	//computes the speed to give to the motors
 			//black_line is modified by the image processing thread
 			speed = pi_regulator(get_line_position(), IMAGE_BUFFER_SIZE/2);
 			//computes a correction factor to let the robot rotate to be in front of the line
 			speed_correction = (get_line_position() - (IMAGE_BUFFER_SIZE/2));
 
-
 			//if the line is nearly in front of the camera, don't rotate
 			if(abs(speed_correction) < ROTATION_THRESHOLD){
 				speed_correction = 0;
 			}
-
 
 			if (speed<0 ){
 				speed=0;
@@ -85,7 +94,6 @@ static THD_FUNCTION(PiRegulator, arg) {
 			if (speed>VITESSE_STABLE){
 				speed=VITESSE_STABLE;
 			}
-
 
 			black_line=get_black_line();
 	        compteur++;
@@ -98,19 +106,60 @@ static THD_FUNCTION(PiRegulator, arg) {
 	        if (black_line==0 && compteur>5){
 	        	right_motor_set_speed(0);
 	        	left_motor_set_speed(0);
+	        	set_body_led(1);
+	        	chThdSleepMilliseconds(TEMPS_ATTENTE/2);
+	        	set_body_led(0);
+	        	chThdSleepMilliseconds(TEMPS_ATTENTE/2);
 	        }
-
-
-	        else{
-	        	//applies the speed from the PI regulator and the correction for the rotation
-//	        	right_motor_set_speed(speed+100 - ROTATION_COEFF * speed_correction);
-//	        	left_motor_set_speed(speed+100 + ROTATION_COEFF * speed_correction);
-//	        	chThdSleepMilliseconds(100);
-	        }
-
 
         }
+/*
+        if (mode==SUIVIT_LIGNE_BACK ){
 
+//        			chprintf((BaseSequentialStream *)&SD1, "mode = %dus\n",mode);
+
+                	set_body_led(0);
+
+                	//computes the speed to give to the motors
+        			//black_line is modified by the image processing thread
+        			speed = pi_regulator(get_line_position(), IMAGE_BUFFER_SIZE/2);
+        			//computes a correction factor to let the robot rotate to be in front of the line
+        			speed_correction = (get_line_position() - (IMAGE_BUFFER_SIZE/2));
+
+        			//if the line is nearly in front of the camera, don't rotate
+        			if(abs(speed_correction) < ROTATION_THRESHOLD){
+        				speed_correction = 0;
+        			}
+
+        			if (speed<0 ){
+        				speed=0;
+        			}
+
+        			if (speed>VITESSE_STABLE){
+        				speed=VITESSE_STABLE;
+        			}
+
+//        			speed=-speed;
+
+        			black_line=get_black_line();
+        	        compteur++;
+
+        	        if (black_line==1){
+        	        	compteur=0;
+        	        	right_motor_set_speed(speed+VITESSE_STABLE/2 - ROTATION_COEFF * speed_correction);
+        				left_motor_set_speed(speed+VITESSE_STABLE + ROTATION_COEFF * speed_correction);
+        	        }
+        	        if (black_line==0 && compteur>5){
+        	        	right_motor_set_speed(0);
+        	        	left_motor_set_speed(0);
+        	        	set_body_led(1);
+        	        	chThdSleepMilliseconds(TEMPS_ATTENTE/2);
+        	        	set_body_led(0);
+        	        	chThdSleepMilliseconds(TEMPS_ATTENTE/2);
+        	        }
+
+        }
+*/
         //100Hz
         chThdSleepUntilWindowed(time, time + MS2ST(10));
     }
@@ -130,53 +179,47 @@ static THD_FUNCTION(Contournement, arg) {
     	time = chVTGetSystemTime();
 
     	proxii=get_proxii();
-    	chprintf((BaseSequentialStream *) &SDU1, "proxii = %d \n",proxii);
 
-
-		if (proxii>SENSIBLE_PROX){
-			evitement=1;
+		if (proxii>SENSIBLE_PROX && mode!=2){
+			mode=CONTOURNEMENT;
 		}
+		if (mode==CONTOURNEMENT){
 
-		if (evitement==1){
+			set_led(LED3,1);
+			set_led(LED7,1);
+			set_body_led(0);
 
 			if (tour==0){
-				right_motor_set_speed(-300);
-				left_motor_set_speed(300);
-				chThdSleepMilliseconds(1000);
-				right_motor_set_speed(300);
-				left_motor_set_speed(170);
-				chThdSleepMilliseconds(2000);
+				right_motor_set_speed(-VITESSE_ROTATION);
+				left_motor_set_speed(VITESSE_ROTATION);
+				chThdSleepMilliseconds(TEMPS_ATTENTE);
+				right_motor_set_speed(VITESSE_ROTATION);
+				left_motor_set_speed(0.57*VITESSE_ROTATION);
+				chThdSleepMilliseconds(2*TEMPS_ATTENTE);
 				tour=1;
 			}
 			else{
-				right_motor_set_speed(300);
-				left_motor_set_speed(170);
+				right_motor_set_speed(VITESSE_ROTATION);
+				left_motor_set_speed(0.57*VITESSE_ROTATION);
 			}
 			ligne=get_liigne();
 
-//			chprintf((BaseSequentialStream *) &SDU1, "ligne = %d \n",ligne);
-
-
 			if(ligne>2){
-				chThdSleepMilliseconds(1200);
-				right_motor_set_speed(-300);
-				left_motor_set_speed(300);
-				chThdSleepMilliseconds(1000);
+				chThdSleepMilliseconds(1.2*TEMPS_ATTENTE);
+				right_motor_set_speed(-VITESSE_ROTATION);
+				left_motor_set_speed(VITESSE_ROTATION);
+				chThdSleepMilliseconds(TEMPS_ATTENTE);
 				right_motor_set_speed(0);
 				left_motor_set_speed(0);
-				evitement=0;
+				mode=0;
 				tour=0;
 				ligne=0;
+				set_led(LED3,0);
+				set_led(LED7,0);
 			}
 		}
-
-
-
-//		chprintf((BaseSequentialStream *) &SDU1, "valeur = %d \n",ligne);
-
     	//100Hz
     	chThdSleepUntilWindowed(time, time + MS2ST(10));
-
     }
 }
 
@@ -184,5 +227,5 @@ static THD_FUNCTION(Contournement, arg) {
 
 void pi_regulator_start(void){
 	chThdCreateStatic(waPiRegulator, sizeof(waPiRegulator), NORMALPRIO, PiRegulator, NULL);
-	chThdCreateStatic(waContournement, sizeof(waContournement), NORMALPRIO, Contournement, NULL);
+//	chThdCreateStatic(waContournement, sizeof(waContournement), NORMALPRIO, Contournement, NULL);
 }

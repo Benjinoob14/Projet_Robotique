@@ -4,23 +4,54 @@
 #include <usbcfg.h>
 
 #include <main.h>
+#include <math.h>
 #include <camera/po8030.h>
 #include <sensors/proximity.h>
 #include <process_image.h>
-
-
-#define VALEUR_SENSIBLE  50
+#include <sensors/imu.h>
+#include <leds.h>
 
 
 static float black_line = 0;
 static uint16_t line_position = IMAGE_BUFFER_SIZE/2;	//middle
 static uint16_t proxii=0;
 static uint8_t liigne=0;
+static bool inclined = 0;
 
 //semaphore
 static BSEMAPHORE_DECL(image_ready_sem, TRUE);
 
 
+void show_inclined(int16_t *accel_values){
+
+    //threshold value to not use the leds when the robot is too horizontal
+    float threshold = 0.2;
+    //create a pointer to the array for shorter name
+    float *accel = accel_values;
+
+
+    if(fabs(accel[X_AXIS]) > threshold || fabs(accel[Y_AXIS]) > threshold){
+
+    	//clock wise angle in rad with 0 being the back of the e-puck2 (Y axis of the IMU)
+        float angle = atan2(accel[X_AXIS], accel[Y_AXIS]);
+
+        //rotates the angle by 45 degrees (simpler to compare with PI and PI/2 than with 5*PI/4)
+        angle += M_PI/4;
+
+        //if the angle is greater than PI, then it has shifted on the -PI side of the quadrant
+        //so we correct it
+        if(angle > M_PI){
+            angle = -2 * M_PI + angle;
+        }
+
+        if(angle>0){
+        	inclined=1;
+        }
+        else{
+        	inclined=0;
+        }
+    }
+}
 /*
  *  Returns the line's width extracted from the image buffer given
  *  Returns 0 if line not found
@@ -39,14 +70,13 @@ uint16_t extract_line_width(uint8_t *buffer){
 	}
 	mean /= IMAGE_BUFFER_SIZE;
 
-	if(buffer[IMAGE_BUFFER_SIZE/2]< VALEUR_SENSIBLE){
-		liigne++;
-	}
-	if(buffer[IMAGE_BUFFER_SIZE/2]> VALEUR_SENSIBLE || liigne>100){
-		liigne=0;
-	}
+	if(buffer[IMAGE_BUFFER_SIZE/2]< VALEUR_SENSIBLE_DETECTION_BLACK){
+			liigne++;
+		}
+		if(buffer[IMAGE_BUFFER_SIZE/2]> VALEUR_SENSIBLE_DETECTION_BLACK || liigne>100){
+			liigne=0;
+		}
 
-//	chprintf((BaseSequentialStream *) &SDU1, "ligne = %d \n",liigne);
 
 	do{
 		wrong_line = 0;
@@ -181,14 +211,13 @@ static THD_FUNCTION(ProcessImage, arg) {
     }
 }
 
-static THD_WORKING_AREA(waProximity, 256);
-static THD_FUNCTION(Proximity, arg) {
+static THD_WORKING_AREA(waMode, 512);
+static THD_FUNCTION(Mode, arg) {
 
     chRegSetThreadName(__FUNCTION__);
     (void)arg;
-    uint8_t proxi=0;
 
-
+    int16_t accel_values[3] = {0};
     systime_t time;
 
     while(1){
@@ -196,11 +225,9 @@ static THD_FUNCTION(Proximity, arg) {
 
 		proxii=get_prox(7);
 
-		proxi=get_ambient_light(7);
+		get_acc_all(accel_values);
 
-//		chprintf((BaseSequentialStream *) &SDU1, "proxiiiiiiiii = %d \n",proxii);
-//		chprintf((BaseSequentialStream *) &SDU1, "proxi = %d \n",proxi);
-
+		show_inclined(accel_values);
 
 		chThdSleepUntilWindowed(time, time + MS2ST(10));
 
@@ -223,8 +250,12 @@ uint8_t get_proxii(void){
 	return proxii;
 }
 
+bool get_inclined(void){
+	return inclined;
+}
+
 void process_image_start(void){
 	chThdCreateStatic(waProcessImage, sizeof(waProcessImage), NORMALPRIO, ProcessImage, NULL);
 	chThdCreateStatic(waCaptureImage, sizeof(waCaptureImage), NORMALPRIO, CaptureImage, NULL);
-	chThdCreateStatic(waProximity, sizeof(waProximity), NORMALPRIO, Proximity, NULL);
+	chThdCreateStatic(waMode, sizeof(waMode), NORMALPRIO, Mode, NULL);
 }

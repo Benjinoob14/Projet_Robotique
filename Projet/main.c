@@ -14,7 +14,9 @@
 
 #include <pi_regulator.h>
 #include <process_image.h>
+#include <leds.h>
 #include <sensors/proximity.h>
+#include <sensors/imu.h>
 
 messagebus_t bus;
 MUTEX_DECL(bus_lock);
@@ -41,13 +43,14 @@ static void serial_start(void)
 
 int main(void)
 {
-	uint8_t proxi=0;
-
-
-    halInit();
+	halInit();
     chSysInit();
     mpu_init();
 
+    clear_leds();
+    set_body_led(0);
+    set_led(LED3,0);
+	set_led(LED7,0);
 
     //starts the serial communication
     serial_start();
@@ -59,7 +62,8 @@ int main(void)
 	//inits the motors
 	motors_init();
 
-
+	imu_start();
+//	calibrate_acc();
 
 
 	messagebus_init(&bus, &bus_lock, &bus_condvar);
