@@ -53,8 +53,6 @@ static THD_FUNCTION(PiRegulator, arg) {
 
     systime_t time;
 
-    bool inclined=0;
-
     uint8_t compteur=0;
     int16_t speed = 0;
     int16_t speed_correction = 0;
@@ -64,17 +62,6 @@ static THD_FUNCTION(PiRegulator, arg) {
 
     while(1){
         time = chVTGetSystemTime();
-
-        inclined = get_inclined();
-
-//        if(inclined==1){
-//        	mode=SUIVIT_LIGNE_PENTE;
-//        }
-//        else{
-//        	mode=SUIVIT_LIGNE;
-//        }
-
-
 
 
         if (mode==SUIVIT_LIGNE ){
@@ -119,12 +106,7 @@ static THD_FUNCTION(PiRegulator, arg) {
 
 		}
 
-        if (mode==SUIVIT_LIGNE_PENTE ){
 
-                	set_body_led(1);
-//                	right_motor_set_speed(0);
-//					left_motor_set_speed(0);
-        }
 
         //100Hz
         chThdSleepUntilWindowed(time, time + MS2ST(10));
@@ -137,18 +119,13 @@ static THD_FUNCTION(Contournement, arg) {
     (void)arg;
 
     systime_t time;
-    uint8_t proxii=0;
     uint8_t compteur_ligne=0;
     bool tour=0;
 
     while(1){
     	time = chVTGetSystemTime();
 
-    	proxii=get_proxii();
 
-		if (proxii>SENSIBLE_PROX && mode!=SUIVIT_LIGNE_PENTE){
-			mode=CONTOURNEMENT;
-		}
 		if (mode==CONTOURNEMENT){
 
 			set_led(LED3,TRUE);
@@ -191,9 +168,43 @@ static THD_FUNCTION(Contournement, arg) {
     }
 }
 
+//la thread qui check à chaque fois dans quel mode le robot se trouve et modifie en fonction de s'il voit un obstacle ou s'il est en pente
+static THD_WORKING_AREA(waCheckMODE, 256);
+static THD_FUNCTION(CheckMODE, arg) {
 
+    chRegSetThreadName(__FUNCTION__);
+    (void)arg;
+
+    systime_t time;
+
+    bool inclined=0;
+
+    uint8_t proxii=0;
+
+    while(1){
+    	time = chVTGetSystemTime();
+
+    	inclined = get_inclined();
+
+		if(inclined==TRUE && mode!=CONTOURNEMENT){
+			set_body_led(TRUE);
+		}
+
+		proxii=get_proxii();
+
+		if (proxii>SENSIBLE_PROX && mode==SUIVIT_LIGNE){
+			mode=CONTOURNEMENT;
+		}
+
+//		chprintf((BaseSequentialStream *)&SDU1, "%d",mode);
+
+    	//100Hz
+    	chThdSleepUntilWindowed(time, time + MS2ST(10));
+    }
+}
 
 void pi_regulator_start(void){
 	chThdCreateStatic(waPiRegulator, sizeof(waPiRegulator), NORMALPRIO, PiRegulator, NULL);
 	chThdCreateStatic(waContournement, sizeof(waContournement), NORMALPRIO, Contournement, NULL);
+	chThdCreateStatic(waCheckMODE, sizeof(waCheckMODE), NORMALPRIO, CheckMODE, NULL);
 }

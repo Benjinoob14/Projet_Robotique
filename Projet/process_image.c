@@ -52,6 +52,8 @@ bool show_inclined(int16_t *accel_values){
         }
     }
 
+    return 0;
+
 }
 /*
  *  Returns the line's width extracted from the image buffer given
@@ -230,7 +232,7 @@ static THD_FUNCTION(Mode, arg) {
 
 		get_acc_all(accel_values);
 
-		inclined=show_inclined(accel_values);
+		value=show_inclined(accel_values);
 
 		if(value!=inclined){
 			compteur++;
@@ -242,7 +244,7 @@ static THD_FUNCTION(Mode, arg) {
 			inclined = !inclined;
 		}
 
-		chprintf((BaseSequentialStream *)&SDU1, "%d",inclined);
+//		chprintf((BaseSequentialStream *)&SDU1, "%d",inclined);
 
 
 		chThdSleepUntilWindowed(time, time + MS2ST(10));
