@@ -14,7 +14,6 @@
 
 static int8_t mode=0;
 
-
 //simple PI regulator implementation
 int16_t pi_regulator(float distance, float goal){
 
@@ -53,30 +52,36 @@ static THD_FUNCTION(PiRegulator, arg) {
     (void)arg;
 
     systime_t time;
+
     bool inclined=0;
 
-    int16_t speed = 0, compteur=0;
+    uint8_t compteur=0;
+    int16_t speed = 0;
     int16_t speed_correction = 0;
 
     bool black_line=1;
 
-    get_inclined();
-
-    mode=0;
 
     while(1){
         time = chVTGetSystemTime();
 
+        inclined = get_inclined();
 
 //        if(inclined==1){
-//        	mode=SUIVIT_LIGNE_BACK;
+//        	mode=SUIVIT_LIGNE_PENTE;
 //        }
+//        else{
+//        	mode=SUIVIT_LIGNE;
+//        }
+
+
+
 
         if (mode==SUIVIT_LIGNE ){
 
-        	set_body_led(0);
+			set_body_led(0);
 
-        	//computes the speed to give to the motors
+			//computes the speed to give to the motors
 			//black_line is modified by the image processing thread
 			speed = pi_regulator(get_line_position(), IMAGE_BUFFER_SIZE/2);
 			//computes a correction factor to let the robot rotate to be in front of the line
@@ -96,70 +101,31 @@ static THD_FUNCTION(PiRegulator, arg) {
 			}
 
 			black_line=get_black_line();
-	        compteur++;
+			compteur++;
 
-	        if (black_line==1){
-	        	compteur=0;
-	        	right_motor_set_speed(speed+VITESSE_STABLE/2 - ROTATION_COEFF * speed_correction);
+			if (black_line==TRUE){
+				compteur=0;
+				right_motor_set_speed(speed+VITESSE_STABLE/2 - ROTATION_COEFF * speed_correction);
 				left_motor_set_speed(speed+VITESSE_STABLE/2 + ROTATION_COEFF * speed_correction);
-	        }
-	        if (black_line==0 && compteur>5){
-	        	right_motor_set_speed(0);
-	        	left_motor_set_speed(0);
-	        	set_body_led(1);
-	        	chThdSleepMilliseconds(TEMPS_ATTENTE/2);
-	        	set_body_led(0);
-	        	chThdSleepMilliseconds(TEMPS_ATTENTE/2);
-	        }
+			}
+			if (black_line==FALSE && compteur>FAUX_POSITIF_LIGNE){
+				right_motor_set_speed(0);
+				left_motor_set_speed(0);
+//				set_body_led(TRUE);
+//				chThdSleepMilliseconds(TEMPS_ATTENTE/2);
+				set_body_led(FALSE);
+//				chThdSleepMilliseconds(TEMPS_ATTENTE/2);
+			}
 
+		}
+
+        if (mode==SUIVIT_LIGNE_PENTE ){
+
+                	set_body_led(1);
+//                	right_motor_set_speed(0);
+//					left_motor_set_speed(0);
         }
-/*
-        if (mode==SUIVIT_LIGNE_BACK ){
 
-//        			chprintf((BaseSequentialStream *)&SD1, "mode = %dus\n",mode);
-
-                	set_body_led(0);
-
-                	//computes the speed to give to the motors
-        			//black_line is modified by the image processing thread
-        			speed = pi_regulator(get_line_position(), IMAGE_BUFFER_SIZE/2);
-        			//computes a correction factor to let the robot rotate to be in front of the line
-        			speed_correction = (get_line_position() - (IMAGE_BUFFER_SIZE/2));
-
-        			//if the line is nearly in front of the camera, don't rotate
-        			if(abs(speed_correction) < ROTATION_THRESHOLD){
-        				speed_correction = 0;
-        			}
-
-        			if (speed<0 ){
-        				speed=0;
-        			}
-
-        			if (speed>VITESSE_STABLE){
-        				speed=VITESSE_STABLE;
-        			}
-
-//        			speed=-speed;
-
-        			black_line=get_black_line();
-        	        compteur++;
-
-        	        if (black_line==1){
-        	        	compteur=0;
-        	        	right_motor_set_speed(speed+VITESSE_STABLE/2 - ROTATION_COEFF * speed_correction);
-        				left_motor_set_speed(speed+VITESSE_STABLE + ROTATION_COEFF * speed_correction);
-        	        }
-        	        if (black_line==0 && compteur>5){
-        	        	right_motor_set_speed(0);
-        	        	left_motor_set_speed(0);
-        	        	set_body_led(1);
-        	        	chThdSleepMilliseconds(TEMPS_ATTENTE/2);
-        	        	set_body_led(0);
-        	        	chThdSleepMilliseconds(TEMPS_ATTENTE/2);
-        	        }
-
-        }
-*/
         //100Hz
         chThdSleepUntilWindowed(time, time + MS2ST(10));
     }
@@ -172,7 +138,7 @@ static THD_FUNCTION(Contournement, arg) {
 
     systime_t time;
     uint8_t proxii=0;
-    uint8_t ligne=0;
+    uint8_t compteur_ligne=0;
     bool tour=0;
 
     while(1){
@@ -180,14 +146,14 @@ static THD_FUNCTION(Contournement, arg) {
 
     	proxii=get_proxii();
 
-		if (proxii>SENSIBLE_PROX && mode!=2){
+		if (proxii>SENSIBLE_PROX && mode!=SUIVIT_LIGNE_PENTE){
 			mode=CONTOURNEMENT;
 		}
 		if (mode==CONTOURNEMENT){
 
-			set_led(LED3,1);
-			set_led(LED7,1);
-			set_body_led(0);
+			set_led(LED3,TRUE);
+			set_led(LED7,TRUE);
+			set_body_led(FALSE);
 
 			if (tour==0){
 				right_motor_set_speed(-VITESSE_ROTATION);
@@ -202,20 +168,22 @@ static THD_FUNCTION(Contournement, arg) {
 				right_motor_set_speed(VITESSE_ROTATION);
 				left_motor_set_speed(0.57*VITESSE_ROTATION);
 			}
-			ligne=get_liigne();
 
-			if(ligne>2){
+			compteur_ligne=get_compteur_liigne();
+
+
+			if(compteur_ligne>FAUX_POSITIF_LIGNE/2){
 				chThdSleepMilliseconds(1.2*TEMPS_ATTENTE);
 				right_motor_set_speed(-VITESSE_ROTATION);
 				left_motor_set_speed(VITESSE_ROTATION);
 				chThdSleepMilliseconds(TEMPS_ATTENTE);
 				right_motor_set_speed(0);
 				left_motor_set_speed(0);
-				mode=0;
+				mode=SUIVIT_LIGNE;
 				tour=0;
-				ligne=0;
-				set_led(LED3,0);
-				set_led(LED7,0);
+				compteur_ligne=0;
+				set_led(LED3,FALSE);
+				set_led(LED7,FALSE);
 			}
 		}
     	//100Hz
@@ -227,5 +195,5 @@ static THD_FUNCTION(Contournement, arg) {
 
 void pi_regulator_start(void){
 	chThdCreateStatic(waPiRegulator, sizeof(waPiRegulator), NORMALPRIO, PiRegulator, NULL);
-//	chThdCreateStatic(waContournement, sizeof(waContournement), NORMALPRIO, Contournement, NULL);
+	chThdCreateStatic(waContournement, sizeof(waContournement), NORMALPRIO, Contournement, NULL);
 }

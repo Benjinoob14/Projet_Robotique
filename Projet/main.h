@@ -29,10 +29,14 @@ extern "C" {
 #define VITESSE_ROTATION 300
 #define SENSIBLE_PROX 240
 #define TEMPS_ATTENTE 1000
+#define FAUX_POSITIF_GYRO 5
+#define FAUX_POSITIF_LIGNE 5
+
+#define SENSOR_FRONT_FRONT_LEFT 7
 
 #define SUIVIT_LIGNE 0
 #define CONTOURNEMENT 1
-#define SUIVIT_LIGNE_BACK 2
+#define SUIVIT_LIGNE_PENTE 2
 
 /** Robot wide IPC bus. */
 extern messagebus_t bus;

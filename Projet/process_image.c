@@ -15,14 +15,14 @@
 static float black_line = 0;
 static uint16_t line_position = IMAGE_BUFFER_SIZE/2;	//middle
 static uint16_t proxii=0;
-static uint8_t liigne=0;
+static uint8_t compteur_liigne=0;
 static bool inclined = 0;
 
 //semaphore
 static BSEMAPHORE_DECL(image_ready_sem, TRUE);
 
 
-void show_inclined(int16_t *accel_values){
+bool show_inclined(int16_t *accel_values){
 
     //threshold value to not use the leds when the robot is too horizontal
     float threshold = 0.2;
@@ -45,12 +45,13 @@ void show_inclined(int16_t *accel_values){
         }
 
         if(angle>0){
-        	inclined=1;
+        	 return 1;
         }
         else{
-        	inclined=0;
+        	return 0;
         }
     }
+
 }
 /*
  *  Returns the line's width extracted from the image buffer given
@@ -71,10 +72,10 @@ uint16_t extract_line_width(uint8_t *buffer){
 	mean /= IMAGE_BUFFER_SIZE;
 
 	if(buffer[IMAGE_BUFFER_SIZE/2]< VALEUR_SENSIBLE_DETECTION_BLACK){
-			liigne++;
+			compteur_liigne++;
 		}
-		if(buffer[IMAGE_BUFFER_SIZE/2]> VALEUR_SENSIBLE_DETECTION_BLACK || liigne>100){
-			liigne=0;
+		if(buffer[IMAGE_BUFFER_SIZE/2]> VALEUR_SENSIBLE_DETECTION_BLACK || compteur_liigne>100){
+			compteur_liigne=0;
 		}
 
 
@@ -219,15 +220,30 @@ static THD_FUNCTION(Mode, arg) {
 
     int16_t accel_values[3] = {0};
     systime_t time;
+    bool value=0;
+    uint8_t compteur=0;
 
     while(1){
     	time = chVTGetSystemTime();
 
-		proxii=get_prox(7);
+		proxii=get_prox(SENSOR_FRONT_FRONT_LEFT);
 
 		get_acc_all(accel_values);
 
-		show_inclined(accel_values);
+		inclined=show_inclined(accel_values);
+
+		if(value!=inclined){
+			compteur++;
+		}
+		else{
+			compteur=0;
+		}
+		if(value!=inclined && compteur>FAUX_POSITIF_GYRO){
+			inclined = !inclined;
+		}
+
+		chprintf((BaseSequentialStream *)&SDU1, "%d",inclined);
+
 
 		chThdSleepUntilWindowed(time, time + MS2ST(10));
 
@@ -242,8 +258,8 @@ uint16_t get_line_position(void){
 	return line_position;
 }
 
-uint8_t get_liigne(void){
-	return liigne;
+uint8_t get_compteur_liigne(void){
+	return compteur_liigne;
 }
 
 uint8_t get_proxii(void){
