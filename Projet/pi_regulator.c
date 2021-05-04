@@ -12,6 +12,10 @@
 #include <leds.h>
 
 
+//permet de savoir le mode du robot
+//mode0->suivit de ligne
+//mode1->contournement
+//mode2->suivit de ligne en pente
 static int8_t mode=0;
 
 //simple PI regulator implementation
@@ -57,7 +61,7 @@ static THD_FUNCTION(PiRegulator, arg) {
     int16_t speed = 0;
     int16_t speed_correction = 0;
 
-    bool black_line=1;
+    uint16_t line=0;
 
 
     while(1){
@@ -66,7 +70,7 @@ static THD_FUNCTION(PiRegulator, arg) {
 
         if (mode==SUIVIT_LIGNE ){
 
-			set_body_led(0);
+			set_body_led(FALSE);
 
 			//computes the speed to give to the motors
 			//black_line is modified by the image processing thread
@@ -78,7 +82,7 @@ static THD_FUNCTION(PiRegulator, arg) {
 			if(abs(speed_correction) < ROTATION_THRESHOLD){
 				speed_correction = 0;
 			}
-
+			//on ne veut pas que le robot recule
 			if (speed<0 ){
 				speed=0;
 			}
@@ -86,16 +90,19 @@ static THD_FUNCTION(PiRegulator, arg) {
 			if (speed>VITESSE_STABLE){
 				speed=VITESSE_STABLE;
 			}
-
-			black_line=get_black_line();
+			//on récupère l'info de s'il y a une ligne devant lui
+			line=get_black_line();
 			compteur++;
 
-			if (black_line==TRUE){
+//			chprintf((BaseSequentialStream *)&SDU1, "line= %d ",line);
+
+			if (line>SENSIBILITY_LIGNE){
+				set_body_led(TRUE);
 				compteur=0;
 				right_motor_set_speed(speed+VITESSE_STABLE/2 - ROTATION_COEFF * speed_correction);
 				left_motor_set_speed(speed+VITESSE_STABLE/2 + ROTATION_COEFF * speed_correction);
 			}
-			if (black_line==FALSE && compteur>FAUX_POSITIF_LIGNE){
+			if (line<SENSIBILITY_LIGNE && compteur>FAUX_POSITIF_LIGNE){
 				right_motor_set_speed(0);
 				left_motor_set_speed(0);
 //				set_body_led(TRUE);
@@ -112,6 +119,8 @@ static THD_FUNCTION(PiRegulator, arg) {
         chThdSleepUntilWindowed(time, time + MS2ST(10));
     }
 }
+
+//la thread qui gère le contournement d'objet
 static THD_WORKING_AREA(waContournement, 1024);
 static THD_FUNCTION(Contournement, arg) {
 
@@ -149,7 +158,7 @@ static THD_FUNCTION(Contournement, arg) {
 			compteur_ligne=get_compteur_liigne();
 
 
-			if(compteur_ligne>FAUX_POSITIF_LIGNE/2){
+			if(compteur_ligne>FAUX_POSITIF_LIGNE/4){
 				chThdSleepMilliseconds(1.2*TEMPS_ATTENTE);
 				right_motor_set_speed(-VITESSE_ROTATION);
 				left_motor_set_speed(VITESSE_ROTATION);
@@ -169,7 +178,7 @@ static THD_FUNCTION(Contournement, arg) {
 }
 
 //la thread qui check à chaque fois dans quel mode le robot se trouve et modifie en fonction de s'il voit un obstacle ou s'il est en pente
-static THD_WORKING_AREA(waCheckMODE, 256);
+static THD_WORKING_AREA(waCheckMODE, 128);
 static THD_FUNCTION(CheckMODE, arg) {
 
     chRegSetThreadName(__FUNCTION__);
@@ -195,8 +204,6 @@ static THD_FUNCTION(CheckMODE, arg) {
 		if (proxii>SENSIBLE_PROX && mode==SUIVIT_LIGNE){
 			mode=CONTOURNEMENT;
 		}
-
-//		chprintf((BaseSequentialStream *)&SDU1, "%d",mode);
 
     	//100Hz
     	chThdSleepUntilWindowed(time, time + MS2ST(10));

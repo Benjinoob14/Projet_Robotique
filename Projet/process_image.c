@@ -12,7 +12,7 @@
 #include <leds.h>
 
 
-static float black_line = 0;
+static uint16_t black_line = 0;
 static uint16_t line_position = IMAGE_BUFFER_SIZE/2;	//middle
 static uint16_t proxii=0;
 static uint8_t compteur_liigne=0;
@@ -21,7 +21,7 @@ static bool inclined = 0;
 //semaphore
 static BSEMAPHORE_DECL(image_ready_sem, TRUE);
 
-
+//fonction qui calcule pour savoir si le robot est en pente
 bool show_inclined(int16_t *accel_values){
 
     //threshold value to not use the leds when the robot is too horizontal
@@ -73,12 +73,13 @@ uint16_t extract_line_width(uint8_t *buffer){
 	}
 	mean /= IMAGE_BUFFER_SIZE;
 
+	//s'il voit une suite de pixels noir il incrémente le compteur qui permet de savoir que le robot est revenu sur une ligne noir
 	if(buffer[IMAGE_BUFFER_SIZE/2]< VALEUR_SENSIBLE_DETECTION_BLACK){
-			compteur_liigne++;
-		}
-		if(buffer[IMAGE_BUFFER_SIZE/2]> VALEUR_SENSIBLE_DETECTION_BLACK || compteur_liigne>100){
-			compteur_liigne=0;
-		}
+		compteur_liigne++;
+	}
+	if(buffer[IMAGE_BUFFER_SIZE/2]> VALEUR_SENSIBLE_DETECTION_BLACK || compteur_liigne>MAX_COMPTEUR){
+		compteur_liigne=0;
+	}
 
 
 	do{
@@ -141,16 +142,8 @@ uint16_t extract_line_width(uint8_t *buffer){
 		line_position = (begin + end)/2; //gives the line position.
 	}
 
-	black_line=width;
-
-
-
-	if (width<170 || width>400){
-		black_line=0;
-	}
-
-
 	return width;
+
 }
 
 static THD_WORKING_AREA(waCaptureImage, 256);
@@ -188,7 +181,11 @@ static THD_FUNCTION(ProcessImage, arg) {
 
 	bool send_to_computer = true;
 
+
+
     while(1){
+
+
     	//waits until an image has been captured
         chBSemWait(&image_ready_sem);
 		//gets the pointer to the array filled with the last image in RGB565
@@ -202,7 +199,13 @@ static THD_FUNCTION(ProcessImage, arg) {
 		}
 
 		//search for a line in the image and gets its width in pixels
-		extract_line_width(image);
+		black_line=extract_line_width(image);
+
+
+		if (black_line<MIN_LINE_WIDTH || black_line>10*MIN_LINE_WIDTH){
+			black_line=0;
+		}
+
 
 
 		if(send_to_computer){
@@ -252,7 +255,7 @@ static THD_FUNCTION(Mode, arg) {
     }
 }
 
-float get_black_line(void){
+uint16_t get_black_line(void){
 	return black_line;
 }
 
