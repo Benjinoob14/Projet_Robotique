@@ -67,10 +67,9 @@ static THD_FUNCTION(PiRegulator, arg) {
     while(1){
         time = chVTGetSystemTime();
 
+        if (mode==SUIVIT_LIGNE_PENTE){
 
-        if (mode==SUIVIT_LIGNE ){
-
-			set_body_led(FALSE);
+			set_body_led(TRUE);
 
 			//computes the speed to give to the motors
 			//black_line is modified by the image processing thread
@@ -90,14 +89,13 @@ static THD_FUNCTION(PiRegulator, arg) {
 			if (speed>VITESSE_STABLE){
 				speed=VITESSE_STABLE;
 			}
-			//on récupère l'info de s'il y a une ligne devant lui
+			//on récupère la taille de la ligne
 			line=get_black_line();
 			compteur++;
 
 //			chprintf((BaseSequentialStream *)&SDU1, "line= %d ",line);
 
 			if (line>SENSIBILITY_LIGNE){
-				set_body_led(TRUE);
 				compteur=0;
 				right_motor_set_speed(speed+VITESSE_STABLE/2 - ROTATION_COEFF * speed_correction);
 				left_motor_set_speed(speed+VITESSE_STABLE/2 + ROTATION_COEFF * speed_correction);
@@ -107,7 +105,48 @@ static THD_FUNCTION(PiRegulator, arg) {
 				left_motor_set_speed(0);
 //				set_body_led(TRUE);
 //				chThdSleepMilliseconds(TEMPS_ATTENTE/2);
-				set_body_led(FALSE);
+//				chThdSleepMilliseconds(TEMPS_ATTENTE/2);
+			}
+		}
+
+        if (mode==SUIVIT_LIGNE ){
+
+        	set_body_led(FALSE);
+
+			//computes the speed to give to the motors
+			//black_line is modified by the image processing thread
+			speed = pi_regulator(get_line_position(), IMAGE_BUFFER_SIZE/2);
+			//computes a correction factor to let the robot rotate to be in front of the line
+			speed_correction = (get_line_position() - (IMAGE_BUFFER_SIZE/2));
+
+			//if the line is nearly in front of the camera, don't rotate
+			if(abs(speed_correction) < ROTATION_THRESHOLD){
+				speed_correction = 0;
+			}
+			//on ne veut pas que le robot recule
+			if (speed<0 ){
+				speed=0;
+			}
+
+			if (speed>VITESSE_STABLE){
+				speed=VITESSE_STABLE;
+			}
+			//on récupère la taille de la ligne
+			line=get_black_line();
+			compteur++;
+
+//			chprintf((BaseSequentialStream *)&SDU1, "line= %d ",line);
+
+			if (line>SENSIBILITY_LIGNE){
+				compteur=0;
+				right_motor_set_speed(speed+VITESSE_STABLE/2 - ROTATION_COEFF * speed_correction);
+				left_motor_set_speed(speed+VITESSE_STABLE/2 + ROTATION_COEFF * speed_correction);
+			}
+			if (line<SENSIBILITY_LIGNE && compteur>FAUX_POSITIF_LIGNE){
+				right_motor_set_speed(0);
+				left_motor_set_speed(0);
+//				set_body_led(TRUE);
+//				chThdSleepMilliseconds(TEMPS_ATTENTE/2);
 //				chThdSleepMilliseconds(TEMPS_ATTENTE/2);
 			}
 
@@ -196,7 +235,10 @@ static THD_FUNCTION(CheckMODE, arg) {
     	inclined = get_inclined();
 
 		if(inclined==TRUE && mode!=CONTOURNEMENT){
-			set_body_led(TRUE);
+			mode=SUIVIT_LIGNE_PENTE;
+		}
+		if(inclined==FALSE && mode==SUIVIT_LIGNE_PENTE){
+			mode=SUIVIT_LIGNE;
 		}
 
 		proxii=get_proxii();

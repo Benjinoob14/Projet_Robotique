@@ -25,7 +25,7 @@ static BSEMAPHORE_DECL(image_ready_sem, TRUE);
 bool show_inclined(int16_t *accel_values){
 
     //threshold value to not use the leds when the robot is too horizontal
-    float threshold = 0.2;
+    float threshold = SENSI_GYRO;
     //create a pointer to the array for shorter name
     float *accel = accel_values;
 
@@ -35,7 +35,7 @@ bool show_inclined(int16_t *accel_values){
     	//clock wise angle in rad with 0 being the back of the e-puck2 (Y axis of the IMU)
         float angle = atan2(accel[X_AXIS], accel[Y_AXIS]);
 
-        //rotates the angle by 45 degrees (simpler to compare with PI and PI/2 than with 5*PI/4)
+        //rotates the angle by 22.5 degrees (simpler to compare with PI and PI/2 than with 5*PI/4)
         angle += M_PI/4;
 
         //if the angle is greater than PI, then it has shifted on the -PI side of the quadrant
@@ -43,6 +43,8 @@ bool show_inclined(int16_t *accel_values){
         if(angle > M_PI){
             angle = -2 * M_PI + angle;
         }
+
+        chprintf((BaseSequentialStream *)&SDU1, "swag=  %d  ",angle);
 
         if(angle>0){
         	 return 1;
@@ -223,10 +225,10 @@ static THD_FUNCTION(Mode, arg) {
     chRegSetThreadName(__FUNCTION__);
     (void)arg;
 
-    int16_t accel_values[3] = {0};
+    int16_t accel_values[3] = {0}, gyro_values[3]={0};
     systime_t time;
-    bool value=0;
-    uint8_t compteur=0;
+    bool acc=0;
+    uint16_t compteur=0;
 
     while(1){
     	time = chVTGetSystemTime();
@@ -235,15 +237,19 @@ static THD_FUNCTION(Mode, arg) {
 
 		get_acc_all(accel_values);
 
-		value=show_inclined(accel_values);
+//		get_gyro_all(gyro_values);
 
-		if(value!=inclined){
+		acc=show_inclined(accel_values);
+
+//		chprintf((BaseSequentialStream *)&SDU1, "angle= %d ",value);
+
+		if(acc != inclined){
 			compteur++;
 		}
 		else{
 			compteur=0;
 		}
-		if(value!=inclined && compteur>FAUX_POSITIF_GYRO){
+		if(acc != inclined && compteur>FAUX_POSITIF_GYRO){
 			inclined = !inclined;
 		}
 
