@@ -48,9 +48,10 @@ int main(void)
     mpu_init();
 
     clear_leds();
-    set_body_led(0);
-    set_led(LED3,0);
-	set_led(LED7,0);
+    set_body_led(FALSE);
+    set_led(LED3,FALSE);
+	set_led(LED7,FALSE);
+	set_led(LED8,FALSE);
 
     //starts the serial communication
     serial_start();
