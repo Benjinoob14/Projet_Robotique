@@ -237,11 +237,7 @@ static THD_FUNCTION(Mode, arg) {
 
 		get_acc_all(accel_values);
 
-//		get_gyro_all(gyro_values);
-
 		value=show_inclined(accel_values);
-
-//		chprintf((BaseSequentialStream *)&SDU1, "angle= %d ",value);
 
 		if(value != inclined){
 			compteur++;
@@ -252,8 +248,6 @@ static THD_FUNCTION(Mode, arg) {
 		if(value != inclined && compteur>FAUX_POSITIF_GYRO){
 			inclined = !inclined;
 		}
-
-//		chprintf((BaseSequentialStream *)&SDU1, "%d",inclined);
 
 
 		chThdSleepUntilWindowed(time, time + MS2ST(10));
