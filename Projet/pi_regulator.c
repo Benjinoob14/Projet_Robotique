@@ -234,7 +234,7 @@ static THD_FUNCTION(CheckMODE, arg) {
 
     	inclined = get_inclined();
 
-		if(inclined==TRUE && mode!=CONTOURNEMENT){
+		if(inclined==TRUE && mode==SUIVIT_LIGNE){
 			mode=SUIVIT_LIGNE_PENTE;
 		}
 		if(inclined==FALSE && mode==SUIVIT_LIGNE_PENTE){
@@ -254,6 +254,6 @@ static THD_FUNCTION(CheckMODE, arg) {
 
 void pi_regulator_start(void){
 	chThdCreateStatic(waPiRegulator, sizeof(waPiRegulator), NORMALPRIO, PiRegulator, NULL);
-	chThdCreateStatic(waContournement, sizeof(waContournement), NORMALPRIO, Contournement, NULL);
+//	chThdCreateStatic(waContournement, sizeof(waContournement), NORMALPRIO, Contournement, NULL);
 	chThdCreateStatic(waCheckMODE, sizeof(waCheckMODE), NORMALPRIO, CheckMODE, NULL);
 }

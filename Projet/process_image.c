@@ -44,7 +44,7 @@ bool show_inclined(int16_t *accel_values){
             angle = -2 * M_PI + angle;
         }
 
-        chprintf((BaseSequentialStream *)&SDU1, "swag=  %d  ",angle);
+//        chprintf((BaseSequentialStream *)&SDU1, "swag=  %d  ",angle);
 
         if(angle>0){
         	 return 1;
@@ -225,9 +225,9 @@ static THD_FUNCTION(Mode, arg) {
     chRegSetThreadName(__FUNCTION__);
     (void)arg;
 
-    int16_t accel_values[3] = {0}, gyro_values[3]={0};
+    int16_t accel_values[3] = {0};
     systime_t time;
-    bool acc=0;
+    bool value=0;
     uint16_t compteur=0;
 
     while(1){
@@ -239,17 +239,17 @@ static THD_FUNCTION(Mode, arg) {
 
 //		get_gyro_all(gyro_values);
 
-		acc=show_inclined(accel_values);
+		value=show_inclined(accel_values);
 
 //		chprintf((BaseSequentialStream *)&SDU1, "angle= %d ",value);
 
-		if(acc != inclined){
+		if(value != inclined){
 			compteur++;
 		}
 		else{
 			compteur=0;
 		}
-		if(acc != inclined && compteur>FAUX_POSITIF_GYRO){
+		if(value != inclined && compteur>FAUX_POSITIF_GYRO){
 			inclined = !inclined;
 		}
 
