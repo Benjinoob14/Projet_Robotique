@@ -16,42 +16,38 @@ static uint16_t black_line = 0;
 static uint16_t line_position = IMAGE_BUFFER_SIZE/2;	//middle
 static uint16_t proxii=0;
 static uint8_t compteur_liigne=0;
-static bool inclined = 0;
+static int8_t inclined = 0;
 
 //semaphore
 static BSEMAPHORE_DECL(image_ready_sem, TRUE);
 
 //fonction qui calcule pour savoir si le robot est en pente
-bool show_inclined(int16_t *accel_values){
+int8_t show_inclined(int16_t *accel_values){
 
     //threshold value to not use the leds when the robot is too horizontal
-    float threshold = SENSI_GYRO;
+    int16_t threshold = SENSI_GYRO;
     //create a pointer to the array for shorter name
-    float *accel = accel_values;
+    int16_t *accel = accel_values;
+
+    int16_t angle = 0;
 
 
-    if(fabs(accel[X_AXIS]) > threshold || fabs(accel[Y_AXIS]) > threshold){
+    if(fabs(accel[X_AXIS]) > threshold){
 
-    	//clock wise angle in rad with 0 being the back of the e-puck2 (Y axis of the IMU)
-        float angle = atan2(accel[X_AXIS], accel[Y_AXIS]);
+        angle=accel[X_AXIS];
 
-        //rotates the angle by 22.5 degrees (simpler to compare with PI and PI/2 than with 5*PI/4)
-        angle += M_PI/4;
-
-        //if the angle is greater than PI, then it has shifted on the -PI side of the quadrant
-        //so we correct it
-        if(angle > M_PI){
-            angle = -2 * M_PI + angle;
+        if(angle<0){
+        	 return -1;
         }
-
-//        chprintf((BaseSequentialStream *)&SDU1, "swag=  %d  ",angle);
-
         if(angle>0){
-        	 return 1;
+        	return 1;
         }
         else{
         	return 0;
         }
+    }
+    else{
+    	return 0;
     }
 
     return 0;
@@ -227,7 +223,7 @@ static THD_FUNCTION(Mode, arg) {
 
     int16_t accel_values[3] = {0};
     systime_t time;
-    bool value=0;
+    int8_t value=0;
     uint16_t compteur=0;
 
     while(1){
@@ -239,6 +235,8 @@ static THD_FUNCTION(Mode, arg) {
 
 		value=show_inclined(accel_values);
 
+
+
 		if(value != inclined){
 			compteur++;
 		}
@@ -246,8 +244,9 @@ static THD_FUNCTION(Mode, arg) {
 			compteur=0;
 		}
 		if(value != inclined && compteur>FAUX_POSITIF_GYRO){
-			inclined = !inclined;
+			inclined = value;
 		}
+
 
 
 		chThdSleepUntilWindowed(time, time + MS2ST(10));
@@ -267,11 +266,11 @@ uint8_t get_compteur_liigne(void){
 	return compteur_liigne;
 }
 
-uint8_t get_proxii(void){
+uint16_t get_proxii(void){
 	return proxii;
 }
 
-bool get_inclined(void){
+int8_t get_inclined(void){
 	return inclined;
 }
 

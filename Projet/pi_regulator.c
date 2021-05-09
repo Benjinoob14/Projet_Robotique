@@ -21,10 +21,10 @@ static int8_t mode=0;
 //simple PI regulator implementation
 int16_t pi_regulator(float position, float goal){
 
-	volatile float error_position = 0;
-	volatile float speed_correction = 0;
+	volatile int16_t error_position = 0;
+	volatile int16_t speed_correction = 0;
 
-	volatile static float sum_error = 0;
+	volatile static int16_t sum_error = 0;
 
 	error_position = (position - goal);
 
@@ -44,7 +44,7 @@ int16_t pi_regulator(float position, float goal){
 		sum_error = -MAX_SUM_ERROR;
 	}
 
-	speed_correction = KP * error_position + KI * sum_error  ;
+	speed_correction = KP * error_position + KI * sum_error;
 
     return (int16_t)speed_correction;
 }
@@ -62,21 +62,57 @@ static THD_FUNCTION(PiRegulator, arg) {
 
     uint16_t line=0;
 
-
-
-
     while(1){
         time = chVTGetSystemTime();
 
-        mode=2;
+
+//        chprintf((BaseSequentialStream *)&SDU1, "%d ",mode);
 
         if (mode==SUIVIT_LIGNE_PENTE){
 
 			set_body_led(TRUE);
-			set_led(LED3,FALSE);
-
 
 			//computes the speed to give to the motors
+			//black_line is modified by the image processing thread
+			speed_correction = pi_regulator(get_line_position(), IMAGE_BUFFER_SIZE/2);
+
+			//if the line is nearly in front of the camera, don't rotate
+			if(fabs(speed_correction) < ROTATION_THRESHOLD){
+				speed_correction = 0;
+			}
+
+			if (speed_correction>VITESSE_STABLE){
+				speed_correction=VITESSE_STABLE;
+			}
+			if (speed_correction<-VITESSE_STABLE){
+				speed_correction=-VITESSE_STABLE;
+			}
+			//on récupère la taille de la ligne
+			line=get_black_line();
+			compteur++;
+
+//			chprintf((BaseSequentialStream *)&SDU1, "line= %d ",line);
+
+			if (line>SENSIBILITY_LIGNE){
+				compteur=0;
+				right_motor_set_speed(VITESSE_STABLE - speed_correction);
+				left_motor_set_speed(VITESSE_STABLE +  speed_correction);
+			}
+			if (line<SENSIBILITY_LIGNE && compteur>FAUX_POSITIF_LIGNE){
+				right_motor_set_speed(0);
+				left_motor_set_speed(0);
+//				set_led(LED3,FALSE);
+//				set_body_led(TRUE);
+//				chThdSleepMilliseconds(TEMPS_ATTENTE/2);
+//				chThdSleepMilliseconds(TEMPS_ATTENTE/2);
+			}
+		}
+
+        if (mode==SUIVIT_LIGNE ){
+
+        	set_body_led(FALSE);
+
+        	//computes the speed to give to the motors
 			//black_line is modified by the image processing thread
 			speed_correction = pi_regulator(get_line_position(), IMAGE_BUFFER_SIZE/2);
 
@@ -105,48 +141,6 @@ static THD_FUNCTION(PiRegulator, arg) {
 			if (line<SENSIBILITY_LIGNE && compteur>FAUX_POSITIF_LIGNE){
 				right_motor_set_speed(0);
 				left_motor_set_speed(0);
-//				set_led(LED3,TRUE);
-//				set_body_led(TRUE);
-//				chThdSleepMilliseconds(TEMPS_ATTENTE/2);
-//				chThdSleepMilliseconds(TEMPS_ATTENTE/2);
-			}
-		}
-
-        if (mode==SUIVIT_LIGNE ){
-
-        	set_body_led(FALSE);
-        	set_led(LED3,TRUE);
-
-        	//computes the speed to give to the motors
-			//black_line is modified by the image processing thread
-			speed_correction = pi_regulator(get_line_position(), IMAGE_BUFFER_SIZE/2);
-
-			//if the line is nearly in front of the camera, don't rotate
-			if(abs(speed_correction) < ROTATION_THRESHOLD){
-				speed_correction = 0;
-			}
-
-			if (speed_correction>VITESSE_STABLE/2){
-				speed_correction=VITESSE_STABLE/2;
-			}
-			if (speed_correction<-VITESSE_STABLE/2){
-				speed_correction=-VITESSE_STABLE/2;
-			}
-			//on récupère la taille de la ligne
-			line=get_black_line();
-			compteur++;
-
-//			chprintf((BaseSequentialStream *)&SDU1, "line= %d ",line);
-
-			if (line>SENSIBILITY_LIGNE){
-				compteur=0;
-				right_motor_set_speed(VITESSE_STABLE - speed_correction);
-				left_motor_set_speed(VITESSE_STABLE +  speed_correction);
-			}
-			if (line<SENSIBILITY_LIGNE && compteur>FAUX_POSITIF_LIGNE){
-				right_motor_set_speed(0);
-				left_motor_set_speed(0);
-				set_led(LED3,TRUE);
 //				set_body_led(TRUE);
 //				chThdSleepMilliseconds(TEMPS_ATTENTE/2);
 //				chThdSleepMilliseconds(TEMPS_ATTENTE/2);
@@ -179,14 +173,14 @@ static THD_FUNCTION(Contournement, arg) {
 			set_led(LED7,TRUE);
 			set_body_led(FALSE);
 
-			if (tour==0){
+			if (tour==FALSE){
 				right_motor_set_speed(-VITESSE_ROTATION);
 				left_motor_set_speed(VITESSE_ROTATION);
 				chThdSleepMilliseconds(TEMPS_ATTENTE);
 				right_motor_set_speed(VITESSE_ROTATION);
 				left_motor_set_speed(0.57*VITESSE_ROTATION);
 				chThdSleepMilliseconds(2*TEMPS_ATTENTE);
-				tour=1;
+				tour=TRUE;
 			}
 			else{
 				right_motor_set_speed(VITESSE_ROTATION);
@@ -216,7 +210,7 @@ static THD_FUNCTION(Contournement, arg) {
 }
 
 //la thread qui check à chaque fois dans quel mode le robot se trouve et modifie en fonction de s'il voit un obstacle ou s'il est en pente
-static THD_WORKING_AREA(waCheckMODE, 128);
+static THD_WORKING_AREA(waCheckMODE, 256);
 static THD_FUNCTION(CheckMODE, arg) {
 
     chRegSetThreadName(__FUNCTION__);
@@ -224,27 +218,36 @@ static THD_FUNCTION(CheckMODE, arg) {
 
     systime_t time;
 
-    bool inclined=0;
+    volatile int8_t incliined=0;
 
     uint8_t proxii=0;
 
     while(1){
     	time = chVTGetSystemTime();
 
-    	inclined = get_inclined();
+    	incliined = get_inclined();
 
-		if(inclined==TRUE && mode==SUIVIT_LIGNE){
+		if(incliined==DESCEND && mode!=CONTOURNEMENT  ){
 			mode=SUIVIT_LIGNE_PENTE;
+			set_led(LED3,0);
+			set_led(LED7,1);
 		}
-		if(inclined==FALSE && mode==SUIVIT_LIGNE_PENTE){
+		if(incliined==MONTE && mode!=CONTOURNEMENT ){
+			mode=SUIVIT_LIGNE_PENTE;
+			set_led(LED3,1);
+			set_led(LED7,0);
+		}
+		if(incliined==PLAT && mode==SUIVIT_LIGNE_PENTE){
+			set_led(LED3,0);
+			set_led(LED7,0);
 			mode=SUIVIT_LIGNE;
 		}
 
 		proxii=get_proxii();
 
-		if (proxii>SENSIBLE_PROX && mode==SUIVIT_LIGNE){
-			mode=CONTOURNEMENT;
-		}
+//		if (proxii>SENSIBLE_PROX && mode==SUIVIT_LIGNE){
+//			mode=CONTOURNEMENT;
+//		}
 
     	//100Hz
     	chThdSleepUntilWindowed(time, time + MS2ST(10));
@@ -253,6 +256,6 @@ static THD_FUNCTION(CheckMODE, arg) {
 
 void pi_regulator_start(void){
 	chThdCreateStatic(waPiRegulator, sizeof(waPiRegulator), NORMALPRIO, PiRegulator, NULL);
-//	chThdCreateStatic(waContournement, sizeof(waContournement), NORMALPRIO, Contournement, NULL);
+	chThdCreateStatic(waContournement, sizeof(waContournement), NORMALPRIO, Contournement, NULL);
 	chThdCreateStatic(waCheckMODE, sizeof(waCheckMODE), NORMALPRIO, CheckMODE, NULL);
 }

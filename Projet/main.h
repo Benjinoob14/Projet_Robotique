@@ -20,7 +20,7 @@ extern "C" {
 #define GOAL_DISTANCE 			10.0f
 #define MAX_DISTANCE 			25.0f
 #define ERROR_THRESHOLD			5.0f	//[cm] because of the noise of the camera
-#define KP						3.0f
+#define KP						3.0
 #define KI 						0.1f	//must not be zero
 #define MAX_SUM_ERROR 			(VITESSE_STABLE/2)
 
@@ -33,9 +33,9 @@ extern "C" {
 #define VITESSE_STABLE 200
 #define VITESSE_ROTATION 300
 #define SENSIBLE_PROX 240
-#define SENSI_GYRO 0.3
+#define SENSI_GYRO 500
 #define TEMPS_ATTENTE 1000
-#define FAUX_POSITIF_GYRO 10
+#define FAUX_POSITIF_GYRO 20
 #define FAUX_ZERO_GYRO 2
 #define FAUX_POSITIF_LIGNE 10
 
@@ -44,6 +44,10 @@ extern "C" {
 #define SUIVIT_LIGNE 0
 #define CONTOURNEMENT 1
 #define SUIVIT_LIGNE_PENTE 2
+
+#define MONTE 1
+#define DESCEND -1
+#define PLAT 0
 
 /** Robot wide IPC bus. */
 extern messagebus_t bus;
