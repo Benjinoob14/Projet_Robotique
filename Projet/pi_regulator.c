@@ -21,21 +21,21 @@ static int8_t mode=0;
 //simple PI regulator implementation
 int16_t pi_regulator(float position, float goal){
 
-	float error = 0;
-	float speed = 0;
+	volatile float error_position = 0;
+	volatile float speed_correction = 0;
 
-	static float sum_error = 0;
+	volatile static float sum_error = 0;
 
-	error = position - goal;
+	error_position = (position - goal);
 
 	//disables the PI regulator if the error is to small
 	//this avoids to always move as we cannot exactly be where we want and
 	//the camera is a bit noisy
-	if(fabs(error) < ERROR_THRESHOLD){
-		return 0;
-	}
+//	if(fabs(error_position) < ERROR_THRESHOLD){
+//		return 0;
+//	}
 
-	sum_error += error;
+	sum_error += error_position;
 
 	//we set a maximum and a minimum for the sum to avoid an uncontrolled growth
 	if(sum_error > MAX_SUM_ERROR){
@@ -44,9 +44,9 @@ int16_t pi_regulator(float position, float goal){
 		sum_error = -MAX_SUM_ERROR;
 	}
 
-	speed = KP * error + KI * sum_error;
+	speed_correction = KP * error_position + KI * sum_error  ;
 
-    return (int16_t)speed;
+    return (int16_t)speed_correction;
 }
 
 static THD_WORKING_AREA(waPiRegulator, 1024);
@@ -58,10 +58,10 @@ static THD_FUNCTION(PiRegulator, arg) {
     systime_t time;
 
     uint8_t compteur=0;
-    int16_t speed = 0;
     int16_t speed_correction = 0;
 
     uint16_t line=0;
+
 
 
 
@@ -78,9 +78,7 @@ static THD_FUNCTION(PiRegulator, arg) {
 
 			//computes the speed to give to the motors
 			//black_line is modified by the image processing thread
-			speed = pi_regulator(get_line_position(), IMAGE_BUFFER_SIZE/2);
-			//computes a correction factor to let the robot rotate to be in front of the line
-			speed_correction = (get_line_position() - (IMAGE_BUFFER_SIZE/2));
+			speed_correction = pi_regulator(get_line_position(), IMAGE_BUFFER_SIZE/2);
 
 			//if the line is nearly in front of the camera, don't rotate
 			if(abs(speed_correction) < ROTATION_THRESHOLD){
@@ -107,7 +105,7 @@ static THD_FUNCTION(PiRegulator, arg) {
 			if (line<SENSIBILITY_LIGNE && compteur>FAUX_POSITIF_LIGNE){
 				right_motor_set_speed(0);
 				left_motor_set_speed(0);
-				set_led(LED3,TRUE);
+//				set_led(LED3,TRUE);
 //				set_body_led(TRUE);
 //				chThdSleepMilliseconds(TEMPS_ATTENTE/2);
 //				chThdSleepMilliseconds(TEMPS_ATTENTE/2);
@@ -119,23 +117,20 @@ static THD_FUNCTION(PiRegulator, arg) {
         	set_body_led(FALSE);
         	set_led(LED3,TRUE);
 
-			//computes the speed to give to the motors
+        	//computes the speed to give to the motors
 			//black_line is modified by the image processing thread
-			speed = pi_regulator(get_line_position(), IMAGE_BUFFER_SIZE/2);
-			//computes a correction factor to let the robot rotate to be in front of the line
-			speed_correction = (get_line_position() - (IMAGE_BUFFER_SIZE/2));
+			speed_correction = pi_regulator(get_line_position(), IMAGE_BUFFER_SIZE/2);
 
 			//if the line is nearly in front of the camera, don't rotate
 			if(abs(speed_correction) < ROTATION_THRESHOLD){
 				speed_correction = 0;
 			}
-			//on ne veut pas que le robot recule
-			if (speed<0 ){
-				speed=0;
-			}
 
-			if (speed>VITESSE_STABLE){
-				speed=VITESSE_STABLE;
+			if (speed_correction>VITESSE_STABLE/2){
+				speed_correction=VITESSE_STABLE/2;
+			}
+			if (speed_correction<-VITESSE_STABLE/2){
+				speed_correction=-VITESSE_STABLE/2;
 			}
 			//on récupère la taille de la ligne
 			line=get_black_line();
@@ -145,21 +140,19 @@ static THD_FUNCTION(PiRegulator, arg) {
 
 			if (line>SENSIBILITY_LIGNE){
 				compteur=0;
-				right_motor_set_speed(speed+VITESSE_STABLE/2 - ROTATION_COEFF * speed_correction);
-				left_motor_set_speed(speed+VITESSE_STABLE/2 + ROTATION_COEFF * speed_correction);
+				right_motor_set_speed(VITESSE_STABLE - speed_correction);
+				left_motor_set_speed(VITESSE_STABLE +  speed_correction);
 			}
 			if (line<SENSIBILITY_LIGNE && compteur>FAUX_POSITIF_LIGNE){
 				right_motor_set_speed(0);
 				left_motor_set_speed(0);
+				set_led(LED3,TRUE);
 //				set_body_led(TRUE);
 //				chThdSleepMilliseconds(TEMPS_ATTENTE/2);
 //				chThdSleepMilliseconds(TEMPS_ATTENTE/2);
 			}
 
-		}
-
-
-
+        }
         //100Hz
         chThdSleepUntilWindowed(time, time + MS2ST(10));
     }
