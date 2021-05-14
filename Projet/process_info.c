@@ -7,12 +7,12 @@
 #include <math.h>
 #include <camera/po8030.h>
 #include <sensors/proximity.h>
-#include <process_image.h>
 #include <sensors/imu.h>
 #include <leds.h>
+#include <process_info.h>
 
 
-static uint16_t black_line = 0;
+static uint16_t line_width = 0;
 static uint16_t line_position = IMAGE_BUFFER_SIZE/2;	//middle
 static uint16_t proxii=0;
 static uint8_t compteur_liigne=0;
@@ -197,11 +197,11 @@ static THD_FUNCTION(ProcessImage, arg) {
 		}
 
 		//search for a line in the image and gets its width in pixels
-		black_line=extract_line_width(image);
+		line_width=extract_line_width(image);
 
 
-		if (black_line<MIN_LINE_WIDTH || black_line>10*MIN_LINE_WIDTH){
-			black_line=0;
+		if (line_width<MIN_LINE_WIDTH || line_width>10*MIN_LINE_WIDTH){
+			line_width=0;
 		}
 
 
@@ -215,8 +215,8 @@ static THD_FUNCTION(ProcessImage, arg) {
     }
 }
 
-static THD_WORKING_AREA(waMode, 512);
-static THD_FUNCTION(Mode, arg) {
+static THD_WORKING_AREA(waInfoMode, 512);
+static THD_FUNCTION(InfoMode, arg) {
 
     chRegSetThreadName(__FUNCTION__);
     (void)arg;
@@ -230,6 +230,8 @@ static THD_FUNCTION(Mode, arg) {
     	time = chVTGetSystemTime();
 
 		proxii=get_prox(SENSOR_FRONT_FRONT_LEFT);
+
+		chprintf((BaseSequentialStream *)&SDU1, "proxi= %d ",proxii);
 
 		get_acc_all(accel_values);
 
@@ -254,8 +256,8 @@ static THD_FUNCTION(Mode, arg) {
     }
 }
 
-uint16_t get_black_line(void){
-	return black_line;
+uint16_t get_line_width(void){
+	return line_width;
 }
 
 uint16_t get_line_position(void){
@@ -277,5 +279,5 @@ int8_t get_inclined(void){
 void process_image_start(void){
 	chThdCreateStatic(waProcessImage, sizeof(waProcessImage), NORMALPRIO, ProcessImage, NULL);
 	chThdCreateStatic(waCaptureImage, sizeof(waCaptureImage), NORMALPRIO, CaptureImage, NULL);
-	chThdCreateStatic(waMode, sizeof(waMode), NORMALPRIO, Mode, NULL);
+	chThdCreateStatic(waInfoMode, sizeof(waInfoMode), NORMALPRIO, InfoMode, NULL);
 }

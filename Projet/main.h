@@ -19,8 +19,8 @@ extern "C" {
 #define PXTOCM					1570.0f //experimental value
 #define GOAL_DISTANCE 			10.0f
 #define MAX_DISTANCE 			25.0f
-#define ERROR_THRESHOLD			5.0f	//[cm] because of the noise of the camera
-#define KP						3.0
+#define ERROR_THRESHOLD			5
+#define KP						3
 #define KI 						0.1f	//must not be zero
 #define MAX_SUM_ERROR 			(VITESSE_STABLE/2)
 
@@ -29,7 +29,7 @@ extern "C" {
 #define MAX_COMPTEUR 250
 
 #define VALEUR_SENSIBLE_DETECTION_BLACK  55
-#define SENSIBILITY_LIGNE 120
+#define SENSIBILITY_LIGNE 80
 #define VITESSE_STABLE 200
 #define VITESSE_ROTATION 300
 #define SENSIBLE_PROX 240

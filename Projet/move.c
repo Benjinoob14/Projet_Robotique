@@ -7,9 +7,9 @@
 
 #include <main.h>
 #include <motors.h>
-#include <pi_regulator.h>
-#include <process_image.h>
+#include <process_info.h>
 #include <leds.h>
+#include <move.h>
 
 
 //permet de savoir le mode du robot
@@ -21,19 +21,19 @@ static int8_t mode=0;
 //simple PI regulator implementation
 int16_t pi_regulator(float position, float goal){
 
-	volatile int16_t error_position = 0;
-	volatile int16_t speed_correction = 0;
+	int16_t error_position = 0;
+	int16_t speed_correction = 0;
 
-	volatile static int16_t sum_error = 0;
+	static int16_t sum_error = 0;
 
 	error_position = (position - goal);
 
 	//disables the PI regulator if the error is to small
 	//this avoids to always move as we cannot exactly be where we want and
 	//the camera is a bit noisy
-//	if(fabs(error_position) < ERROR_THRESHOLD){
-//		return 0;
-//	}
+	if(fabs(error_position) < ERROR_THRESHOLD){
+		return 0;
+	}
 
 	sum_error += error_position;
 
@@ -49,8 +49,8 @@ int16_t pi_regulator(float position, float goal){
     return (int16_t)speed_correction;
 }
 
-static THD_WORKING_AREA(waPiRegulator, 1024);
-static THD_FUNCTION(PiRegulator, arg) {
+static THD_WORKING_AREA(waMove, 1024);
+static THD_FUNCTION(Move, arg) {
 
     chRegSetThreadName(__FUNCTION__);
     (void)arg;
@@ -61,6 +61,9 @@ static THD_FUNCTION(PiRegulator, arg) {
     int16_t speed_correction = 0;
 
     uint16_t line=0;
+
+    uint8_t compteur_ligne=0;
+    bool tour=0;
 
     while(1){
         time = chVTGetSystemTime();
@@ -73,7 +76,7 @@ static THD_FUNCTION(PiRegulator, arg) {
 			set_body_led(TRUE);
 
 			//computes the speed to give to the motors
-			//black_line is modified by the image processing thread
+			//line_width is modified by the image processing thread
 			speed_correction = pi_regulator(get_line_position(), IMAGE_BUFFER_SIZE/2);
 
 			//if the line is nearly in front of the camera, don't rotate
@@ -88,7 +91,7 @@ static THD_FUNCTION(PiRegulator, arg) {
 				speed_correction=-VITESSE_STABLE;
 			}
 			//on récupère la taille de la ligne
-			line=get_black_line();
+			line=get_line_width();
 			compteur++;
 
 //			chprintf((BaseSequentialStream *)&SDU1, "line= %d ",line);
@@ -113,7 +116,7 @@ static THD_FUNCTION(PiRegulator, arg) {
         	set_body_led(FALSE);
 
         	//computes the speed to give to the motors
-			//black_line is modified by the image processing thread
+			//line_width is modified by the image processing thread
 			speed_correction = pi_regulator(get_line_position(), IMAGE_BUFFER_SIZE/2);
 
 			//if the line is nearly in front of the camera, don't rotate
@@ -128,7 +131,7 @@ static THD_FUNCTION(PiRegulator, arg) {
 				speed_correction=-VITESSE_STABLE;
 			}
 			//on récupère la taille de la ligne
-			line=get_black_line();
+			line=get_line_width();
 			compteur++;
 
 //			chprintf((BaseSequentialStream *)&SDU1, "line= %d ",line);
@@ -147,27 +150,8 @@ static THD_FUNCTION(PiRegulator, arg) {
 			}
 
         }
-        //100Hz
-        chThdSleepUntilWindowed(time, time + MS2ST(10));
-    }
-}
 
-//la thread qui gère le contournement d'objet
-static THD_WORKING_AREA(waContournement, 1024);
-static THD_FUNCTION(Contournement, arg) {
-
-    chRegSetThreadName(__FUNCTION__);
-    (void)arg;
-
-    systime_t time;
-    uint8_t compteur_ligne=0;
-    bool tour=0;
-
-    while(1){
-    	time = chVTGetSystemTime();
-
-
-		if (mode==CONTOURNEMENT){
+        if (mode==CONTOURNEMENT){
 
 			set_led(LED3,TRUE);
 			set_led(LED7,TRUE);
@@ -203,11 +187,12 @@ static THD_FUNCTION(Contournement, arg) {
 				set_led(LED3,FALSE);
 				set_led(LED7,FALSE);
 			}
-		}
-    	//100Hz
-    	chThdSleepUntilWindowed(time, time + MS2ST(10));
+        }
+        //100Hz
+        chThdSleepUntilWindowed(time, time + MS2ST(10));
     }
 }
+
 
 //la thread qui check à chaque fois dans quel mode le robot se trouve et modifie en fonction de s'il voit un obstacle ou s'il est en pente
 static THD_WORKING_AREA(waCheckMODE, 256);
@@ -254,8 +239,7 @@ static THD_FUNCTION(CheckMODE, arg) {
     }
 }
 
-void pi_regulator_start(void){
-	chThdCreateStatic(waPiRegulator, sizeof(waPiRegulator), NORMALPRIO, PiRegulator, NULL);
-	chThdCreateStatic(waContournement, sizeof(waContournement), NORMALPRIO, Contournement, NULL);
+void move_start(void){
+	chThdCreateStatic(waMove, sizeof(waMove), NORMALPRIO, Move, NULL);
 	chThdCreateStatic(waCheckMODE, sizeof(waCheckMODE), NORMALPRIO, CheckMODE, NULL);
 }

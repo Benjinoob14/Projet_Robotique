@@ -12,9 +12,9 @@
 #include <camera/po8030.h>
 #include <chprintf.h>
 
-#include <pi_regulator.h>
-#include <process_image.h>
 #include <leds.h>
+#include <move.h>
+#include <process_info.h>
 #include <sensors/proximity.h>
 #include <sensors/imu.h>
 
@@ -74,7 +74,7 @@ int main(void)
 
 
 	//stars the threads for the pi regulator and the processing of the image
-	pi_regulator_start();
+	move_start();
 	process_image_start();
 
 
