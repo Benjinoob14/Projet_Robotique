@@ -75,6 +75,7 @@ uint16_t extract_line_width(uint8_t *buffer){
 	if(buffer[IMAGE_BUFFER_SIZE/2]< VALEUR_SENSIBLE_DETECTION_BLACK){
 		compteur_liigne++;
 	}
+	//remet à zéro le compteur s'il ne voit pas de ligne ou si le compteur arrive au max
 	if(buffer[IMAGE_BUFFER_SIZE/2]> VALEUR_SENSIBLE_DETECTION_BLACK || compteur_liigne>MAX_COMPTEUR){
 		compteur_liigne=0;
 	}
