@@ -14,7 +14,7 @@
 
 static uint16_t line_width = 0;
 static uint16_t line_position = IMAGE_BUFFER_SIZE/2;	//middle
-static uint16_t proxii=0;
+static uint16_t proxi_tab[2]={0};
 static uint8_t compteur_liigne=0;
 static int8_t inclined = 0;
 
@@ -229,9 +229,9 @@ static THD_FUNCTION(InfoMode, arg) {
     while(1){
     	time = chVTGetSystemTime();
 
-		proxii=get_prox(SENSOR_FRONT_FRONT_LEFT);
+		proxi_tab[0]=get_prox(SENSOR_FRONT_FRONT_LEFT);
+		proxi_tab[1]=get_prox(SENSOR_FRONT_LEFT);
 
-		chprintf((BaseSequentialStream *)&SDU1, "proxi= %d ",proxii);
 
 		get_acc_all(accel_values);
 
@@ -268,8 +268,8 @@ uint8_t get_compteur_liigne(void){
 	return compteur_liigne;
 }
 
-uint16_t get_proxii(void){
-	return proxii;
+uint16_t *get_proxi(void){
+	return proxi_tab;
 }
 
 int8_t get_inclined(void){

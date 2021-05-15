@@ -19,9 +19,10 @@ extern "C" {
 #define PXTOCM					1570.0f //experimental value
 #define GOAL_DISTANCE 			10.0f
 #define MAX_DISTANCE 			25.0f
-#define ERROR_THRESHOLD			5
-#define KP						3
+#define ERROR_THRESHOLD			5.0f
+#define KP						3.0f
 #define KI 						0.1f	//must not be zero
+#define KD						1.5f
 #define MAX_SUM_ERROR 			(VITESSE_STABLE/2)
 
 #define TAILLE_LIGNE_MIN 170
@@ -30,20 +31,25 @@ extern "C" {
 
 #define VALEUR_SENSIBLE_DETECTION_BLACK  55
 #define SENSIBILITY_LIGNE 80
-#define VITESSE_STABLE 200
-#define VITESSE_ROTATION 300
-#define SENSIBLE_PROX 240
+#define VITESSE_STABLE 200.0f
+#define VITESSE_ROTATION 300.0f
+#define SENSIBLE_PROX 700
 #define SENSI_GYRO 500
-#define TEMPS_ATTENTE 1000
+#define TEMPS_ATTENTE 1000.0f
 #define FAUX_POSITIF_GYRO 20
 #define FAUX_ZERO_GYRO 2
 #define FAUX_POSITIF_LIGNE 10
 
 #define SENSOR_FRONT_FRONT_LEFT 7
 
-#define SUIVIT_LIGNE 0
-#define CONTOURNEMENT 1
+#define SENSOR_FRONT_LEFT 6
+
+#define SUIVIT_LIGNE 1
 #define SUIVIT_LIGNE_PENTE 2
+#define DEBUT_CONTOURNEMENT 3
+#define MILIEU_CONTOURNEMENT 4
+#define FIN_CONTOURNEMENT 5
+
 
 #define MONTE 1
 #define DESCEND -1
