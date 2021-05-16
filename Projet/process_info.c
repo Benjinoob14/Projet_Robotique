@@ -11,6 +11,7 @@
 #include <leds.h>
 #include <process_info.h>
 
+
 static uint16_t line_width = 0;
 static uint16_t line_position = IMAGE_BUFFER_SIZE/2;	//middle
 static valeurs reception = {0,0,0}; //structure recevant les valeurs des deux capteurs et l'inclinaison
@@ -19,7 +20,7 @@ static uint8_t counter_line=0;
 //semaphore
 static BSEMAPHORE_DECL(image_ready_sem, TRUE);
 
-//fonction qui calcule pour savoir si le robot est en pente
+//fonction calculant pour savoir si le robot est en pente
 int8_t show_inclined(int16_t *accel_values){
 
     //threshold value to not use the leds when the robot is too horizontal
@@ -69,17 +70,17 @@ uint16_t extract_line_width(uint8_t *buffer){
 	}
 	mean /= IMAGE_BUFFER_SIZE;
 
-	//s'il voit une suite de pixels noir il incrémente le compteur qui permet de savoir que le robot est revenu sur une ligne noir
+	//s'il voit une suite de pixels noirs il incrémente le compteur qui permet de déterminer si le robot est revenu ou non sur une ligne noire
 	if(buffer[IMAGE_BUFFER_SIZE/2]< VALEUR_SENSIBLE_DETECTION_BLACK){
-		compteur_liigne++;
+		counter_line++;
 	}
 	//evite l'overflow
-	if(compteur_liigne>MAX_COMPTEUR){
-		compteur_liigne=MAX_COMPTEUR;
+	if(counter_line>MAX_COMPTEUR){
+		counter_line=MAX_COMPTEUR;
 	}
 	//remet à zéro le compteur s'il ne voit pas de ligne ou si le compteur arrive au max
 	if(buffer[IMAGE_BUFFER_SIZE/2]> VALEUR_SENSIBLE_DETECTION_BLACK){
-		compteur_liigne=0;
+		counter_line=0;
 	}
 
 
@@ -271,7 +272,7 @@ static THD_FUNCTION(InfoMode, arg) {
 			compteur_prox2=0;
 			reception.lateral=0;
 		}
-		//si il y a plusieurs fois de suite une valeur acceptable on envoie la valeure
+		//si il y a plusieurs fois de suite une valeur acceptable on envoie la valeur
 		if(compteur_prox2>FAUX_POSITIF_PROX){
 			reception.lateral=prox_tab[PROX2];
 		}
@@ -321,31 +322,6 @@ valeurs get_reception(void){
 	return reception;
 }
 
-
-void process_image_start(void){
-	chThdCreateStatic(waProcessImage, sizeof(waProcessImage), NORMALPRIO, ProcessImage, NULL);
-	chThdCreateStatic(waCaptureImage, sizeof(waCaptureImage), NORMALPRIO, CaptureImage, NULL);
-	chThdCreateStatic(waInfoMode, sizeof(waInfoMode), NORMALPRIO, InfoMode, NULL);
-}
-uint16_t get_line_width(void){
-	return line_width;
-}
-
-uint16_t get_line_position(void){
-	return line_position;
-}
-
-uint8_t get_compteur_liigne(void){
-	return compteur_liigne;
-}
-
-uint16_t *get_proxi(void){
-	return proxi_tab_globale;
-}
-
-int8_t get_inclined(void){
-	return inclined;
-}
 
 void process_image_start(void){
 	chThdCreateStatic(waProcessImage, sizeof(waProcessImage), NORMALPRIO, ProcessImage, NULL);
