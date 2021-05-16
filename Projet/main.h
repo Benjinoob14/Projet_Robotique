@@ -54,6 +54,12 @@ extern "C" {
 #define SENSOR_FRONT_LEFT		 6
 #define PROX1					 0
 #define PROX2					 1
+	
+typedef struct {
+	uint16_t frontal;
+	uint16_t lateral;
+	uint8_t inclinaison;
+	} valeurs;
 
 
 typedef enum {
