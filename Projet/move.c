@@ -79,6 +79,7 @@ static THD_FUNCTION(Move, arg) {
     int16_t speed_correction = 0;
 
     uint16_t line=0;
+    bool rebond=0;
 
     uint8_t compteur_ligne=0;
 
@@ -149,9 +150,17 @@ static THD_FUNCTION(Move, arg) {
 			compteur_ligne=get_compteur_liigne();
 
 			if (mode==DEBUT_CONTOURNEMENT){
-				right_motor_set_speed(-VITESSE_ROTATION);
-				left_motor_set_speed(VITESSE_ROTATION);
-				chThdSleepMilliseconds(TEMPS_ATTENTE_ROT);
+				if (rebond=0){
+					right_motor_set_speed(-VITESSE_ROTATION);
+					left_motor_set_speed(VITESSE_ROTATION);
+					chThdSleepMilliseconds(TEMPS_ATTENTE_ROT);
+					rebond=1;
+				}
+				else{
+					right_motor_set_speed(-VITESSE_ROTATION);
+					left_motor_set_speed(VITESSE_ROTATION);
+					chThdSleepMilliseconds(TEMPS_ATTENTE_REBOND);
+				}
 				right_motor_set_speed(VITESSE_VIRAGE_ROUE_EXT);
 				left_motor_set_speed(VITESSE_VIRAGE_ROUE_INT);
 				chThdSleepMilliseconds(TEMPS_ATTENTE);
@@ -163,6 +172,7 @@ static THD_FUNCTION(Move, arg) {
 //			chprintf((BaseSequentialStream *)&SDU1, " count=%d ",compteur_ligne);
 
 			if(mode==MILIEU_CONTOURNEMENT && compteur_ligne>FAUX_POSITIF_REPLACEMENT){
+				rebond=0;
 				set_led(LED3,FALSE);
 				set_led(LED7,FALSE);
 				chThdSleepMilliseconds(MINI_ATTENTE);
