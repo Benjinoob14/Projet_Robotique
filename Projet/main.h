@@ -29,13 +29,14 @@ extern "C" {
 #define TAILLE_LIGNE_MAX 	400
 #define MAX_COMPTEUR 		250
 
-#define VALEUR_SENSIBLE_DETECTION_BLACK  55
+#define VALEUR_SENSIBLE_DETECTION_BLACK  45
 #define SENSIBILITY_LIGNE 				 60
 #define VITESSE_STABLE_PLAT 			 200
 #define VITESSE_STABLE_PENTE 			 300
 #define VITESSE_ROTATION 			     300
 
-#define SENSIBLE_PROX 					 400
+#define SENSIBLE_PROX_FRONT 			 400
+#define SENSIBLE_PROX_LEFT				 700
 #define SENSI_GYRO 						 500
 
 #define TEMPS_ATTENTE 			 		 1000
@@ -43,9 +44,11 @@ extern "C" {
 #define FAUX_POSITIF_PROX 				 10
 #define FAUX_POSITIF_LIGNE 				 10
 
-#define SENSOR_FRONT_FRONT_LEFT  7
-
+#define SENSOR_FRONT		     7
 #define SENSOR_FRONT_LEFT		 6
+#define PROX1					 0
+#define PROX2					 1
+
 
 typedef enum {
 	ARRET,

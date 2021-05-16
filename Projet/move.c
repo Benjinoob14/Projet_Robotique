@@ -85,8 +85,6 @@ static THD_FUNCTION(Move, arg) {
 
     while(1){
 
-
-    	mode=1;
         time = chVTGetSystemTime();
 
 
@@ -134,8 +132,8 @@ static THD_FUNCTION(Move, arg) {
 				//fait avancer le robot s'il voit une ligne
 				if (line>SENSIBILITY_LIGNE){
 					compteur_sans_ligne=0;
-//					right_motor_set_speed(VITESSE_STABLE_PLAT - speed_correction);
-//					left_motor_set_speed(VITESSE_STABLE_PLAT +  speed_correction);
+					right_motor_set_speed(VITESSE_STABLE_PLAT - speed_correction);
+					left_motor_set_speed(VITESSE_STABLE_PLAT +  speed_correction);
 				}
 
 			}
@@ -160,19 +158,35 @@ static THD_FUNCTION(Move, arg) {
 				compteur_ligne=get_compteur_liigne();
 			}
 
-			if(mode==MILIEU_CONTOURNEMENT && compteur_ligne>FAUX_POSITIF_LIGNE){
-				chThdSleepMilliseconds(3100);
+//			chprintf((BaseSequentialStream *)&SDU1, " count=%d ",compteur_ligne);
+
+			if(mode==MILIEU_CONTOURNEMENT && compteur_ligne>7){
+				set_led(LED3,FALSE);
+				set_led(LED7,FALSE);
+				chThdSleepMilliseconds(500);
+				set_led(LED3,TRUE);
+				set_led(LED7,TRUE);
+				chThdSleepMilliseconds(500);
+				set_led(LED3,FALSE);
+				set_led(LED7,FALSE);
+				chThdSleepMilliseconds(500);
+				set_led(LED3,TRUE);
+				set_led(LED7,TRUE);
+				chThdSleepMilliseconds(500);
+				right_motor_set_speed(-VITESSE_ROTATION);
+				left_motor_set_speed(VITESSE_ROTATION);
 				mode=FIN_CONTOURNEMENT;
 			}
 			if(mode==FIN_CONTOURNEMENT){
-				right_motor_set_speed(-VITESSE_ROTATION);
-				left_motor_set_speed(VITESSE_ROTATION);
-				chThdSleepMilliseconds(TEMPS_ATTENTE);
 				if(line>SENSIBILITY_LIGNE){
 					compteur_ligne=0;
 					set_led(LED3,FALSE);
 					set_led(LED7,FALSE);
 					mode=SUIVI_LIGNE;
+				}
+				else{
+					right_motor_set_speed(-VITESSE_ROTATION);
+					left_motor_set_speed(VITESSE_ROTATION);
 				}
 
 			}
@@ -197,7 +211,7 @@ static THD_FUNCTION(CheckMODE, arg) {
 
     volatile uint16_t *proxi_front = get_proxi();
 
-    volatile uint16_t *proxi_front_left=proxi_front+1;
+    volatile uint16_t *proxi_left=proxi_front+1;
 
 
     while(1){
@@ -221,11 +235,11 @@ static THD_FUNCTION(CheckMODE, arg) {
 //			set_led(LED7,0);
 //		}
 
-//
-//		if (*proxi_front>SENSIBLE_PROX && mode==SUIVI_LIGNE){
-//			mode=DEBUT_CONTOURNEMENT;
-//		}
-//		if(mode==MILIEU_CONTOURNEMENT && *proxi_front_left>200 ){
+
+		if (mode==SUIVI_LIGNE && *proxi_front>SENSIBLE_PROX_FRONT){
+			mode=DEBUT_CONTOURNEMENT;
+		}
+//		if(mode==MILIEU_CONTOURNEMENT && *proxi_left>SENSIBLE_PROX_LEFT){
 //			mode=DEBUT_CONTOURNEMENT;
 //		}
 

@@ -14,7 +14,7 @@
 
 static uint16_t line_width = 0;
 static uint16_t line_position = IMAGE_BUFFER_SIZE/2;	//middle
-static uint16_t proxi_tab[2]={0};
+static uint16_t proxi_tab_globale[2]={0};
 static uint8_t compteur_liigne=0;
 static int8_t inclined = 0;
 
@@ -231,17 +231,18 @@ static THD_FUNCTION(InfoMode, arg) {
     int8_t value=0;
     uint8_t compteur_inclined=0;
     uint8_t compteur_prox = 0;
+    uint8_t compteur_prox2 = 0;
     uint16_t prox_tab[2]={0};
 
     while(1){
     	time = chVTGetSystemTime();
 
-		proxi_tab[0]=get_prox(SENSOR_FRONT_FRONT_LEFT);
-		proxi_tab[1]=get_prox(SENSOR_FRONT_LEFT);
+		prox_tab[PROX1]=get_prox(SENSOR_FRONT);
+		prox_tab[PROX2]=get_prox(SENSOR_FRONT_LEFT);
 
 
 		//s'il voit que la proximité est assez proche il incrémente
-		if(proxi_tab[0] > SENSIBLE_PROX){
+		if(prox_tab[PROX1] > SENSIBLE_PROX_FRONT){
 			compteur_prox++;
 		}
 		//evite l'overflow
@@ -249,12 +250,32 @@ static THD_FUNCTION(InfoMode, arg) {
 			compteur_prox=MAX_COMPTEUR;
 		}
 		//remet à zéro le compteur s'il la valeur est trop faible
-		if(proxi_tab[0] < SENSIBLE_PROX){
+		if(prox_tab[PROX1] < SENSIBLE_PROX_FRONT){
 			compteur_prox=0;
+			proxi_tab_globale[PROX1]=0;
 		}
 		//si il y a plusieurs fois de suite une valeur acceptable on envoie la valeure
 		if(compteur_prox>FAUX_POSITIF_PROX){
-			proxi_tab[0]=prox_tab[0];
+			proxi_tab_globale[PROX1]=prox_tab[PROX1];
+		}
+
+
+		//s'il voit que la proximité est assez proche il incrémente
+		if(prox_tab[PROX2] > SENSIBLE_PROX_LEFT){
+			compteur_prox2++;
+		}
+		//evite l'overflow
+		if(compteur_prox2>MAX_COMPTEUR){
+			compteur_prox2=MAX_COMPTEUR;
+		}
+		//remet à zéro le compteur s'il la valeur est trop faible
+		if(prox_tab[PROX2] < SENSIBLE_PROX_LEFT){
+			compteur_prox2=0;
+			proxi_tab_globale[PROX2]=0;
+		}
+		//si il y a plusieurs fois de suite une valeur acceptable on envoie la valeure
+		if(compteur_prox2>FAUX_POSITIF_PROX){
+			proxi_tab_globale[PROX2]=prox_tab[PROX2];
 		}
 
 
@@ -297,7 +318,7 @@ uint8_t get_compteur_liigne(void){
 }
 
 uint16_t *get_proxi(void){
-	return proxi_tab;
+	return proxi_tab_globale;
 }
 
 int8_t get_inclined(void){
