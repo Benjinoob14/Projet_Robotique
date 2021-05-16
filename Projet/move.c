@@ -52,7 +52,6 @@ int16_t pid_regulator(float position, float goal){
 
 	last_error=error_position;
 
-//	chprintf((BaseSequentialStream *)&SDU1, "daamam= %f  ",speed_correction);
 
 	//if the line is nearly in front of the camera, don't rotate
 	if(abs(speed_correction) < ROTATION_THRESHOLD){
@@ -82,7 +81,7 @@ int16_t pid_regulator(float position, float goal){
  * le thread le plus importante car il regroupe tout le reste en indiquant au robot quel
  * mouvement il doit procéder en fonction du mode dans lequel il se trouve
  */
-static THD_WORKING_AREA(waMove, 256);
+static THD_WORKING_AREA(waMove, 512);
 static THD_FUNCTION(Move, arg) {
 
     chRegSetThreadName(__FUNCTION__);
@@ -103,9 +102,6 @@ static THD_FUNCTION(Move, arg) {
 
         time = chVTGetSystemTime();
 
-
-
-//        chprintf((BaseSequentialStream *)&SDU1, "%d ",mode);
 
         if (mode==SUIVI_LIGNE_PENTE_MONTEE || mode==SUIVI_LIGNE || mode==SUIVI_LIGNE_PENTE_DESCENTE){
 
@@ -130,6 +126,8 @@ static THD_FUNCTION(Move, arg) {
         	if (mode==SUIVI_LIGNE_PENTE_MONTEE || mode==SUIVI_LIGNE_PENTE_DESCENTE){
 
 				set_body_led(TRUE);
+
+//				chprintf((BaseSequentialStream *)&SDU1, "mode= %d  ",mode);
 
 				if( mode==SUIVI_LIGNE_PENTE_MONTEE){
 					toggle_rgb_led(LED2,GREEN_LED,INTENSITY);

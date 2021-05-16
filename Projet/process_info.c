@@ -21,15 +21,17 @@ static uint8_t counter_line=0;
 static BSEMAPHORE_DECL(image_ready_sem, TRUE);
 
 //calcul pour savoir si le robot est incliné en avant, en arrière ou à plat
-int8_t show_inclined(int16_t accel_value){
+int8_t show_inclined(int16_t accel_value, int16_t calibrate){
 
     int16_t value = 0;
 
 
-    if(abs(accel_value) > SENSI_PENTE){
+    value=accel_value-calibrate;
 
-        value=accel_value;
+    chprintf((BaseSequentialStream *)&SDU1, "calibrate= %d  ",value);
 
+
+    if(abs(value) > SENSI_PENTE){
 
         if(value<0){
         	 return MONTEE;
@@ -231,11 +233,15 @@ static THD_FUNCTION(InfoMode, arg) {
 
     int16_t accel_value=0;
     systime_t time;
+
+    calibrate_acc();
+
     int8_t value=0;
     uint8_t compteur_inclinaison=0;
     uint8_t compteur_prox1 = 0;
     uint8_t compteur_prox2 = 0;
     uint16_t prox_tab[2]={0};
+    int16_t calibrate= get_acc_offset(X_AXIS);
 
     while(1){
     	time = chVTGetSystemTime();
@@ -281,9 +287,11 @@ static THD_FUNCTION(InfoMode, arg) {
 			reception.lateral=prox_tab[PROX2];
 		}
 
+
+
 		accel_value = get_acc_filtered(X_AXIS,FAUX_POSITIF_PENTE);
 
-		value=show_inclined(accel_value);
+		value=show_inclined(accel_value,calibrate);
 
 		if(value != reception.inclinaison){
 			compteur_inclinaison++;

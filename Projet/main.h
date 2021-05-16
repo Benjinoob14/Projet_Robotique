@@ -41,7 +41,7 @@ extern "C" {
 
 #define SENSIBLE_PROX_FRONT 			 500
 #define SENSIBLE_PROX_LEFT				 300
-#define SENSI_PENTE 					 300
+#define SENSI_PENTE 					 100
 
 #define TEMPS_ATTENTE 			 		 1000
 #define TEMPS_ATTENTE_ROT				 1.3*TEMPS_ATTENTE
