@@ -18,6 +18,8 @@ static int8_t mode=SUIVI_LIGNE;
 //simple PID regulator implementation
 int16_t pid_regulator(float position, float goal){
 
+//plouf
+
 	float error_position = 0;
 	float speed_correction = 0;
 
