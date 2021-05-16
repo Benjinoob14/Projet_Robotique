@@ -248,6 +248,9 @@ static THD_FUNCTION(InfoMode, arg) {
 		prox_tab[PROX2]=get_prox(SENSOR_FRONT_LEFT);
 
 
+		//*****vérification de valeurs pour ne pas avoir de faux positifs*****
+
+
 		//s'il voit que la proximité est assez proche le compteur est incrémenté
 		if(prox_tab[PROX1] > SENSIBLE_PROX_FRONT){
 			compteur_prox1++;
@@ -291,6 +294,7 @@ static THD_FUNCTION(InfoMode, arg) {
 
 		value=show_inclined(accel_value,calibrate);
 
+		//verification de faux positif
 		if(value != reception.inclinaison){
 			compteur_inclinaison++;
 		}
