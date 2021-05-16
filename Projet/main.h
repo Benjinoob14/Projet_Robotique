@@ -44,6 +44,7 @@ extern "C" {
 
 #define TEMPS_ATTENTE 			 		 1000
 #define TEMPS_ATTENTE_ROT				 1.2*TEMPS_ATTENTE
+#define TEMPS_ATTENTE_REBOND			 0.8*TEMPS_ATTENTE
 #define MINI_ATTENTE					 400
 #define FAUX_POSITIF_GYRO 				 10
 #define FAUX_POSITIF_PROX 				 4
@@ -58,8 +59,8 @@ extern "C" {
 typedef struct {
 	uint16_t frontal;
 	uint16_t lateral;
-	uint8_t inclinaison;
-	} valeurs;
+	int8_t inclinaison;
+} valeurs;
 
 
 typedef enum {
@@ -71,8 +72,8 @@ typedef enum {
 	FIN_CONTOURNEMENT,
 } choose_mode_t;
 
-#define MONTE 					 1
-#define DESCEND 				-1
+#define MONTEE 					 1
+#define DESCENTE				-1
 #define PLAT 					 0
 
 /** Robot wide IPC bus. */
