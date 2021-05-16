@@ -71,7 +71,7 @@ uint16_t extract_line_width(uint8_t *buffer){
 	}
 	mean /= IMAGE_BUFFER_SIZE;
 
-	//s'il voit une suite de pixels noir il incrémente le compteur qui permet de savoir que le robot est revenu sur une ligne noir
+	//s'il voit une suite de pixels noir il incrÃ©mente le compteur qui permet de savoir que le robot est revenu sur une ligne noir
 	if(buffer[IMAGE_BUFFER_SIZE/2]< VALEUR_SENSIBLE_DETECTION_BLACK){
 		compteur_liigne++;
 	}
@@ -79,7 +79,7 @@ uint16_t extract_line_width(uint8_t *buffer){
 	if(compteur_liigne>MAX_COMPTEUR){
 		compteur_liigne=MAX_COMPTEUR;
 	}
-	//remet à zéro le compteur s'il ne voit pas de ligne ou si le compteur arrive au max
+	//remet Ã  zÃ©ro le compteur s'il ne voit pas de ligne ou si le compteur arrive au max
 	if(buffer[IMAGE_BUFFER_SIZE/2]> VALEUR_SENSIBLE_DETECTION_BLACK){
 		compteur_liigne=0;
 	}
@@ -229,8 +229,8 @@ static THD_FUNCTION(InfoMode, arg) {
     int16_t accel_values[3] = {0};
     systime_t time;
     int8_t value=0;
-    uint8_t compteur_inclined=0;
-    uint8_t compteur_prox = 0;
+    uint8_t compteur_inclinaison=0;
+    uint8_t compteur_prox1 = 0;
     uint8_t compteur_prox2 = 0;
     uint16_t prox_tab[2]={0};
 
@@ -241,42 +241,46 @@ static THD_FUNCTION(InfoMode, arg) {
 		prox_tab[PROX2]=get_prox(SENSOR_FRONT_LEFT);
 
 
-		//s'il voit que la proximité est assez proche il incrémente
+		//s'il voit que la proximitÃ© est assez proche le compteur est incrÃ©mentÃ©
 		if(prox_tab[PROX1] > SENSIBLE_PROX_FRONT){
-			compteur_prox++;
+			compteur_prox1++;
 		}
-		//evite l'overflow
-		if(compteur_prox>MAX_COMPTEUR){
-			compteur_prox=MAX_COMPTEUR;
+		//Ã©vite l'overflow
+		if(compteur_prox1>MAX_COMPTEUR){
+			compteur_prox1=MAX_COMPTEUR;
 		}
-		//remet à zéro le compteur s'il la valeur est trop faible
+		//remet Ã  zÃ©ro le compteur si la valeur est trop faible
 		if(prox_tab[PROX1] < SENSIBLE_PROX_FRONT){
-			compteur_prox=0;
-			proxi_tab_globale[PROX1]=0;
+			compteur_prox1=0;
+			reception.frontal=0;
 		}
-		//si il y a plusieurs fois de suite une valeur acceptable on envoie la valeure
-		if(compteur_prox>FAUX_POSITIF_PROX){
-			proxi_tab_globale[PROX1]=prox_tab[PROX1];
+		//si il y a plusieurs fois de suite une valeur acceptable on envoie la valeur
+		if(compteur_prox1>FAUX_POSITIF_PROX){
+			reception.frontal=prox_tab[PROX1];
 		}
 
 
-		//s'il voit que la proximité est assez proche il incrémente
+		//s'il voit que la proximitÃ© est assez proche le compteur est incrÃ©mentÃ©
 		if(prox_tab[PROX2] > SENSIBLE_PROX_LEFT){
 			compteur_prox2++;
 		}
-		//evite l'overflow
+		//Ã©vite l'overflow
 		if(compteur_prox2>MAX_COMPTEUR){
 			compteur_prox2=MAX_COMPTEUR;
 		}
-		//remet à zéro le compteur s'il la valeur est trop faible
+		//remet Ã  zÃ©ro le compteur si la valeur est trop faible
 		if(prox_tab[PROX2] < SENSIBLE_PROX_LEFT){
 			compteur_prox2=0;
-			proxi_tab_globale[PROX2]=0;
+			reception.lateral=0;
 		}
 		//si il y a plusieurs fois de suite une valeur acceptable on envoie la valeure
 		if(compteur_prox2>FAUX_POSITIF_PROX){
-			proxi_tab_globale[PROX2]=prox_tab[PROX2];
+			reception.lateral=prox_tab[PROX2];
 		}
+
+
+
+
 
 
 
@@ -284,30 +288,47 @@ static THD_FUNCTION(InfoMode, arg) {
 
 		value=show_inclined(accel_values);
 
-		if(value != inclined){
-			compteur_inclined++;
-		}
-		else{
-			compteur_inclined=0;
+		if(value != reception.inclinaison){
+			compteur_inclinaison++;
 		}
 		//evite l'overflow
-		if(compteur_inclined>MAX_COMPTEUR){
-			compteur_inclined=MAX_COMPTEUR;
+		if(compteur_inclinaison>MAX_COMPTEUR){
+			compteur_inclinaison=MAX_COMPTEUR;
 		}
-		if(value != inclined && compteur_inclined>FAUX_POSITIF_GYRO){
-			inclined = value;
+		else{
+			compteur_inclinaison=0;
 		}
-
-//		chprintf((BaseSequentialStream *)&SDU1, " value= %d ",compteur_inclined);
-
-
-
+		if(value != reception.inclinaison && compteur_inclinaison>FAUX_POSITIF_GYRO){
+			reception.inclinaison = value;
+		}
 
 		chThdSleepUntilWindowed(time, time + MS2ST(10));
 
     }
 }
 
+uint16_t get_line_width(void){
+	return line_width;
+}
+
+uint16_t get_line_position(void){
+	return line_position;
+}
+
+uint8_t get_counter_line(void){
+	return counter_line;
+}
+
+valeurs get_reception(void){
+	return reception;
+}
+
+
+void process_image_start(void){
+	chThdCreateStatic(waProcessImage, sizeof(waProcessImage), NORMALPRIO, ProcessImage, NULL);
+	chThdCreateStatic(waCaptureImage, sizeof(waCaptureImage), NORMALPRIO, CaptureImage, NULL);
+	chThdCreateStatic(waInfoMode, sizeof(waInfoMode), NORMALPRIO, InfoMode, NULL);
+}
 uint16_t get_line_width(void){
 	return line_width;
 }
