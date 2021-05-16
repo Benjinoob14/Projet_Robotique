@@ -246,14 +246,20 @@ static THD_FUNCTION(CheckMODE, arg) {
 			set_rgb_led(1, 0, 10, 0);
 			set_rgb_led(2, 0, 10, 0);
 			set_rgb_led(3, 0, 10, 0);
-			set_led(LED3,0);
-			set_led(LED7,1);
+			chThdSleepMilliseconds(TEMPS_ATTENTE);
+			clear_leds;
+
+
 		}
 		if(Capteurs.inclinaison==MONTEE && mode<DEBUT_CONTOURNEMENT){
-			mode=SUIVI_LIGNE_PENTE;
-			set_led(LED3,1);
-			set_led(LED7,0);
+			set_rgb_led(4, 0, 0, 10);
+			set_rgb_led(5, 0, 0, 10);
+			set_rgb_led(6, 0, 0, 10);
+			set_rgb_led(7, 0, 0, 10);
+			chThdSleepMilliseconds(TEMPS_ATTENTE);
+			clear_leds;
 		}
+	    
 		if(Capteurs.inclinaison==PLAT && mode<DEBUT_CONTOURNEMENT){
    		mode=SUIVI_LIGNE;
 
