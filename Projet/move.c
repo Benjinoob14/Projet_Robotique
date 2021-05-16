@@ -146,47 +146,58 @@ static THD_FUNCTION(Move, arg) {
 			set_led(LED7,TRUE);
 			set_body_led(FALSE);
 
+			compteur_ligne=get_compteur_liigne();
+
 			if (mode==DEBUT_CONTOURNEMENT){
 				right_motor_set_speed(-VITESSE_ROTATION);
 				left_motor_set_speed(VITESSE_ROTATION);
-				chThdSleepMilliseconds(1.2*TEMPS_ATTENTE);
+				chThdSleepMilliseconds(TEMPS_ATTENTE_ROT);
+				right_motor_set_speed(VITESSE_VIRAGE_ROUE_EXT);
+				left_motor_set_speed(VITESSE_VIRAGE_ROUE_INT);
+				chThdSleepMilliseconds(TEMPS_ATTENTE);
 				mode=MILIEU_CONTOURNEMENT;
 			}
-			if(mode==MILIEU_CONTOURNEMENT){
-				right_motor_set_speed(VITESSE_ROTATION);
-				left_motor_set_speed(0.6*VITESSE_ROTATION);
-				compteur_ligne=get_compteur_liigne();
-			}
+
+			compteur_ligne=get_compteur_liigne();
 
 //			chprintf((BaseSequentialStream *)&SDU1, " count=%d ",compteur_ligne);
 
-			if(mode==MILIEU_CONTOURNEMENT && compteur_ligne>7){
+			if(mode==MILIEU_CONTOURNEMENT && compteur_ligne>FAUX_POSITIF_REPLACEMENT){
 				set_led(LED3,FALSE);
 				set_led(LED7,FALSE);
-				chThdSleepMilliseconds(500);
+				chThdSleepMilliseconds(MINI_ATTENTE);
 				set_led(LED3,TRUE);
 				set_led(LED7,TRUE);
-				chThdSleepMilliseconds(500);
+				chThdSleepMilliseconds(MINI_ATTENTE);
 				set_led(LED3,FALSE);
 				set_led(LED7,FALSE);
-				chThdSleepMilliseconds(500);
+				chThdSleepMilliseconds(MINI_ATTENTE);
 				set_led(LED3,TRUE);
 				set_led(LED7,TRUE);
-				chThdSleepMilliseconds(500);
-				right_motor_set_speed(-VITESSE_ROTATION);
-				left_motor_set_speed(VITESSE_ROTATION);
+				chThdSleepMilliseconds(MINI_ATTENTE);
+
+				//on divise pas deux la rotation car on veut lui laisser le temps de bien voir la ligne quand il se replace
+				right_motor_set_speed(-ROTATION_REPLACEMENT);
+				left_motor_set_speed(ROTATION_REPLACEMENT);
+				chThdSleepMilliseconds(TEMPS_ATTENTE);
 				mode=FIN_CONTOURNEMENT;
 			}
+
+			compteur_ligne=get_compteur_liigne();
+
 			if(mode==FIN_CONTOURNEMENT){
-				if(line>SENSIBILITY_LIGNE){
+				if(compteur_ligne<FAUX_POSITIF_REPLACEMENT){
+					//on divise pas deux la rotation car on veut lui laisser le temps de bien voir la ligne quand il se replace
+					right_motor_set_speed(-ROTATION_REPLACEMENT);
+					left_motor_set_speed(ROTATION_REPLACEMENT);
+				}
+				else{
+					right_motor_set_speed(0);
+					left_motor_set_speed(0);
 					compteur_ligne=0;
 					set_led(LED3,FALSE);
 					set_led(LED7,FALSE);
 					mode=SUIVI_LIGNE;
-				}
-				else{
-					right_motor_set_speed(-VITESSE_ROTATION);
-					left_motor_set_speed(VITESSE_ROTATION);
 				}
 
 			}
@@ -239,9 +250,12 @@ static THD_FUNCTION(CheckMODE, arg) {
 		if (mode==SUIVI_LIGNE && *proxi_front>SENSIBLE_PROX_FRONT){
 			mode=DEBUT_CONTOURNEMENT;
 		}
-//		if(mode==MILIEU_CONTOURNEMENT && *proxi_left>SENSIBLE_PROX_LEFT){
-//			mode=DEBUT_CONTOURNEMENT;
-//		}
+
+//		chprintf((BaseSequentialStream *)&SDU1, " count=%d ",*proxi_left);
+
+		if(mode==MILIEU_CONTOURNEMENT && (*proxi_front>SENSIBLE_PROX_FRONT || *proxi_left>SENSIBLE_PROX_LEFT)){
+			mode=DEBUT_CONTOURNEMENT;
+		}
 
     	//100Hz
     	chThdSleepUntilWindowed(time, time + MS2ST(10));
