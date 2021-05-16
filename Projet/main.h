@@ -15,10 +15,7 @@ extern "C" {
 #define WIDTH_SLOPE				5
 #define MIN_LINE_WIDTH			40
 #define ROTATION_THRESHOLD		10
-#define ROTATION_COEFF			2 
 #define PXTOCM					1570.0f //experimental value
-#define GOAL_DISTANCE 			10.0f
-#define MAX_DISTANCE 			25.0f
 #define ERROR_THRESHOLD			5.0f
 #define KP						3.0f
 #define KI 						0.1f	//must not be zero
@@ -29,9 +26,9 @@ extern "C" {
 #define TAILLE_LIGNE_MAX 	400
 #define MAX_COMPTEUR 		250
 
-//les valeurs ci-dessous ont été trouvé de manière experimentale
-#define VALEUR_SENSIBLE_DETECTION_BLACK  55
-#define SENSIBILITY_LIGNE 				 100
+//***les valeurs ci-dessous ont été trouvé de manière experimentale****
+
+//liste des differentes vitesses
 #define VITESSE_STABLE_PLAT 			 200
 #define VITESSE_STABLE_PENTE 			 300
 #define VITESSE_ROTATION 			     300
@@ -39,19 +36,24 @@ extern "C" {
 #define VITESSE_VIRAGE_ROUE_EXT			 300
 #define VITESSE_VIRAGE_ROUE_INT			 150
 
+//toutes les sensibilitées paramétré experimentalement
+#define VALEUR_SENSIBLE_DETECTION_BLACK  55
+#define SENSIBILITY_LIGNE 				 100
 #define SENSIBLE_PROX_FRONT 			 500
 #define SENSIBLE_PROX_LEFT				 300
-#define SENSI_PENTE 					 100
+#define SENSI_PENTE 					 150
 
+//liste des attentes en fonction du besoins
 #define TEMPS_ATTENTE 			 		 1000
 #define TEMPS_ATTENTE_ROT				 1.3*TEMPS_ATTENTE
 #define TEMPS_ATTENTE_REBOND			 0.8*TEMPS_ATTENTE
 #define MINI_ATTENTE					 400
 #define MINUSCULE_ATTENTE				 100
 
+//permet la verification en serie pour etre sûr d avoir une bonne valeurs
 #define FAUX_POSITIF_PENTE 				 5
 #define FAUX_POSITIF_PROX 				 4
-#define FAUX_POSITIF_LIGNE 				 10
+#define FAUX_POSITIF_LIGNE 				 20
 #define FAUX_POSITIF_REPLACEMENT		 3
 
 #define SENSOR_FRONT		     7
@@ -61,14 +63,14 @@ extern "C" {
 
 #define INTENSITY				 10
 
-	
+//la struct qui a les valeurs des detecteurs de proxi et l'inclinaison
 typedef struct {
 	uint16_t frontal;
 	uint16_t lateral;
 	int8_t inclinaison;
 } valeurs;
 
-
+//la liste de tout les modes
 typedef enum {
 	ARRET,
 	SUIVI_LIGNE,

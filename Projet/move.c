@@ -116,10 +116,16 @@ static THD_FUNCTION(Move, arg) {
 			if (line<SENSIBILITY_LIGNE){
 				compteur_sans_ligne++;
 			}
-			//arrete le robot s'il n'y a plus de ligne devant lui
+			//arrete le robot et fait clignoter des LEDs s'il n'y a plus de ligne devant lui
 			if (line<SENSIBILITY_LIGNE && compteur_sans_ligne>FAUX_POSITIF_LIGNE){
 				right_motor_set_speed(0);
 				left_motor_set_speed(0);
+				set_led(LED3,TRUE);
+				set_led(LED7,TRUE);
+				chThdSleepMilliseconds(MINUSCULE_ATTENTE);
+				set_led(LED3,FALSE);
+				set_led(LED7,FALSE);
+				chThdSleepMilliseconds(MINUSCULE_ATTENTE);
 			}
 
 
@@ -127,15 +133,15 @@ static THD_FUNCTION(Move, arg) {
 
 				set_body_led(TRUE);
 
-//				chprintf((BaseSequentialStream *)&SDU1, "mode= %d  ",mode);
-
 				if( mode==SUIVI_LIGNE_PENTE_MONTEE){
+					clear_leds();
 					toggle_rgb_led(LED2,GREEN_LED,INTENSITY);
 					toggle_rgb_led(LED4,GREEN_LED,INTENSITY);
 					toggle_rgb_led(LED6,GREEN_LED,INTENSITY);
 					toggle_rgb_led(LED8,GREEN_LED,INTENSITY);
 				}
 				else{
+					clear_leds();
 					toggle_rgb_led(LED2,BLUE_LED,INTENSITY);
 					toggle_rgb_led(LED4,BLUE_LED,INTENSITY);
 					toggle_rgb_led(LED6,BLUE_LED,INTENSITY);

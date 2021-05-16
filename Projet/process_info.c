@@ -28,9 +28,6 @@ int8_t show_inclined(int16_t accel_value, int16_t calibrate){
 
     value=accel_value-calibrate;
 
-    chprintf((BaseSequentialStream *)&SDU1, "calibrate= %d  ",value);
-
-
     if(abs(value) > SENSI_PENTE){
 
         if(value<0){
@@ -234,6 +231,7 @@ static THD_FUNCTION(InfoMode, arg) {
     int16_t accel_value=0;
     systime_t time;
 
+    //calibre l'acceleromètre
     calibrate_acc();
 
     int8_t value=0;
@@ -308,7 +306,6 @@ static THD_FUNCTION(InfoMode, arg) {
 			reception.inclinaison = value;
 		}
 
-//		chprintf((BaseSequentialStream *)&SDU1, "value=%d ",value);
 
 		chThdSleepUntilWindowed(time, time + MS2ST(10));
 

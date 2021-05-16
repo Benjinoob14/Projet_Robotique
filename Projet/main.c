@@ -48,8 +48,10 @@ int main(void)
     chSysInit();
     mpu_init();
 
+    //start leds
     clear_leds();
     spi_comm_start();
+
 
     //starts the serial communication
     serial_start();
@@ -61,17 +63,14 @@ int main(void)
 	//inits the motors
 	motors_init();
 
+	//init sensors
 	imu_start();
-//	calibrate_acc();
-
-
 	messagebus_init(&bus, &bus_lock, &bus_condvar);
 	proximity_start();
-	calibrate_ir();
 
 
 
-	//stars the threads for the pi regulator and the processing of the image
+	//stars the threads for the move and the processing of datas
 	move_start();
 	process_image_start();
 
