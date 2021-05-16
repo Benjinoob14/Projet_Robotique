@@ -23,15 +23,13 @@ static BSEMAPHORE_DECL(image_ready_sem, TRUE);
 //fonction calculant pour savoir si le robot est en pente
 int8_t show_inclined(int16_t *accel_values){
 
-    //threshold value to not use the leds when the robot is too horizontal
-    int16_t threshold = SENSI_GYRO;
     //create a pointer to the array for shorter name
     int16_t *accel = accel_values;
 
     int16_t angle = 0;
 
 
-    if(fabs(accel[X_AXIS]) > threshold){
+    if(fabs(accel[X_AXIS]) > SENSI_PENTE){
 
         angle=accel[X_AXIS];
 
@@ -277,12 +275,6 @@ static THD_FUNCTION(InfoMode, arg) {
 			reception.lateral=prox_tab[PROX2];
 		}
 
-
-
-
-
-
-
 		get_acc_all(accel_values);
 
 		value=show_inclined(accel_values);
@@ -298,7 +290,7 @@ static THD_FUNCTION(InfoMode, arg) {
 			compteur_inclinaison=MAX_COMPTEUR;
 		}
 
-		if(value != reception.inclinaison && compteur_inclinaison>FAUX_POSITIF_GYRO){
+		if(value != reception.inclinaison && compteur_inclinaison>FAUX_POSITIF_PENTE){
 			reception.inclinaison = value;
 		}
 

@@ -90,7 +90,6 @@ static THD_FUNCTION(Move, arg) {
 
         time = chVTGetSystemTime();
 
-        mode = 0;
 
 
 //        chprintf((BaseSequentialStream *)&SDU1, "%d ",mode);
@@ -154,6 +153,7 @@ static THD_FUNCTION(Move, arg) {
 			compteur_ligne=get_counter_line();
 
 			if (mode==DEBUT_CONTOURNEMENT){
+//				chprintf((BaseSequentialStream *)&SDU1, " count=%d ",rebond);
 				if (rebond==0){
 					right_motor_set_speed(-VITESSE_ROTATION);
 					left_motor_set_speed(VITESSE_ROTATION);
@@ -241,31 +241,30 @@ static THD_FUNCTION(CheckMODE, arg) {
     	Capteurs = get_reception();
 
 		if(Capteurs.inclinaison==DESCENTE && mode<DEBUT_CONTOURNEMENT){
-			mode=SUIVI_LIGNE_PENTE;
 			set_rgb_led(0, 0, 10, 0);
 			set_rgb_led(1, 0, 10, 0);
 			set_rgb_led(2, 0, 10, 0);
 			set_rgb_led(3, 0, 10, 0);
-			set_led(LED3,0);
-			set_led(LED7,1);
+			mode=SUIVI_LIGNE_PENTE;
 		}
 		if(Capteurs.inclinaison==MONTEE && mode<DEBUT_CONTOURNEMENT){
+			set_rgb_led(0, 0, 0, 10);
+			set_rgb_led(1, 0, 0, 10);
+			set_rgb_led(2, 0, 0, 10);
+			set_rgb_led(3, 0, 0, 10);
 			mode=SUIVI_LIGNE_PENTE;
-			set_led(LED3,1);
-			set_led(LED7,0);
+
 		}
 		if(Capteurs.inclinaison==PLAT && mode<DEBUT_CONTOURNEMENT){
-   		mode=SUIVI_LIGNE;
-
-			set_led(LED3,0);
-			set_led(LED7,0);
+			mode=SUIVI_LIGNE;
+			clear_leds();
 		}
 
 
-		if (mode==SUIVI_LIGNE && Capteurs.frontal>SENSIBLE_PROX_FRONT){
+		if (mode<FIN_CONTOURNEMENT && Capteurs.frontal>SENSIBLE_PROX_FRONT){
 			mode=DEBUT_CONTOURNEMENT;
 		}
-		if(mode==MILIEU_CONTOURNEMENT && Capteurs.lateral>SENSIBLE_PROX_LEFT){
+		if(mode<FIN_CONTOURNEMENT && Capteurs.lateral>SENSIBLE_PROX_LEFT){
 			mode=DEBUT_CONTOURNEMENT;
 		}
 

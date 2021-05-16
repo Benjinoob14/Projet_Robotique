@@ -40,13 +40,13 @@ extern "C" {
 
 #define SENSIBLE_PROX_FRONT 			 350
 #define SENSIBLE_PROX_LEFT				 150
-#define SENSI_GYRO 						 500
+#define SENSI_PENTE 					 350
 
 #define TEMPS_ATTENTE 			 		 1000
 #define TEMPS_ATTENTE_ROT				 1.2*TEMPS_ATTENTE
 #define TEMPS_ATTENTE_REBOND			 0.8*TEMPS_ATTENTE
 #define MINI_ATTENTE					 400
-#define FAUX_POSITIF_GYRO 				 10
+#define FAUX_POSITIF_PENTE 				 25
 #define FAUX_POSITIF_PROX 				 4
 #define FAUX_POSITIF_LIGNE 				 10
 #define FAUX_POSITIF_REPLACEMENT		 3
