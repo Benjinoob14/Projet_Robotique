@@ -12,8 +12,8 @@
 #include <move.h>
 
 
-//permet de savoir le mode du robot
-static int8_t mode=SUIVI_LIGNE;
+
+static int8_t mode=SUIVI_LIGNE; //permet de connaître le mode dans lequel se trouve le robot
 
 //simple PID regulator implementation
 int16_t pid_regulator(float position, float goal){
@@ -44,7 +44,7 @@ int16_t pid_regulator(float position, float goal){
 
 	speed_correction = KP * error_position + KI * sum_error + KD * (error_position-last_error);
 
-	//on divise par deux pour r�partir l'erreur entre les deux roues
+	//on divise par deux pour répartir l'erreur entre les deux roues
 	speed_correction= speed_correction/2;
 
 	last_error=error_position;
@@ -96,7 +96,7 @@ static THD_FUNCTION(Move, arg) {
 			//line_width is modified by the image processing thread
 			speed_correction = pid_regulator(get_line_position(), IMAGE_BUFFER_SIZE/2);
 
-			//on r�cup�re la taille de la ligne
+			//on récupère la taille de la ligne
 			line=get_line_width();
 
 			if (line<SENSIBILITY_LIGNE){
@@ -140,64 +140,65 @@ static THD_FUNCTION(Move, arg) {
 
         }
 
+        //Début de contournement: Le robot tourne de 90° à droite puis entame la manoeuvre d’évitement, puis le mode est changé en mode 5
+
+
+
         if (mode>=DEBUT_CONTOURNEMENT){
 
 			set_led(LED3,TRUE);
 			set_led(LED7,TRUE);
 			set_body_led(FALSE);
 
-			compteur_ligne=get_compteur_liigne();
-
 			if (mode==DEBUT_CONTOURNEMENT){
 				right_motor_set_speed(-VITESSE_ROTATION);
 				left_motor_set_speed(VITESSE_ROTATION);
-				chThdSleepMilliseconds(TEMPS_ATTENTE_ROT);
-				right_motor_set_speed(VITESSE_VIRAGE_ROUE_EXT);
-				left_motor_set_speed(VITESSE_VIRAGE_ROUE_INT);
-				chThdSleepMilliseconds(TEMPS_ATTENTE);
+				chThdSleepMilliseconds(1.2*TEMPS_ATTENTE);
 				mode=MILIEU_CONTOURNEMENT;
 			}
 
-			compteur_ligne=get_compteur_liigne();
+			//Milieu de contournement: Le robot tourne autour de l’objet en analysant en permanence s’il le recroise avec le détecteur de proximité situé en avant-gauche (45°), vérifie également s’il ne recroise pas la ligne noire.
+			//Si jamais il recroise l’objet, il relance son virage depuis le début et s’il recroise la ligne, il passe au mode suivant.
+
+			if(mode==MILIEU_CONTOURNEMENT){
+				right_motor_set_speed(VITESSE_ROTATION);
+				left_motor_set_speed(0.6*VITESSE_ROTATION);
+				compteur_ligne=get_counter_line();
+			}
 
 //			chprintf((BaseSequentialStream *)&SDU1, " count=%d ",compteur_ligne);
 
-			if(mode==MILIEU_CONTOURNEMENT && compteur_ligne>FAUX_POSITIF_REPLACEMENT){
+			if(mode==MILIEU_CONTOURNEMENT && compteur_ligne>7){
 				set_led(LED3,FALSE);
 				set_led(LED7,FALSE);
-				chThdSleepMilliseconds(MINI_ATTENTE);
+				chThdSleepMilliseconds(500);
 				set_led(LED3,TRUE);
 				set_led(LED7,TRUE);
-				chThdSleepMilliseconds(MINI_ATTENTE);
+				chThdSleepMilliseconds(500);
 				set_led(LED3,FALSE);
 				set_led(LED7,FALSE);
-				chThdSleepMilliseconds(MINI_ATTENTE);
+				chThdSleepMilliseconds(500);
 				set_led(LED3,TRUE);
 				set_led(LED7,TRUE);
-				chThdSleepMilliseconds(MINI_ATTENTE);
-
-				//on divise pas deux la rotation car on veut lui laisser le temps de bien voir la ligne quand il se replace
-				right_motor_set_speed(-ROTATION_REPLACEMENT);
-				left_motor_set_speed(ROTATION_REPLACEMENT);
-				chThdSleepMilliseconds(TEMPS_ATTENTE);
+				chThdSleepMilliseconds(500);
+				right_motor_set_speed(-VITESSE_ROTATION);
+				left_motor_set_speed(VITESSE_ROTATION);
 				mode=FIN_CONTOURNEMENT;
+
 			}
 
-			compteur_ligne=get_compteur_liigne();
+			//Fin de contournement: Le robot tourne sur lui-même jusqu’à retrouver la ligne en face de lui, prête à être suivie.
 
 			if(mode==FIN_CONTOURNEMENT){
-				if(compteur_ligne<FAUX_POSITIF_REPLACEMENT){
-					//on divise pas deux la rotation car on veut lui laisser le temps de bien voir la ligne quand il se replace
-					right_motor_set_speed(-ROTATION_REPLACEMENT);
-					left_motor_set_speed(ROTATION_REPLACEMENT);
-				}
-				else{
-					right_motor_set_speed(0);
-					left_motor_set_speed(0);
+				if(line>SENSIBILITY_LIGNE){
 					compteur_ligne=0;
 					set_led(LED3,FALSE);
 					set_led(LED7,FALSE);
 					mode=SUIVI_LIGNE;
+				}
+				else{
+					right_motor_set_speed(-VITESSE_ROTATION);
+					left_motor_set_speed(VITESSE_ROTATION);
 				}
 
 			}
@@ -209,7 +210,7 @@ static THD_FUNCTION(Move, arg) {
 }
 
 
-//la thread qui check � chaque fois dans quel mode le robot se trouve et modifie en fonction de s'il voit un obstacle ou s'il est en pente
+//la thread qui check à chaque fois dans quel mode le robot se trouve et modifie en fonction de s'il voit un obstacle ou s'il est en pente
 static THD_WORKING_AREA(waCheckMODE, 256);
 static THD_FUNCTION(CheckMODE, arg) {
 
@@ -218,42 +219,34 @@ static THD_FUNCTION(CheckMODE, arg) {
 
     systime_t time;
 
-    int8_t incliined=0;
-
-    volatile uint16_t *proxi_front = get_proxi();
-
-    volatile uint16_t *proxi_left=proxi_front+1;
-
+    valeurs Capteurs = {0,0,0};
 
     while(1){
     	time = chVTGetSystemTime();
 
-       	incliined = get_inclined();
+    	Capteurs = get_reception();
 
-//		if(incliined==DESCEND && mode<DEBUT_CONTOURNEMENT){
+//		if(Capteurs.inclinaison==DESCENTE && mode<DEBUT_CONTOURNEMENT){
 //			mode=SUIVI_LIGNE_PENTE;
 //			set_led(LED3,0);
 //			set_led(LED7,1);
 //		}
-//		if(incliined==MONTE && mode<DEBUT_CONTOURNEMENT){
+//		if(Capteurs.inclinaison==MONTEE && mode<DEBUT_CONTOURNEMENT){
 //			mode=SUIVI_LIGNE_PENTE;
 //			set_led(LED3,1);
 //			set_led(LED7,0);
 //		}
-//		if(incliined==PLAT && mode<DEBUT_CONTOURNEMENT){
+//		if(Capteurs.inclinaison==PLAT && mode<DEBUT_CONTOURNEMENT){
 //    		mode=SUIVI_LIGNE;
 //			set_led(LED3,0);
 //			set_led(LED7,0);
 //		}
 
 
-		if (mode==SUIVI_LIGNE && *proxi_front>SENSIBLE_PROX_FRONT){
+		if (mode==SUIVI_LIGNE && Capteurs.frontal>SENSIBLE_PROX_FRONT){
 			mode=DEBUT_CONTOURNEMENT;
 		}
-
-//		chprintf((BaseSequentialStream *)&SDU1, " count=%d ",*proxi_left);
-
-		if(mode==MILIEU_CONTOURNEMENT && (*proxi_front>SENSIBLE_PROX_FRONT || *proxi_left>SENSIBLE_PROX_LEFT)){
+		if(mode==MILIEU_CONTOURNEMENT && Capteurs.lateral>SENSIBLE_PROX_LEFT){
 			mode=DEBUT_CONTOURNEMENT;
 		}
 
