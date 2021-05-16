@@ -17,16 +17,18 @@ extern "C" {
 #define ROTATION_THRESHOLD		10
 #define PXTOCM					1570.0f //experimental value
 #define ERROR_THRESHOLD			5.0f
-#define KP						3.0f
-#define KI 						0.1f	//must not be zero
-#define KD						1.5f
-#define MAX_SUM_ERROR 			VITESSE_STABLE_PLAT/(4*KI)
 
 #define TAILLE_LIGNE_MIN 	170
 #define TAILLE_LIGNE_MAX 	400
 #define MAX_COMPTEUR 		250
 
 //***les valeurs ci-dessous ont été trouvé de manière experimentale****
+
+//valeurs pour le PID
+#define KP						3.0f
+#define KI 						0.1f	//must not be zero
+#define KD						1.5f
+#define MAX_SUM_ERROR 			VITESSE_STABLE_PLAT/(4*KI)
 
 //liste des differentes vitesses
 #define VITESSE_STABLE_PLAT 			 200
