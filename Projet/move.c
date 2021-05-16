@@ -138,8 +138,9 @@ static THD_FUNCTION(Move, arg) {
 					toggle_rgb_led(LED4,GREEN_LED,INTENSITY);
 					toggle_rgb_led(LED6,GREEN_LED,INTENSITY);
 					toggle_rgb_led(LED8,GREEN_LED,INTENSITY);
+
 				}
-				else{
+				if(mode==SUIVI_LIGNE_PENTE_DESCENTE ){
 					clear_leds();
 					toggle_rgb_led(LED2,BLUE_LED,INTENSITY);
 					toggle_rgb_led(LED4,BLUE_LED,INTENSITY);
@@ -147,6 +148,7 @@ static THD_FUNCTION(Move, arg) {
 					toggle_rgb_led(LED8,BLUE_LED,INTENSITY);
 
 				}
+
 
 				//fait avancer le robot s'il voit une ligne
 				if (line>SENSIBILITY_LIGNE){
@@ -158,6 +160,7 @@ static THD_FUNCTION(Move, arg) {
 
 			if (mode==SUIVI_LIGNE ){
 
+				clear_leds();
 				set_body_led(FALSE);
 				//fait avancer le robot s'il voit une ligne
 				if (line>SENSIBILITY_LIGNE){
@@ -280,13 +283,11 @@ static THD_FUNCTION(CheckMODE, arg) {
 
 		//si l'inclinaison est vers l'arrière
 		if(Capteurs.inclinaison==MONTEE && mode<DEBUT_CONTOURNEMENT){
-			clear_leds();
 			mode=SUIVI_LIGNE_PENTE_MONTEE;
 
 		}
 		//si le robot est à plat
 		if(Capteurs.inclinaison==PLAT && mode<DEBUT_CONTOURNEMENT){
-			clear_leds();
 			mode=SUIVI_LIGNE;
 
 		}

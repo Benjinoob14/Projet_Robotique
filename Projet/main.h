@@ -21,6 +21,7 @@ extern "C" {
 #define TAILLE_LIGNE_MIN 	170
 #define TAILLE_LIGNE_MAX 	400
 #define MAX_COMPTEUR 		250
+#define MAX_PROXI			10000
 
 //***les valeurs ci-dessous ont été trouvé de manière experimentale****
 
@@ -43,7 +44,7 @@ extern "C" {
 #define SENSIBILITY_LIGNE 				 100
 #define SENSIBLE_PROX_FRONT 			 500
 #define SENSIBLE_PROX_LEFT				 300
-#define SENSI_PENTE 					 150
+#define SENSI_PENTE 					 1000
 
 //liste des attentes en fonction du besoins
 #define TEMPS_ATTENTE 			 		 1000
