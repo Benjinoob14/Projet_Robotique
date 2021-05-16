@@ -70,7 +70,7 @@ uint16_t extract_line_width(uint8_t *buffer){
 	}
 	mean /= IMAGE_BUFFER_SIZE;
 
-	//s'il voit une suite de pixels noirs il incrÃ©mente le compteur qui permet de dÃ©terminer si le robot est revenu ou non sur une ligne noire
+	//s'il voit une suite de pixels noirs il incrémente le compteur qui permet de déterminer si le robot est revenu ou non sur une ligne noire
 	if(buffer[IMAGE_BUFFER_SIZE/2]< VALEUR_SENSIBLE_DETECTION_BLACK){
 		counter_line++;
 	}
@@ -78,7 +78,7 @@ uint16_t extract_line_width(uint8_t *buffer){
 	if(counter_line>MAX_COMPTEUR){
 		counter_line=MAX_COMPTEUR;
 	}
-	//remet Ã  zÃ©ro le compteur s'il ne voit pas de ligne ou si le compteur arrive au max
+	//remet à zéro le compteur s'il ne voit pas de ligne ou si le compteur arrive au max
 	if(buffer[IMAGE_BUFFER_SIZE/2]> VALEUR_SENSIBLE_DETECTION_BLACK){
 		counter_line=0;
 	}
@@ -240,15 +240,15 @@ static THD_FUNCTION(InfoMode, arg) {
 		prox_tab[PROX2]=get_prox(SENSOR_FRONT_LEFT);
 
 
-		//s'il voit que la proximitÃ© est assez proche le compteur est incrÃ©mentÃ©
+		//s'il voit que la proximité est assez proche le compteur est incrémenté
 		if(prox_tab[PROX1] > SENSIBLE_PROX_FRONT){
 			compteur_prox1++;
 		}
-		//Ã©vite l'overflow
+		//évite l'overflow
 		if(compteur_prox1>MAX_COMPTEUR){
 			compteur_prox1=MAX_COMPTEUR;
 		}
-		//remet Ã  zÃ©ro le compteur si la valeur est trop faible
+		//remet à zéro le compteur si la valeur est trop faible
 		if(prox_tab[PROX1] < SENSIBLE_PROX_FRONT){
 			compteur_prox1=0;
 			reception.frontal=0;
@@ -259,15 +259,15 @@ static THD_FUNCTION(InfoMode, arg) {
 		}
 
 
-		//s'il voit que la proximitÃ© est assez proche le compteur est incrÃ©mentÃ©
+		//s'il voit que la proximité est assez proche le compteur est incrémenté
 		if(prox_tab[PROX2] > SENSIBLE_PROX_LEFT){
 			compteur_prox2++;
 		}
-		//Ã©vite l'overflow
+		//évite l'overflow
 		if(compteur_prox2>MAX_COMPTEUR){
 			compteur_prox2=MAX_COMPTEUR;
 		}
-		//remet Ã  zÃ©ro le compteur si la valeur est trop faible
+		//remet à zéro le compteur si la valeur est trop faible
 		if(prox_tab[PROX2] < SENSIBLE_PROX_LEFT){
 			compteur_prox2=0;
 			reception.lateral=0;
@@ -290,13 +290,14 @@ static THD_FUNCTION(InfoMode, arg) {
 		if(value != reception.inclinaison){
 			compteur_inclinaison++;
 		}
+		else{
+			compteur_inclinaison=0;
+		}
 		//evite l'overflow
 		if(compteur_inclinaison>MAX_COMPTEUR){
 			compteur_inclinaison=MAX_COMPTEUR;
 		}
-		else{
-			compteur_inclinaison=0;
-		}
+
 		if(value != reception.inclinaison && compteur_inclinaison>FAUX_POSITIF_GYRO){
 			reception.inclinaison = value;
 		}
