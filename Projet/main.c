@@ -1,76 +1,91 @@
-#ifndef MAIN_H
-#define MAIN_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "ch.h"
+#include "hal.h"
+#include "memory_protection.h"
+#include <usbcfg.h>
+#include <main.h>
+#include <motors.h>
+#include <camera/po8030.h>
+#include <chprintf.h>
 
-#include "camera/dcmi_camera.h"
-#include "msgbus/messagebus.h"
-#include "parameter/parameter.h"
+#include <leds.h>
+#include <move.h>
+#include <process_info.h>
+#include <sensors/proximity.h>
+#include <sensors/imu.h>
 
+messagebus_t bus;
+MUTEX_DECL(bus_lock);
+CONDVAR_DECL(bus_condvar);
 
-//constants for the differents parts of the project
-#define IMAGE_BUFFER_SIZE		640
-#define WIDTH_SLOPE				5
-#define MIN_LINE_WIDTH			40
-#define ROTATION_THRESHOLD		10
-#define ROTATION_COEFF			2 
-#define PXTOCM					1570.0f //experimental value
-#define GOAL_DISTANCE 			10.0f
-#define MAX_DISTANCE 			25.0f
-#define ERROR_THRESHOLD			5.0f
-#define KP						3.0f
-#define KI 						0.1f	//must not be zero
-#define KD						1.5f
-#define MAX_SUM_ERROR 			(VITESSE_STABLE/2)
-
-#define TAILLE_LIGNE_MIN 170
-#define TAILLE_LIGNE_MAX 400
-#define MAX_COMPTEUR 250
-
-#define VALEUR_SENSIBLE_DETECTION_BLACK  55
-#define SENSIBILITY_LIGNE 60
-#define VITESSE_STABLE 200.0f
-#define VITESSE_ROTATION 300.0f
-#define SENSIBLE_PROX 700
-#define SENSI_GYRO 500
-#define TEMPS_ATTENTE 1000.0f
-#define FAUX_POSITIF_GYRO 20
-#define FAUX_ZERO_GYRO 2
-#define FAUX_POSITIF_LIGNE 10
-
-#define SENSOR_FRONT_FRONT_LEFT 7
-
-#define SENSOR_FRONT_LEFT 6
-
-#define SUIVIT_LIGNE 1
-#define SUIVIT_LIGNE_PENTE 2
-#define DEBUT_CONTOURNEMENT 3
-#define MILIEU_CONTOURNEMENT 4
-#define FIN_CONTOURNEMENT 5
-
-
-#define MONTE 1
-#define DESCEND -1
-#define PLAT 0
-
-/** Robot wide IPC bus. */
-extern messagebus_t bus;
-
-extern parameter_namespace_t parameter_root;
-
-void SendUint8ToComputer(uint8_t* data, uint16_t size);
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif
-
-typedef struct
+void SendUint8ToComputer(uint8_t* data, uint16_t size) 
 {
-	uint16_t frontal;
-	uint16_t lateral;
-	uint8_t inclinaison;
-} valeurs;
+	chSequentialStreamWrite((BaseSequentialStream *)&SD3, (uint8_t*)"START", 5);
+	chSequentialStreamWrite((BaseSequentialStream *)&SD3, (uint8_t*)&size, sizeof(uint16_t));
+	chSequentialStreamWrite((BaseSequentialStream *)&SD3, (uint8_t*)data, size);
+}
+
+static void serial_start(void)
+{
+	static SerialConfig ser_cfg = {
+	    115200,
+	    0,
+	    0,
+	    0,
+	};
+
+	sdStart(&SD3, &ser_cfg); // UART3.
+}
+
+int main(void)
+{
+	halInit();
+    chSysInit();
+    mpu_init();
+
+    clear_leds();
+
+    //starts the serial communication
+    serial_start();
+   //start the USB communication
+    usb_start();
+   //starts the camera
+    dcmi_start();
+	po8030_start();
+	//inits the motors
+	motors_init();
+
+	imu_start();
+//	calibrate_acc();
+
+
+	messagebus_init(&bus, &bus_lock, &bus_condvar);
+	proximity_start();
+	calibrate_ir();
+
+
+
+	//stars the threads for the pi regulator and the processing of the image
+	move_start();
+	process_image_start();
+
+
+
+    /* Infinite loop. */
+    while (1) {
+    	//waits 1 second
+        chThdSleepMilliseconds(1000);
+    }
+}
+
+#define STACK_CHK_GUARD 0xe2dee396
+uintptr_t __stack_chk_guard = STACK_CHK_GUARD;
+
+void __stack_chk_fail(void)
+{
+    chSysHalt("Stack smashing detected");
+}

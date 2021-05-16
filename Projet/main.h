@@ -35,24 +35,26 @@ extern "C" {
 #define VITESSE_STABLE_PENTE 			 300
 #define VITESSE_ROTATION 			     300
 
-#define SENSIBLE_PROX 					 700
+#define SENSIBLE_PROX 					 400
 #define SENSI_GYRO 						 500
 
 #define TEMPS_ATTENTE 			 		 1000
 #define FAUX_POSITIF_GYRO 				 20
-#define FAUX_ZERO_GYRO 					 2
+#define FAUX_POSITIF_PROX 				 10
 #define FAUX_POSITIF_LIGNE 				 10
 
 #define SENSOR_FRONT_FRONT_LEFT  7
 
 #define SENSOR_FRONT_LEFT		 6
 
-#define SUIVIT_LIGNE 			 1
-#define SUIVIT_LIGNE_PENTE 		 2
-#define DEBUT_CONTOURNEMENT 	 3
-#define MILIEU_CONTOURNEMENT 	 4
-#define FIN_CONTOURNEMENT 		 5
-
+typedef enum {
+	ARRET,
+	SUIVI_LIGNE,
+	SUIVI_LIGNE_PENTE,
+	DEBUT_CONTOURNEMENT,
+	MILIEU_CONTOURNEMENT,
+	FIN_CONTOURNEMENT,
+} choose_mode_t;
 
 #define MONTE 					 1
 #define DESCEND 				-1
