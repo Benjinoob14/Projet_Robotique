@@ -14,11 +14,9 @@
 
 static uint16_t line_width = 0;
 static uint16_t line_position = IMAGE_BUFFER_SIZE/2;	//middle
+static uint16_t proxi_tab[2]={0};
 static uint8_t compteur_liigne=0;
-
-static valeurs reception = {0, 0, 0};
-
-
+static int8_t inclined = 0;
 
 //semaphore
 static BSEMAPHORE_DECL(image_ready_sem, TRUE);
@@ -73,11 +71,16 @@ uint16_t extract_line_width(uint8_t *buffer){
 	}
 	mean /= IMAGE_BUFFER_SIZE;
 
-	//s'il voit une suite de pixels noir il incrÃƒÂ©mente le compteur qui permet de savoir que le robot est revenu sur une ligne noir
+	//s'il voit une suite de pixels noir il incrémente le compteur qui permet de savoir que le robot est revenu sur une ligne noir
 	if(buffer[IMAGE_BUFFER_SIZE/2]< VALEUR_SENSIBLE_DETECTION_BLACK){
 		compteur_liigne++;
 	}
-	if(buffer[IMAGE_BUFFER_SIZE/2]> VALEUR_SENSIBLE_DETECTION_BLACK || compteur_liigne>MAX_COMPTEUR){
+	//evite l'overflow
+	if(compteur_liigne>MAX_COMPTEUR){
+		compteur_liigne=MAX_COMPTEUR;
+	}
+	//remet à zéro le compteur s'il ne voit pas de ligne ou si le compteur arrive au max
+	if(buffer[IMAGE_BUFFER_SIZE/2]> VALEUR_SENSIBLE_DETECTION_BLACK){
 		compteur_liigne=0;
 	}
 
@@ -158,7 +161,6 @@ static THD_FUNCTION(CaptureImage, arg) {
 	dcmi_set_capture_mode(CAPTURE_ONE_SHOT);
 	dcmi_prepare();
 
-
     while(1){
         //starts a capture
 		dcmi_capture_start();
@@ -227,27 +229,52 @@ static THD_FUNCTION(InfoMode, arg) {
     int16_t accel_values[3] = {0};
     systime_t time;
     int8_t value=0;
-    uint16_t compteur=0;
+    uint8_t compteur_inclined=0;
+    uint8_t compteur_prox = 0;
+    uint16_t prox_tab[2]={0};
 
     while(1){
     	time = chVTGetSystemTime();
 
-    	reception.frontal=get_prox(SENSOR_FRONT_FRONT_LEFT);
-        reception.lateral=get_prox(SENSOR_FRONT_LEFT);
+		proxi_tab[0]=get_prox(SENSOR_FRONT_FRONT_LEFT);
+		proxi_tab[1]=get_prox(SENSOR_FRONT_LEFT);
+
+
+		//s'il voit que la proximité est assez proche il incrémente
+		if(proxi_tab[0] > SENSIBLE_PROX){
+			compteur_prox++;
+		}
+		//evite l'overflow
+		if(compteur_prox>MAX_COMPTEUR){
+			compteur_prox=MAX_COMPTEUR;
+		}
+		//remet à zéro le compteur s'il la valeur est trop faible
+		if(proxi_tab[0] < SENSIBLE_PROX){
+			compteur_prox=0;
+		}
+		//si il y a plusieurs fois de suite une valeur acceptable on envoie la valeure
+		if(compteur_prox>FAUX_POSITIF_PROX){
+			proxi_tab[0]=prox_tab[0];
+		}
+
 
 
 		get_acc_all(accel_values);
 
 		value=show_inclined(accel_values);
 
-		if(value != reception.inclinaison){
-			compteur++;
+		if(value != inclined){
+			compteur_inclined++;
+		}
+		//evite l'overflow
+		if(compteur_inclined>MAX_COMPTEUR){
+			compteur_inclined=MAX_COMPTEUR;
 		}
 		else{
-			compteur=0;
+			compteur_inclined=0;
 		}
-		if(value != reception.inclinaison && compteur>FAUX_POSITIF_GYRO){
-			reception.inclinaison = value;
+		if(value != inclined && compteur_inclined>FAUX_POSITIF_GYRO){
+			inclined = value;
 		}
 
 
@@ -269,13 +296,12 @@ uint8_t get_compteur_liigne(void){
 	return compteur_liigne;
 }
 
- valeurs *get_valeurs(void){
-	valeurs *p = &reception;
-	p->frontal = reception.frontal;
-	p->lateral = reception.lateral;
-	p->inclinaison = reception.inclinaison;
+uint16_t *get_proxi(void){
+	return proxi_tab;
+}
 
-	return p;
+int8_t get_inclined(void){
+	return inclined;
 }
 
 void process_image_start(void){
