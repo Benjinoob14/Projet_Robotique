@@ -123,8 +123,7 @@ static THD_FUNCTION(Move, arg) {
 				set_led(LED3,TRUE);
 				set_led(LED7,TRUE);
 				chThdSleepMilliseconds(MINUSCULE_ATTENTE);
-				set_led(LED3,FALSE);
-				set_led(LED7,FALSE);
+				clear_leds();
 				chThdSleepMilliseconds(MINUSCULE_ATTENTE);
 			}
 
@@ -205,14 +204,12 @@ static THD_FUNCTION(Move, arg) {
 			//il l'indique par le fait de clignoter les LEDs
 			if(mode==MILIEU_CONTOURNEMENT && compteur_ligne>FAUX_POSITIF_REPLACEMENT){
 				rebond=FALSE;
-				set_led(LED3,FALSE);
-				set_led(LED7,FALSE);
+				clear_leds();
 				chThdSleepMilliseconds(MINI_ATTENTE);
 				set_led(LED3,TRUE);
 				set_led(LED7,TRUE);
 				chThdSleepMilliseconds(MINI_ATTENTE);
-				set_led(LED3,FALSE);
-				set_led(LED7,FALSE);
+				clear_leds();
 				chThdSleepMilliseconds(MINI_ATTENTE);
 				set_led(LED3,TRUE);
 				set_led(LED7,TRUE);
@@ -240,8 +237,7 @@ static THD_FUNCTION(Move, arg) {
 					right_motor_set_speed(0);
 					left_motor_set_speed(0);
 					compteur_ligne=0;
-					set_led(LED3,FALSE);
-					set_led(LED7,FALSE);
+					clear_leds();
 					mode=SUIVI_LIGNE;
 				}
 
