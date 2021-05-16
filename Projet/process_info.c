@@ -20,7 +20,7 @@ static uint8_t counter_line=0;
 //semaphore
 static BSEMAPHORE_DECL(image_ready_sem, TRUE);
 
-//fonction calculant pour savoir si le robot est en pente
+//calcul pour savoir si le robot est incliné en avant, en arrière ou à plat
 int8_t show_inclined(int16_t accel_value){
 
     int16_t value = 0;
@@ -51,6 +51,10 @@ int8_t show_inclined(int16_t accel_value){
 /*
  *  Returns the line's width extracted from the image buffer given
  *  Returns 0 if line not found
+ *  Il scan l’image de gauche à droite pour trouver des pixels noirs, s’il y en a, le compteur de ligne est incrémenté.
+ *  Ensuite, il regarde s’il trouve plusieurs pixels à la suite qui se finissent à un moment, cela veut dire qu’il y a
+ *  une ligne devant lui et renvoie la taille de la ligne et change la valeur de la position de la ligne
+ *
  */
 uint16_t extract_line_width(uint8_t *buffer){
 
@@ -143,7 +147,7 @@ uint16_t extract_line_width(uint8_t *buffer){
 	return width;
 
 }
-
+//capture une image à l’aide de la caméra
 static THD_WORKING_AREA(waCaptureImage, 256);
 static THD_FUNCTION(CaptureImage, arg) {
 
@@ -167,7 +171,7 @@ static THD_FUNCTION(CaptureImage, arg) {
 
 }
 
-
+//lorsque l’image est prise, elle est mise dans le buffer puis envoyé dans extract_line_width pour être analysé
 static THD_WORKING_AREA(waProcessImage, 1024);
 static THD_FUNCTION(ProcessImage, arg) {
 
@@ -214,7 +218,11 @@ static THD_FUNCTION(ProcessImage, arg) {
 		send_to_computer = !send_to_computer;
     }
 }
-
+/*
+ *  récupère la valeur des détecteurs de proximité et ceux de l'accéléromètre et vérifie à l’aide d’un compteur
+ *  s’il ne s’agit pas d’un faux changement (si plusieurs fois la même valeur alors c’est bon)
+ *
+ */
 static THD_WORKING_AREA(waInfoMode, 512);
 static THD_FUNCTION(InfoMode, arg) {
 
@@ -299,18 +307,19 @@ static THD_FUNCTION(InfoMode, arg) {
     }
 }
 
+//renvoie la taille de la ligne dans le fichier move.c
 uint16_t get_line_width(void){
 	return line_width;
 }
-
+//renvoie la position de la ligne dans le fichier move.c
 uint16_t get_line_position(void){
 	return line_position;
 }
-
+//renvoie un compteur dans le fichier move.c qui permet de revenir sur la ligne à la fin du contournement
 uint8_t get_counter_line(void){
 	return counter_line;
 }
-
+//renvoie dans le fichier move.c la struct qui a les valeurs de proximité et d'inclinaison
 valeurs get_reception(void){
 	return reception;
 }

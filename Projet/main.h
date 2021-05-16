@@ -29,6 +29,7 @@ extern "C" {
 #define TAILLE_LIGNE_MAX 	400
 #define MAX_COMPTEUR 		250
 
+//les valeurs ci-dessous ont été trouvé de manière experimentale
 #define VALEUR_SENSIBLE_DETECTION_BLACK  55
 #define SENSIBILITY_LIGNE 				 100
 #define VITESSE_STABLE_PLAT 			 200
@@ -47,6 +48,7 @@ extern "C" {
 #define TEMPS_ATTENTE_REBOND			 0.8*TEMPS_ATTENTE
 #define MINI_ATTENTE					 400
 #define MINUSCULE_ATTENTE				 100
+
 #define FAUX_POSITIF_PENTE 				 5
 #define FAUX_POSITIF_PROX 				 4
 #define FAUX_POSITIF_LIGNE 				 10
@@ -57,8 +59,7 @@ extern "C" {
 #define PROX1					 0
 #define PROX2					 1
 
-#define BLUE					 10
-#define GREEN					 10
+#define INTENSITY				 10
 
 	
 typedef struct {
@@ -71,7 +72,8 @@ typedef struct {
 typedef enum {
 	ARRET,
 	SUIVI_LIGNE,
-	SUIVI_LIGNE_PENTE,
+	SUIVI_LIGNE_PENTE_MONTEE,
+	SUIVI_LIGNE_PENTE_DESCENTE,
 	DEBUT_CONTOURNEMENT,
 	MILIEU_CONTOURNEMENT,
 	FIN_CONTOURNEMENT,
