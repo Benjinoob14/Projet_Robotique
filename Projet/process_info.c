@@ -11,12 +11,10 @@
 #include <leds.h>
 #include <process_info.h>
 
-
 static uint16_t line_width = 0;
 static uint16_t line_position = IMAGE_BUFFER_SIZE/2;	//middle
-static uint16_t proxi_tab_globale[2]={0};
-static uint8_t compteur_liigne=0;
-static int8_t inclined = 0;
+static valeurs reception = {0,0,0}; //structure recevant les valeurs des deux capteurs et l'inclinaison
+static uint8_t counter_line=0;
 
 //semaphore
 static BSEMAPHORE_DECL(image_ready_sem, TRUE);
