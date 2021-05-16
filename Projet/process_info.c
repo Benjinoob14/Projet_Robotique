@@ -287,16 +287,19 @@ static THD_FUNCTION(InfoMode, arg) {
 		if(value != inclined){
 			compteur_inclined++;
 		}
+		else{
+			compteur_inclined=0;
+		}
 		//evite l'overflow
 		if(compteur_inclined>MAX_COMPTEUR){
 			compteur_inclined=MAX_COMPTEUR;
 		}
-		else{
-			compteur_inclined=0;
-		}
 		if(value != inclined && compteur_inclined>FAUX_POSITIF_GYRO){
 			inclined = value;
 		}
+
+//		chprintf((BaseSequentialStream *)&SDU1, " value= %d ",compteur_inclined);
+
 
 
 

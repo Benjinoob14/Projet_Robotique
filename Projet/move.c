@@ -119,8 +119,8 @@ static THD_FUNCTION(Move, arg) {
 				//fait avancer le robot s'il voit une ligne
 				if (line>SENSIBILITY_LIGNE){
 					compteur_sans_ligne=0;
-//					right_motor_set_speed(VITESSE_STABLE_PENTE - speed_correction);
-//					left_motor_set_speed(VITESSE_STABLE_PENTE +  speed_correction);
+					right_motor_set_speed(VITESSE_STABLE_PENTE - speed_correction);
+					left_motor_set_speed(VITESSE_STABLE_PENTE +  speed_correction);
 				}
 			}
 
@@ -177,9 +177,9 @@ static THD_FUNCTION(Move, arg) {
 				chThdSleepMilliseconds(MINI_ATTENTE);
 
 				//on divise pas deux la rotation car on veut lui laisser le temps de bien voir la ligne quand il se replace
-				right_motor_set_speed(-ROTATION_REPLACEMENT);
-				left_motor_set_speed(ROTATION_REPLACEMENT);
-				chThdSleepMilliseconds(TEMPS_ATTENTE);
+				right_motor_set_speed(-VITESSE_ROTATION_REPLACEMENT);
+				left_motor_set_speed(VITESSE_ROTATION_REPLACEMENT);
+				chThdSleepMilliseconds(MINI_ATTENTE);
 				mode=FIN_CONTOURNEMENT;
 			}
 
@@ -188,8 +188,8 @@ static THD_FUNCTION(Move, arg) {
 			if(mode==FIN_CONTOURNEMENT){
 				if(compteur_ligne<FAUX_POSITIF_REPLACEMENT){
 					//on divise pas deux la rotation car on veut lui laisser le temps de bien voir la ligne quand il se replace
-					right_motor_set_speed(-ROTATION_REPLACEMENT);
-					left_motor_set_speed(ROTATION_REPLACEMENT);
+					right_motor_set_speed(-VITESSE_ROTATION_REPLACEMENT);
+					left_motor_set_speed(VITESSE_ROTATION_REPLACEMENT);
 				}
 				else{
 					right_motor_set_speed(0);
@@ -230,21 +230,23 @@ static THD_FUNCTION(CheckMODE, arg) {
 
        	incliined = get_inclined();
 
-//		if(incliined==DESCEND && mode<DEBUT_CONTOURNEMENT){
-//			mode=SUIVI_LIGNE_PENTE;
-//			set_led(LED3,0);
-//			set_led(LED7,1);
-//		}
-//		if(incliined==MONTE && mode<DEBUT_CONTOURNEMENT){
-//			mode=SUIVI_LIGNE_PENTE;
-//			set_led(LED3,1);
-//			set_led(LED7,0);
-//		}
-//		if(incliined==PLAT && mode<DEBUT_CONTOURNEMENT){
-//    		mode=SUIVI_LIGNE;
-//			set_led(LED3,0);
-//			set_led(LED7,0);
-//		}
+
+
+		if(incliined==DESCEND && mode<DEBUT_CONTOURNEMENT){
+			mode=SUIVI_LIGNE_PENTE;
+			set_led(LED3,0);
+			set_led(LED7,1);
+		}
+		if(incliined==MONTE && mode<DEBUT_CONTOURNEMENT){
+			mode=SUIVI_LIGNE_PENTE;
+			set_led(LED3,1);
+			set_led(LED7,0);
+		}
+		if(incliined==PLAT && mode<DEBUT_CONTOURNEMENT){
+    		mode=SUIVI_LIGNE;
+			set_led(LED3,0);
+			set_led(LED7,0);
+		}
 
 
 		if (mode==SUIVI_LIGNE && *proxi_front>SENSIBLE_PROX_FRONT){

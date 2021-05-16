@@ -34,6 +34,7 @@ extern "C" {
 #define VITESSE_STABLE_PLAT 			 200
 #define VITESSE_STABLE_PENTE 			 300
 #define VITESSE_ROTATION 			     300
+#define VITESSE_ROTATION_REPLACEMENT	 150
 #define VITESSE_VIRAGE_ROUE_EXT			 300
 #define VITESSE_VIRAGE_ROUE_INT			 150
 
@@ -42,8 +43,9 @@ extern "C" {
 #define SENSI_GYRO 						 500
 
 #define TEMPS_ATTENTE 			 		 1000
+#define TEMPS_ATTENTE_ROT				 1.2*TEMPS_ATTENTE
 #define MINI_ATTENTE					 400
-#define FAUX_POSITIF_GYRO 				 20
+#define FAUX_POSITIF_GYRO 				 10
 #define FAUX_POSITIF_PROX 				 4
 #define FAUX_POSITIF_LIGNE 				 10
 #define FAUX_POSITIF_REPLACEMENT		 3
