@@ -44,7 +44,6 @@ extern "C" {
 
 #define TEMPS_ATTENTE 			 		 1000
 #define TEMPS_ATTENTE_ROT				 1.2*TEMPS_ATTENTE
-#define TEMPS_ATTENTE_REBOND			 0.8*TEMPS_ATTENTE
 #define MINI_ATTENTE					 400
 #define FAUX_POSITIF_GYRO 				 10
 #define FAUX_POSITIF_PROX 				 4

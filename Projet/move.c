@@ -150,7 +150,7 @@ static THD_FUNCTION(Move, arg) {
 			compteur_ligne=get_compteur_liigne();
 
 			if (mode==DEBUT_CONTOURNEMENT){
-				if (rebond==0){
+				if (rebond=0){
 					right_motor_set_speed(-VITESSE_ROTATION);
 					left_motor_set_speed(VITESSE_ROTATION);
 					chThdSleepMilliseconds(TEMPS_ATTENTE_ROT);
