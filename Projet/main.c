@@ -49,6 +49,7 @@ int main(void)
     mpu_init();
 
     clear_leds();
+    spi_comm_start();
 
     //starts the serial communication
     serial_start();
@@ -74,7 +75,6 @@ int main(void)
 	move_start();
 	process_image_start();
 
-	spi_comm_start();
 
 
 

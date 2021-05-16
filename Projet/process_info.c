@@ -21,33 +21,31 @@ static uint8_t counter_line=0;
 static BSEMAPHORE_DECL(image_ready_sem, TRUE);
 
 //fonction calculant pour savoir si le robot est en pente
-int8_t show_inclined(int16_t *accel_values){
+int8_t show_inclined(int16_t accel_value){
 
-    //create a pointer to the array for shorter name
-    int16_t *accel = accel_values;
-
-    int16_t angle = 0;
+    int16_t value = 0;
 
 
-    if(fabs(accel[X_AXIS]) > SENSI_PENTE){
+    if(abs(accel_value) > SENSI_PENTE){
 
-        angle=accel[X_AXIS];
+        value=accel_value;
 
-        if(angle<0){
-        	 return -1;
+
+        if(value<0){
+        	 return MONTEE;
         }
-        if(angle>0){
-        	return 1;
+        if(value>0){
+        	return DESCENTE;
         }
         else{
-        	return 0;
+        	return PLAT;
         }
     }
     else{
-    	return 0;
+    	return PLAT;
     }
 
-    return 0;
+    return PLAT;
 
 }
 /*
@@ -223,7 +221,7 @@ static THD_FUNCTION(InfoMode, arg) {
     chRegSetThreadName(__FUNCTION__);
     (void)arg;
 
-    int16_t accel_values[3] = {0};
+    int16_t accel_value=0;
     systime_t time;
     int8_t value=0;
     uint8_t compteur_inclinaison=0;
@@ -275,9 +273,9 @@ static THD_FUNCTION(InfoMode, arg) {
 			reception.lateral=prox_tab[PROX2];
 		}
 
-		get_acc_all(accel_values);
+		accel_value = get_acc_filtered(X_AXIS,FAUX_POSITIF_PENTE);
 
-		value=show_inclined(accel_values);
+		value=show_inclined(accel_value);
 
 		if(value != reception.inclinaison){
 			compteur_inclinaison++;
@@ -293,6 +291,8 @@ static THD_FUNCTION(InfoMode, arg) {
 		if(value != reception.inclinaison && compteur_inclinaison>FAUX_POSITIF_PENTE){
 			reception.inclinaison = value;
 		}
+
+//		chprintf((BaseSequentialStream *)&SDU1, "value=%d ",value);
 
 		chThdSleepUntilWindowed(time, time + MS2ST(10));
 

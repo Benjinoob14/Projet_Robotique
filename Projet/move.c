@@ -37,6 +37,7 @@ int16_t pid_regulator(float position, float goal){
 
 	sum_error += error_position;
 
+
 	//we set a maximum and a minimum for the sum to avoid an uncontrolled growth
 	if(sum_error > MAX_SUM_ERROR){
 		sum_error = MAX_SUM_ERROR;
@@ -58,13 +59,22 @@ int16_t pid_regulator(float position, float goal){
 		speed_correction = 0;
 	}
 
-	if (speed_correction>VITESSE_STABLE_PLAT){
-		speed_correction=VITESSE_STABLE_PLAT;
+	if(mode==SUIVI_LIGNE){
+		if (speed_correction>VITESSE_STABLE_PLAT){
+			speed_correction=VITESSE_STABLE_PLAT;
+		}
+		if (speed_correction<-VITESSE_STABLE_PLAT){
+			speed_correction=-VITESSE_STABLE_PLAT;
+		}
 	}
-	if (speed_correction<-VITESSE_STABLE_PLAT){
-		speed_correction=-VITESSE_STABLE_PLAT;
+	else{
+		if (speed_correction>VITESSE_STABLE_PENTE){
+			speed_correction=VITESSE_STABLE_PENTE;
+		}
+		if (speed_correction<-VITESSE_STABLE_PENTE){
+			speed_correction=-VITESSE_STABLE_PENTE;
+		}
 	}
-
 
     return (int16_t)speed_correction;
 }
@@ -131,8 +141,7 @@ static THD_FUNCTION(Move, arg) {
 			if (mode==SUIVI_LIGNE ){
 
 				set_body_led(FALSE);
-
-
+				clear_leds();
 				//fait avancer le robot s'il voit une ligne
 				if (line>SENSIBILITY_LIGNE){
 					compteur_sans_ligne=0;
@@ -148,7 +157,6 @@ static THD_FUNCTION(Move, arg) {
 
 			set_led(LED3,TRUE);
 			set_led(LED7,TRUE);
-			set_body_led(FALSE);
 
 			compteur_ligne=get_counter_line();
 
@@ -190,7 +198,7 @@ static THD_FUNCTION(Move, arg) {
 				set_led(LED7,TRUE);
 				chThdSleepMilliseconds(MINI_ATTENTE);
 
-				//on divise pas deux la rotation car on veut lui laisser le temps de bien voir la ligne quand il se replace
+				//on divise pas deux la vitesse de rotation car on veut lui laisser le temps de bien voir la ligne quand il se replace
 				right_motor_set_speed(-VITESSE_ROTATION_REPLACEMENT);
 				left_motor_set_speed(VITESSE_ROTATION_REPLACEMENT);
 				chThdSleepMilliseconds(MINI_ATTENTE);
@@ -224,7 +232,7 @@ static THD_FUNCTION(Move, arg) {
 
 
 //la thread qui check à chaque fois dans quel mode le robot se trouve et modifie en fonction de s'il voit un obstacle ou s'il est en pente
-static THD_WORKING_AREA(waCheckMODE, 256);
+static THD_WORKING_AREA(waCheckMODE, 512);
 static THD_FUNCTION(CheckMODE, arg) {
 
     chRegSetThreadName(__FUNCTION__);
@@ -241,23 +249,25 @@ static THD_FUNCTION(CheckMODE, arg) {
     	Capteurs = get_reception();
 
 		if(Capteurs.inclinaison==DESCENTE && mode<DEBUT_CONTOURNEMENT){
-			set_rgb_led(0, 0, 10, 0);
-			set_rgb_led(1, 0, 10, 0);
-			set_rgb_led(2, 0, 10, 0);
-			set_rgb_led(3, 0, 10, 0);
+			chThdSleepMilliseconds(MINUSCULE_ATTENTE);
+			clear_leds();
+			set_rgb_led(LED4,0,0,BLUE);
+			set_rgb_led(LED6,0,0,BLUE);
+
 			mode=SUIVI_LIGNE_PENTE;
 		}
 		if(Capteurs.inclinaison==MONTEE && mode<DEBUT_CONTOURNEMENT){
-			set_rgb_led(0, 0, 0, 10);
-			set_rgb_led(1, 0, 0, 10);
-			set_rgb_led(2, 0, 0, 10);
-			set_rgb_led(3, 0, 0, 10);
+			chThdSleepMilliseconds(MINUSCULE_ATTENTE);
+			clear_leds();
+			set_rgb_led(LED2,0,GREEN,0);
+			set_rgb_led(LED8,0,GREEN,0);
 			mode=SUIVI_LIGNE_PENTE;
 
 		}
 		if(Capteurs.inclinaison==PLAT && mode<DEBUT_CONTOURNEMENT){
-			mode=SUIVI_LIGNE;
 			clear_leds();
+			mode=SUIVI_LIGNE;
+
 		}
 
 
